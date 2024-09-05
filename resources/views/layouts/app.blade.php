@@ -28,20 +28,20 @@
 
     @auth
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #21932F;">
 
         <!-- Sidebar - Brand -->
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html" style="padding: 100px 0;">
             <div class="sidebar-brand-icon">
-                <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="img-fluid" style="max-width: auto; height: auto;">
+                <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 90%; height: auto;">
             </div>
         </a>
 
 
         <!-- Divider -->
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item active pt-5">
+        <li class="nav-item pt-5">
             <a class="nav-link" href="index.html">
                 <i class="fas fa-fw fa-home"></i>
                 <span>Dashboard</span></a>
