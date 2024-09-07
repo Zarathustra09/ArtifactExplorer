@@ -26,6 +26,11 @@
                         {{ session('success') }}
                     </div>
                 @endif
+                @if(session('error'))
+                    <div class="alert alert-warning">
+                        {{ session('error') }}
+                    </div>
+                @endif
 
                 @include('survey::standard', ['survey' => $survey])
             </form>

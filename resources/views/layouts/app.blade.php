@@ -16,6 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -42,7 +44,7 @@
         <!-- Divider -->
         <!-- Nav Item - Dashboard -->
         <li class="nav-item pt-5">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{{route('home')}}">
                 <i class="fas fa-fw fa-home"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -58,7 +60,7 @@
         <!-- Nav Item - Pages Collapse Menu -->
         <!-- Nav Item - Visitor Information -->
         <li class="nav-item">
-            <a class="nav-link" href="visitor-information.html">
+            <a class="nav-link" href="{{route('visitor.index')}}">
                 <i class="fas fa-fw fa-user"></i> <!-- Changed to a user icon -->
                 <span>Visitor Information</span>
             </a>
@@ -411,5 +413,8 @@
     <script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script>
     <script src="{{asset('js/demo/chart-area-demo.js')}}"></script>
     <script src="{{asset('js/demo/chart-pie-demo.js')}}"></script>
+    <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
 </body>
 </html>

@@ -11,10 +11,21 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6 d-none d-lg-block position-relative"
+                                 style="background: #97CC70 url('{{ asset('img/miguel_malvar.png') }}'); background-position: bottom center; background-size: 50%; background-repeat: no-repeat;">
+                                <!-- Overlay Text -->
+                                <div class="text-center position-absolute w-100" style="top: 20%; color: white; font-size: 2rem; font-weight: bold;">
+                                    <span style="color: white;">Step into history with</span> <br>
+                                    <span style="color: #007A33;">ARtifact Explore</span> <br>
+                                    <span style="color: white;">where the past meets the future</span>
+                                </div>
+                            </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
+                                        <!-- Logo Image on Top of Login -->
+                                        <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="img-fluid mb-4" style="max-width: 150px;">
+
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
                                     <!-- Start of Form -->
@@ -57,18 +68,7 @@
                                         </button>
 
                                         <hr>
-
-                                        <!-- Optional Social Logins -->
-                                        <a href="#" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
-                                        <a href="#" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                        </a>
                                     </form>
-                                    <!-- End of Form -->
-
-                                    <hr>
 
                                     <!-- Forgot Password and Register Links -->
                                     <div class="text-center">
@@ -76,9 +76,9 @@
                                             <a class="small" href="{{ route('password.request') }}">Forgot Password?</a>
                                         @endif
                                     </div>
-                                    <div class="text-center">
-                                        <a class="small" href="{{ route('register') }}">Create an Account!</a>
-                                    </div>
+                                    {{--                                    <div class="text-center">--}}
+                                    {{--                                        <a class="small" href="{{ route('register') }}">Create an Account!</a>--}}
+                                    {{--                                    </div>--}}
                                 </div>
                             </div>
                         </div>
