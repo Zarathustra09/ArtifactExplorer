@@ -34,5 +34,7 @@ Route::get('/gender-demographics', [HomeController::class, 'genderDemographics']
 Route::get('/visitor/index', [VisitorInformationController::class, 'index'])->name('visitor.index');
 Route::get('/visitor-information/data-table', [VisitorInformationController::class, 'dataTable'])->name('visitor-information.data-table');
 
+Route::get('/visitor/demographics/{entryId}', [VisitorInformationController::class, 'view'])->name('visitor.demographics');
+
 Route::get('/feedback-survey', [FeedbackController::class, 'create'])->name('feedback.survey.create');
 Route::post('/feedback-survey', [FeedbackController::class, 'store'])->name('feedback.survey.store');

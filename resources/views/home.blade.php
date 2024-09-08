@@ -130,68 +130,52 @@
                 });
         });
 
-        // Fetch gender demographics data
         fetch('/gender-demographics')
             .then(response => response.json())
             .then(data => {
+                // Map genders and counts
+                const genders = data.map(item => item.gender);
+                const counts = data.map(item => item.count);
+
                 const ctx = document.getElementById('genderDemographicsChart').getContext('2d');
                 new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: data.map(item => item.gender),
+                        labels: genders,  // Use the gender labels from the data
                         datasets: [{
                             label: 'Gender Demographics',
-                            data: data.map(item => item.count),
-                            backgroundColor: [
-                                '#FF6384',  // Color for Male
-                                '#36A2EB'   // Color for Female
-                            ],
-                            borderColor: [
-                                '#FF6384',  // Border color for Male
-                                '#36A2EB'   // Border color for Female
-                            ],
-                            borderWidth: 2,  // Increased border width for better visual separation
+                            data: counts,  // Use the count values from the data
+                            backgroundColor: ['#FF6384', '#36A2EB'],  // Colors for Female and Male
+                            borderColor: ['#FF6384', '#36A2EB'],
+                            borderWidth: 2
                         }]
                     },
                     options: {
-                        cutout: '50%', // Sets the inner radius to 50% to make it a half-doughnut
-                        rotation: -90, // Starts the doughnut chart from the top
-                        circumference: 180, // Makes the doughnut chart a half-doughnut
+                        cutout: '50%',
                         plugins: {
                             legend: {
                                 labels: {
-                                    color: '#333',  // Custom color for the legend text
+                                    color: '#333',
                                     font: {
                                         size: 16,
                                         weight: 'bold'
                                     }
                                 }
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(tooltipItem) {
-                                        return tooltipItem.label + ': ' + tooltipItem.raw;
-                                    }
-                                }
                             }
                         },
                         responsive: true,
-                        maintainAspectRatio: false, // Makes the graph responsive
-                        layout: {
-                            padding: {
-                                top: 10,
-                                bottom: 10,
-                                left: 20,
-                                right: 20
-                            }
-                        },
+                        maintainAspectRatio: false,
                         animation: {
-                            duration: 1500,  // Custom animation duration
-                            easing: 'easeOutBounce'  // Custom easing function
+                            duration: 1500,
+                            easing: 'easeOutBounce'
                         }
                     }
                 });
+            })
+            .catch(error => {
+                console.error('Error fetching gender demographics data:', error);
             });
+
 
     </script>
 @endsection

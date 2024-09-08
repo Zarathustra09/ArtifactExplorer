@@ -14,14 +14,7 @@
                             <th>Address</th>
                             <th>Nationality</th>
                             <th>Gender</th>
-{{--                            <th>Students (Grade School)</th>--}}
-{{--                            <th>Students (High School)</th>--}}
-{{--                            <th>Students (College)</th>--}}
                             <th>PWD</th>
-{{--                            <th>17 y/o below</th>--}}
-{{--                            <th>18-30 y/o</th>--}}
-{{--                            <th>31-45 y/o</th>--}}
-{{--                            <th>60 y/o above</th>--}}
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -33,14 +26,7 @@
                                 <td>{{ $entry['address'] }}</td>
                                 <td>{{ $entry['nationality'] }}</td>
                                 <td>{{ $entry['gender'] }}</td>
-{{--                                <td>{{ $entry['students_grade_school'] }}</td>--}}
-{{--                                <td>{{ $entry['students_high_school'] }}</td>--}}
-{{--                                <td>{{ $entry['students_college'] }}</td>--}}
                                 <td>{{ $entry['pwd'] }}</td>
-{{--                                <td>{{ $entry['age_17_below'] }}</td>--}}
-{{--                                <td>{{ $entry['age_18_30'] }}</td>--}}
-{{--                                <td>{{ $entry['age_31_45'] }}</td>--}}
-{{--                                <td>{{ $entry['age_60_above'] }}</td>--}}
                                 <td>
                                     <div class="d-flex justify-content-around">
                                         <a href="#" class="btn btn-info btn-sm mx-1" title="View" onclick="viewEntry({{ $entry['id'] }})">
@@ -62,4 +48,37 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function viewEntry(entryId) {
+            fetch(`/visitor/demographics/${entryId}`)
+                .then(response => response.json())
+                .then(data => {
+                    Swal.fire({
+                        title: 'Demographic Data',
+                        html: `
+                            <p><strong>Age 17 Below:</strong> ${data.age_17_below}</p>
+                            <p><strong>Age 18-30:</strong> ${data.age_18_30}</p>
+                            <p><strong>Age 31-45:</strong> ${data.age_31_45}</p>
+                            <p><strong>Age 60 Above:</strong> ${data.age_60_above}</p>
+                            <p><strong>Students Grade School:</strong> ${data.students_grade_school}</p>
+                            <p><strong>Students High School:</strong> ${data.students_high_school}</p>
+                            <p><strong>Students College:</strong> ${data.students_college}</p>
+                        `,
+                        icon: 'info'
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching demographic data:', error);
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Failed to fetch demographic data.',
+                        icon: 'error'
+                    });
+                });
+        }
+    </script>
 @endsection

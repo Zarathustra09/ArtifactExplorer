@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use MattDaneshvar\Survey\Models\Answer;
 
 class VisitorInformationController extends Controller
 {
@@ -163,5 +164,51 @@ class VisitorInformationController extends Controller
             ->values();
 
         return response()->json($data);
+    }
+
+
+    public function view($entryId)
+    {
+        $ageDemographics = Answer::where('entry_id', $entryId)
+            ->whereIn('question_id', [10, 11, 12, 13]) // Age demographic question IDs
+            ->select('question_id', DB::raw('SUM(value) as total'))
+            ->groupBy('question_id')
+            ->get()
+            ->mapWithKeys(function ($item) {
+                switch ($item->question_id) {
+                    case 10:
+                        return ['age_17_below' => $item->total];
+                    case 11:
+                        return ['age_18_30' => $item->total];
+                    case 12:
+                        return ['age_31_45' => $item->total];
+                    case 13:
+                        return ['age_60_above' => $item->total];
+                    default:
+                        return [];
+                }
+            });
+
+        $schoolDemographics = Answer::where('entry_id', $entryId)
+            ->whereIn('question_id', [6, 7, 8]) // School demographic question IDs
+            ->select('question_id', DB::raw('SUM(value) as total'))
+            ->groupBy('question_id')
+            ->get()
+            ->mapWithKeys(function ($item) {
+                switch ($item->question_id) {
+                    case 6:
+                        return ['students_grade_school' => $item->total];
+                    case 7:
+                        return ['students_high_school' => $item->total];
+                    case 8:
+                        return ['students_college' => $item->total];
+                    default:
+                        return [];
+                }
+            });
+
+        $demographicData = $ageDemographics->merge($schoolDemographics);
+
+        return response()->json($demographicData, 200);
     }
 }
