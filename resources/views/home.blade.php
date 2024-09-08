@@ -6,17 +6,43 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
+            <!-- Weather Widget and Stat Cards in One Row -->
+            <div class="col-md-4">
+                <div class="card shadow-lg p-4 mb-4">
                     <div class="card-body">
-                        <div id="weatherapi-weather-widget-4"></div><script type='text/javascript' src='https://www.weatherapi.com/weather/widget.ashx?loc=1857837&wid=4&tu=1&div=weatherapi-weather-widget-4' async></script><noscript><a href="https://www.weatherapi.com/weather/q/pantay-1857837" alt="Hour by hour Pantay weather">10 day hour by hour Pantay weather</a></noscript>
+                        <div id="weatherapi-weather-widget-4"></div>
+                        <script type='text/javascript' src='https://www.weatherapi.com/weather/widget.ashx?loc=1857837&wid=4&tu=1&div=weatherapi-weather-widget-4' async></script>
+                        <noscript><a href="https://www.weatherapi.com/weather/q/pantay-1857837" alt="Hour by hour Pantay weather">10 day hour by hour Pantay weather</a></noscript>
                     </div>
                 </div>
             </div>
 
+            <!-- Visits Today Card -->
+            <div class="col-md-4">
+                <div class="card text-center shadow-lg p-4 mb-4 border-0">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-size: 1.5em; font-weight: bold;">Visits Today</h5>
+                        <p class="card-text" style="font-size: 3em; font-weight: bold;">{{ $visitToday }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visits This Month Card -->
+            <div class="col-md-4">
+                <div class="card text-center shadow-lg p-4 mb-4 border-0">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-size: 1.5em; font-weight: bold;">Visits This Month</h5>
+                        <p class="card-text" style="font-size: 3em; font-weight: bold;">{{ $visitMonth }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row Below -->
+        <div class="row justify-content-center mt-4">
             <!-- Age Demographics Chart -->
             <div class="col-md-6">
-                <div class="card">
+                <div class="card shadow-lg p-4 mb-4">
                     <div class="card-body">
                         <canvas id="ageDemographicsChart" style="height: 400px"></canvas>
                     </div>
@@ -25,16 +51,27 @@
 
             <!-- Gender Demographics Chart -->
             <div class="col-md-6">
-                <div class="card">
+                <div class="card shadow-lg p-4 mb-4">
                     <div class="card-body">
                         <canvas id="genderDemographicsChart" style="height: 400px"></canvas>
                     </div>
                 </div>
             </div>
+        </div>
 
-
+        <!-- Most Visited Chart Full Width Below -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-12">
+                <div class="card shadow-lg p-4 mb-4">
+                    <div class="card-body">
+                        <canvas id="mostVisitedChart" style="height: 400px"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
@@ -145,8 +182,14 @@
                         datasets: [{
                             label: 'Gender Demographics',
                             data: counts,  // Use the count values from the data
-                            backgroundColor: ['#FF6384', '#36A2EB'],  // Colors for Female and Male
-                            borderColor: ['#FF6384', '#36A2EB'],
+                            backgroundColor: [
+                                '#97CC70',  // Base color
+                                '#6FAE55',  // Darker shade
+                            ],
+                            borderColor: [
+                                '#5B8B42',  // Border color
+                                '#497C34',  // Darker border color
+                            ],
                             borderWidth: 2
                         }]
                     },
@@ -174,6 +217,97 @@
             })
             .catch(error => {
                 console.error('Error fetching gender demographics data:', error);
+            });
+
+
+
+        fetch('/most-visited')
+            .then(response => response.json())
+            .then(data => {
+                const days = data.map(item => item.day);
+                const visits = data.map(item => item.visits);
+
+                const ctx = document.getElementById('mostVisitedChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: days,
+                        datasets: [{
+                            label: 'Number of Visits',
+                            data: visits,
+                            backgroundColor: [
+                                '#97CC70',  // Base color
+                                '#6FAE55',  // Darker shade
+                                '#4F8B43',  // Even darker
+                                '#3C6D34'   // Darkest
+                            ],
+                            borderColor: [
+                                '#5B8B42',  // Border color for base
+                                '#497C34',  // Darker border for shade
+                                '#386829',  // Even darker border
+                                '#2A5420'   // Darkest border
+                            ],
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    color: '#333',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                },
+                                grid: {
+                                    borderColor: '#CCC'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#333',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                },
+                                grid: {
+                                    borderColor: '#CCC'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#333',
+                                    font: {
+                                        size: 16,
+                                        weight: 'bold'
+                                    }
+                                }
+                            }
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: {
+                            padding: {
+                                top: 10,
+                                bottom: 10,
+                                left: 20,
+                                right: 20
+                            }
+                        },
+                        animation: {
+                            duration: 1500,
+                            easing: 'easeOutBounce'
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching most visited data:', error);
             });
 
 

@@ -32,12 +32,12 @@
                                         <a href="#" class="btn btn-info btn-sm mx-1" title="View" onclick="viewEntry({{ $entry['id'] }})">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="#" class="btn btn-warning btn-sm mx-1" title="Edit" onclick="editEntry({{ $entry['id'] }})">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-sm mx-1" title="Delete" onclick="deleteEntry({{ $entry['id'] }})">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
+{{--                                        <a href="#" class="btn btn-warning btn-sm mx-1" title="Edit" onclick="editEntry({{ $entry['id'] }})">--}}
+{{--                                            <i class="fas fa-edit"></i>--}}
+{{--                                        </a>--}}
+{{--                                        <a href="#" class="btn btn-danger btn-sm mx-1" title="Delete" onclick="deleteEntry({{ $entry['id'] }})">--}}
+{{--                                            <i class="fas fa-trash"></i>--}}
+{{--                                        </a>--}}
                                     </div>
                                 </td>
                             </tr>

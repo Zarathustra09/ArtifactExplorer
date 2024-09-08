@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use MattDaneshvar\Survey\Models\Answer;
+use MattDaneshvar\Survey\Models\Entry;
 
 class HomeController extends Controller
 {
@@ -24,7 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $visitToday = $this->visitToday();
+        $visitMonth = $this->visitThisMonth();
+        return view('home', compact('visitToday', 'visitMonth'));
     }
 
     // app/Http/Controllers/HomeController.php
@@ -65,4 +70,31 @@ class HomeController extends Controller
 
         return response()->json($genderData);
     }
+
+
+    public function mostVisited()
+    {
+        $entriesByDay = Entry::selectRaw('DAYNAME(created_at) as day, COUNT(*) as visits')
+            ->groupBy('day')
+            ->orderBy(DB::raw('FIELD(day, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")'))
+            ->get();
+
+        return response()->json($entriesByDay);
+    }
+
+    public function visitToday()
+    {
+        return Entry::whereDate('created_at', Carbon::today())->count();
+    }
+
+    public function visitThisMonth()
+    {
+        return Entry::whereMonth('created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->count();
+    }
+
+
+
+
 }
