@@ -27,19 +27,38 @@ class HomeController extends Controller
         return view('home');
     }
 
+    // app/Http/Controllers/HomeController.php
+
     public function ageDemographics()
     {
-        $ageData = Answer::where('question_id', 2)
-            ->selectRaw('value as age, COUNT(*) as count')
-            ->groupBy('age')
-            ->get();
+        $seventeen = Answer::where('question_id', 10)
+            ->selectRaw('SUM(value) as seventeen')
+            ->first();
 
-        return response()->json($ageData);
+        $thirty = Answer::where('question_id', 11)
+            ->selectRaw('SUM(value) as thirty')
+            ->first();
+
+        $fortyfive = Answer::where('question_id', 12)
+            ->selectRaw('SUM(value) as fortyfive') // Corrected to fortyfive
+            ->first();
+
+        $sixty = Answer::where('question_id', 13)
+            ->selectRaw('SUM(value) as sixty')
+            ->first();
+
+        return response()->json([
+            'seventeen' => $seventeen->seventeen,
+            'thirty' => $thirty->thirty,
+            'fortyfive' => $fortyfive->fortyfive,
+            'sixty' => $sixty->sixty,
+        ]);
     }
+
 
     public function genderDemographics()
     {
-        $genderData = Answer::where('question_id', 3)
+        $genderData = Answer::where('question_id', 5)
             ->selectRaw('value as gender, COUNT(*) as count')
             ->groupBy('gender')
             ->get();

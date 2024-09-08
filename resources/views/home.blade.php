@@ -1,3 +1,5 @@
+<!-- resources/views/home.blade.php -->
+
 @extends('layouts.app')
 
 @section('content')
@@ -16,7 +18,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <canvas id="ageDemographicsChart"></canvas>
+                        <canvas id="ageDemographicsChart" style="height: 400px"></canvas>
                     </div>
                 </div>
             </div>
@@ -25,97 +27,171 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <canvas id="genderDemographicsChart"></canvas>
+                        <canvas id="genderDemographicsChart" style="height: 400px"></canvas>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Age Demographics Chart
-            fetch('{{ route('age-demographics') }}')
+            // Fetch age demographics data
+            fetch('/age-demographics')
                 .then(response => response.json())
                 .then(data => {
-                    const ageLabels = data.map(item => item.age);
-                    const ageCounts = data.map(item => item.count);
-
-                    const ageCtx = document.getElementById('ageDemographicsChart').getContext('2d');
-                    new Chart(ageCtx, {
+                    const ctx = document.getElementById('ageDemographicsChart').getContext('2d');
+                    new Chart(ctx, {
                         type: 'bar',
                         data: {
-                            labels: ageLabels,
+                            labels: ['17 y/o and below', '18-30 y/o', '31-45 y/o', '60 y/o and above'],
                             datasets: [{
                                 label: 'Age Demographics',
-                                data: ageCounts,
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
+                                data: [
+                                    data.seventeen,
+                                    data.thirty,
+                                    data.fortyfive,
+                                    data.sixty
+                                ],
+                                backgroundColor: [
+                                    '#97CC70',  // Base color
+                                    '#6FAE55',  // Darker shade for 18-30
+                                    '#4F8B43',  // Even darker for 31-45
+                                    '#3C6D34'   // Darkest for 60 and above
+                                ],
+                                borderColor: [
+                                    '#5B8B42',  // Border color for 17 y/o and below
+                                    '#497C34',  // Border color for 18-30
+                                    '#386829',  // Border color for 31-45
+                                    '#2A5420'   // Border color for 60 and above
+                                ],
+                                borderWidth: 2,  // Increased border width for better visual separation
+                                borderRadius: 5, // Rounded corners on the bars
                             }]
                         },
                         options: {
                             scales: {
                                 y: {
-                                    display: false,  // Hides the Y-axis
-                                    beginAtZero: true
+                                    beginAtZero: true,
+                                    ticks: {
+                                        color: '#333', // Darker tick marks
+                                        font: {
+                                            size: 14, // Custom font size for y-axis labels
+                                            weight: 'bold'
+                                        }
+                                    },
+                                    grid: {
+                                        borderColor: '#CCC', // Custom grid color
+                                    }
+                                },
+                                x: {
+                                    ticks: {
+                                        color: '#333', // Darker tick marks for x-axis
+                                        font: {
+                                            size: 14,
+                                            weight: 'bold'
+                                        }
+                                    },
+                                    grid: {
+                                        borderColor: '#CCC', // Custom grid color for x-axis
+                                    }
                                 }
+                            },
+                            plugins: {
+                                legend: {
+                                    labels: {
+                                        color: '#333',  // Custom color for the legend text
+                                        font: {
+                                            size: 16,
+                                            weight: 'bold'
+                                        }
+                                    }
+                                }
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false, // Makes the graph responsive
+                            layout: {
+                                padding: {
+                                    top: 10,
+                                    bottom: 10,
+                                    left: 20,
+                                    right: 20
+                                }
+                            },
+                            animation: {
+                                duration: 1500,  // Custom animation duration
+                                easing: 'easeOutBounce'  // Custom easing function
                             }
                         }
                     });
                 });
+        });
 
-            // Gender Demographics Chart
-            fetch('{{ route('gender-demographics') }}')
-                .then(response => response.json())
-                .then(data => {
-                    const genderLabels = data.map(item => item.gender);
-                    const genderCounts = data.map(item => item.count);
-
-                    const genderCtx = document.getElementById('genderDemographicsChart').getContext('2d');
-                    new Chart(genderCtx, {
-                        type: 'doughnut',
-                        data: {
-                            labels: genderLabels,
-                            datasets: [{
-                                label: 'Gender Demographics',
-                                data: genderCounts,
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    position: 'top',
-                                },
-                                title: {
-                                    display: true,
-                                    text: 'Gender Demographics'
+        // Fetch gender demographics data
+        fetch('/gender-demographics')
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('genderDemographicsChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: data.map(item => item.gender),
+                        datasets: [{
+                            label: 'Gender Demographics',
+                            data: data.map(item => item.count),
+                            backgroundColor: [
+                                '#FF6384',  // Color for Male
+                                '#36A2EB'   // Color for Female
+                            ],
+                            borderColor: [
+                                '#FF6384',  // Border color for Male
+                                '#36A2EB'   // Border color for Female
+                            ],
+                            borderWidth: 2,  // Increased border width for better visual separation
+                        }]
+                    },
+                    options: {
+                        cutout: '50%', // Sets the inner radius to 50% to make it a half-doughnut
+                        rotation: -90, // Starts the doughnut chart from the top
+                        circumference: 180, // Makes the doughnut chart a half-doughnut
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#333',  // Custom color for the legend text
+                                    font: {
+                                        size: 16,
+                                        weight: 'bold'
+                                    }
                                 }
                             },
-                            rotation: -Math.PI,
-                            circumference: Math.PI
+                            tooltip: {
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        return tooltipItem.label + ': ' + tooltipItem.raw;
+                                    }
+                                }
+                            }
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false, // Makes the graph responsive
+                        layout: {
+                            padding: {
+                                top: 10,
+                                bottom: 10,
+                                left: 20,
+                                right: 20
+                            }
+                        },
+                        animation: {
+                            duration: 1500,  // Custom animation duration
+                            easing: 'easeOutBounce'  // Custom easing function
                         }
-                    });
+                    }
                 });
-        });
+            });
+
     </script>
 @endsection

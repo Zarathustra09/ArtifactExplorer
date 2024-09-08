@@ -16,35 +16,87 @@ class SurveySeeder extends Seeder
         // Create a new survey
         $survey = Survey::create(['name' => 'Visitor Information', 'settings' =>  ['accept-guest-entries' => true]]);
 
-        // Add questions to the survey
+        // Create sections
+        $sectionOne = $survey->sections()->create(['name' => 'Personal Information']);
+        $sectionTwo = $survey->sections()->create(['name' => 'Demographics']);
 
-
-        $survey->questions()->create([
-            'content' => 'Full Name',
+        // Add questions to section one
+        $sectionOne->questions()->create([
+            'content' => 'C.N. Bus Number',
             'rules' => ['required']
         ]);
 
-        $survey->questions()->create([
-            'content' => 'Age',
-            'type' => 'number',
-            'rules' => ['numeric', 'min:0', 'required']
-        ]);
-
-        $survey->questions()->create([
-            'content' => 'Gender',
-            'type' => 'radio',
-            'options' => ['Male', 'Female', 'Other'],
+        $sectionOne->questions()->create([
+            'content' => 'Full name',
             'rules' => ['required']
         ]);
 
-        $survey->questions()->create([
-            'content' => 'Occupation',
+        $sectionOne->questions()->create([
+            'content' => 'Address/Affliation',
             'rules' => ['required']
         ]);
 
-        $survey->questions()->create([
+        $sectionOne->questions()->create([
             'content' => 'Nationality',
             'rules' => ['required']
         ]);
+
+        $sectionOne->questions()->create([
+            'content' => 'Gender',
+            'type' => 'radio',
+            'options' => ['Male', 'Female'],
+            'rules' => ['required']
+        ]);
+
+        // Add questions to section two
+        $sectionTwo->questions()->create([
+            'content' => 'No. of Students / Grade School',
+            'type' => 'number',
+            'rules' => ['required', 'numeric', 'min:1']
+        ]);
+
+        $sectionTwo->questions()->create([
+            'content' => 'No. of Students / High School',
+            'type' => 'number',
+            'rules' => ['required', 'numeric', 'min:1']
+        ]);
+
+        $sectionTwo->questions()->create([
+            'content' => 'No. of Students / College / GradSchool',
+            'type' => 'number',
+            'rules' => ['required', 'numeric', 'min:1']
+        ]);
+
+        $sectionTwo->questions()->create([
+            'content' => 'PWD',
+            'rules' => ['required']
+        ]);
+
+        $sectionTwo->questions()->create([
+            'content' => '17 y/o and below',
+            'type' => 'number',
+            'rules' => ['required', 'numeric', 'min:1']
+        ]);
+
+        $sectionTwo->questions()->create([
+            'content' => '18-30 y/o',
+            'type' => 'number',
+            'rules' => ['required', 'numeric', 'min:1']
+        ]);
+
+        $sectionTwo->questions()->create([
+            'content' => '31-45 y/o',
+            'type' => 'number',
+            'rules' => ['required', 'numeric', 'min:1']
+        ]);
+
+        $sectionTwo->questions()->create([
+            'content' => '60 y/o and above',
+            'type' => 'number',
+            'rules' => ['required', 'numeric', 'min:1']
+        ]);
+
+
+
     }
 }

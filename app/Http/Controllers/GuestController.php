@@ -24,7 +24,7 @@ class GuestController extends Controller
         // If the cookie does not exist, create a new unique identifier
         if (!$deviceIdentifier) {
             $deviceIdentifier = $request->ip() . '-' . Str::random(40);
-            $expiresAt = Carbon::now()->endOfDay();
+            $expiresAt = Carbon::now()->setTimezone('Asia/Manila')->endOfDay();
             Cookie::queue('device_identifier', $deviceIdentifier, $expiresAt->diffInMinutes());
         }
 
