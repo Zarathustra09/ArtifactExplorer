@@ -28,13 +28,14 @@ class GuestController extends Controller
             Cookie::queue('device_identifier', $deviceIdentifier, $expiresAt->diffInMinutes());
         }
 
-        // Check if the user has already submitted a response
+        // Check if the user has already submitted a response today
         $existingEntry = Entry::where('survey_id', $survey->id)
             ->where('device_identifier', $deviceIdentifier)
+            ->whereDate('created_at', Carbon::today())
             ->first();
 
         if ($existingEntry) {
-            return redirect()->back()->with('error', 'You have already submitted a response.');
+            return redirect()->back()->with('error', 'You have already submitted a response today.');
         }
 
         // Validate the request data using the survey rules

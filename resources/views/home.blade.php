@@ -227,6 +227,19 @@
                 const days = data.map(item => item.day);
                 const visits = data.map(item => item.visits);
 
+                const baseColor = '#97CC70';
+                const colorShades = [
+                    '#97CC70',  // Base color
+                    '#6FAE55',  // Darker shade
+                    '#4F8B43',  // Even darker
+                    '#3C6D34',  // Darkest
+                    '#2A5420'   // Deeper shade if there are more than 4 records
+                ];
+
+                // Use shades based on the number of records, repeating colors if necessary
+                const backgroundColors = days.map((_, index) => colorShades[index % colorShades.length]);
+                const borderColors = days.map((_, index) => colorShades[index % colorShades.length]);
+
                 const ctx = document.getElementById('mostVisitedChart').getContext('2d');
                 new Chart(ctx, {
                     type: 'bar',
@@ -235,58 +248,40 @@
                         datasets: [{
                             label: 'Number of Visits',
                             data: visits,
-                            backgroundColor: [
-                                '#97CC70',  // Base color
-                                '#6FAE55',  // Darker shade
-                                '#4F8B43',  // Even darker
-                                '#3C6D34'   // Darkest
-                            ],
-                            borderColor: [
-                                '#5B8B42',  // Border color for base
-                                '#497C34',  // Darker border for shade
-                                '#386829',  // Even darker border
-                                '#2A5420'   // Darkest border
-                            ],
+                            backgroundColor: backgroundColors,  // Dynamic shades
+                            borderColor: borderColors,          // Dynamic border color
                             borderWidth: 2
                         }]
                     },
                     options: {
                         scales: {
-                            y: {
-                                beginAtZero: true,
+                            yAxes: [{
                                 ticks: {
-                                    color: '#333',
-                                    font: {
-                                        size: 14,
-                                        weight: 'bold'
-                                    }
+                                    beginAtZero: true,
+                                    fontColor: '#333',  // Darker tick marks
+                                    fontSize: 14,       // Custom font size for y-axis labels
+                                    fontStyle: 'bold'
                                 },
-                                grid: {
-                                    borderColor: '#CCC'
+                                gridLines: {
+                                    color: '#CCC'  // Custom grid color
                                 }
-                            },
-                            x: {
+                            }],
+                            xAxes: [{
                                 ticks: {
-                                    color: '#333',
-                                    font: {
-                                        size: 14,
-                                        weight: 'bold'
-                                    }
+                                    fontColor: '#333',  // Darker tick marks for x-axis
+                                    fontSize: 14,
+                                    fontStyle: 'bold'
                                 },
-                                grid: {
-                                    borderColor: '#CCC'
+                                gridLines: {
+                                    color: '#CCC'  // Custom grid color for x-axis
                                 }
-                            }
+                            }]
                         },
-                        plugins: {
-                            legend: {
-                                labels: {
-                                    color: '#333',
-                                    font: {
-                                        size: 16,
-                                        weight: 'bold'
-                                    }
-                                }
+                        legend: {
+                            labels: {
+                                fontColor: '#333',  // Custom color for the legend text
+                                fontSize: 16,
+                                fontStyle: 'bold'
                             }
                         },
                         responsive: true,
@@ -300,8 +295,8 @@
                             }
                         },
                         animation: {
-                            duration: 1500,
-                            easing: 'easeOutBounce'
+                            duration: 1500,  // Custom animation duration
+                            easing: 'easeOutBounce'  // Custom easing function
                         }
                     }
                 });
@@ -309,6 +304,7 @@
             .catch(error => {
                 console.error('Error fetching most visited data:', error);
             });
+
 
 
     </script>

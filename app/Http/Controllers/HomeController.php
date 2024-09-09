@@ -72,9 +72,11 @@ class HomeController extends Controller
     }
 
 
+// app/Http/Controllers/HomeController.php
+
     public function mostVisited()
     {
-        $entriesByDay = Entry::selectRaw('DAYNAME(created_at) as day, COUNT(*) as visits')
+        $entriesByDay = Entry::selectRaw('DAYNAME(created_at) as day, COUNT(DISTINCT device_identifier) as visits')
             ->groupBy('day')
             ->orderBy(DB::raw('FIELD(day, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")'))
             ->get();
@@ -84,14 +86,17 @@ class HomeController extends Controller
 
     public function visitToday()
     {
-        return Entry::whereDate('created_at', Carbon::today())->count();
+        return Entry::whereDate('created_at', Carbon::today())
+            ->distinct('device_identifier')
+            ->count('device_identifier');
     }
 
     public function visitThisMonth()
     {
         return Entry::whereMonth('created_at', Carbon::now()->month)
             ->whereYear('created_at', Carbon::now()->year)
-            ->count();
+            ->distinct('device_identifier')
+            ->count('device_identifier');
     }
 
 

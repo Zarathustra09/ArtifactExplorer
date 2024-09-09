@@ -222,7 +222,7 @@
 
         <!-- Nav Item - Reports -->
         <li class="nav-item">
-            <a class="nav-link" href="reports.html">
+            <a class="nav-link" href="{{route('report.index')}}">
                 <i class="fas fa-fw fa-file-alt"></i> <!-- Changed to a file icon -->
                 <span>Reports</span>
             </a>
@@ -575,7 +575,7 @@
         // Simulate a loading delay (e.g., 2 seconds)
         setTimeout(function() {
             document.body.classList.add('loaded');
-        }, 500); // Adjust the time as needed
+        }, 1000); // Adjust the time as needed
     });
 </script>
 

@@ -22,5 +22,10 @@ class FeedbackSeeder extends Seeder
             'options' => [1, 2, 3, 4, 5], // Representing 1 to 5 stars
             'rules' => ['required']
         ]);
+
+        $survey->questions()->create([
+            'content' => 'Feedback',
+            'rules' => ['required']
+        ]);
     }
 }

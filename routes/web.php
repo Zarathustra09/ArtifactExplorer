@@ -3,6 +3,7 @@
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\VisitorInformationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -44,3 +45,7 @@ Route::get('/visitor/demographics/{entryId}', [VisitorInformationController::cla
 
 Route::get('/feedback-survey', [FeedbackController::class, 'create'])->name('feedback.survey.create');
 Route::post('/feedback-survey', [FeedbackController::class, 'store'])->name('feedback.survey.store');
+
+
+
+Route::get('/report', [ReportController::class, 'index'])->name('report.index');

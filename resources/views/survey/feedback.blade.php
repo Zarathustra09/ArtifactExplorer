@@ -1,4 +1,3 @@
-<!-- resources/views/survey/feedback.blade.php -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,21 +15,21 @@
         }
         .custom-background {
             background-color: white;
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
         .star-rating {
             direction: rtl;
             display: inline-block;
-            padding: 20px;
+            padding: 10px 0;
         }
         .star-rating input[type="radio"] {
             display: none;
         }
         .star-rating label {
             color: #bbb;
-            font-size: 24px;
+            font-size: 30px;
             padding: 0;
             cursor: pointer;
             -webkit-transition: all 0.3s ease-in-out;
@@ -41,12 +40,16 @@
         .star-rating input[type="radio"]:checked ~ label {
             color: #f2b600;
         }
+        .form-group label {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 <div class="container my-5">
     <div class="row justify-content-center">
-        <div class="col-md-6 custom-background">
+        <div class="col-md-8 col-lg-6 custom-background">
+            <h2 class="text-center mb-4">Visitor Feedback</h2>
             <form method="POST" action="{{ route('feedback.survey.store') }}">
                 @csrf
 
@@ -62,7 +65,7 @@
                 @endif
 
                 <div class="form-group">
-                    <label for="rating">How was your visit?</label>
+                    <label for="rating">How was your visit?     </label>
                     <div class="star-rating">
                         @for($i = 5; $i >= 1; $i--)
                             <input type="radio" id="star{{ $i }}" name="rating" value="{{ $i }}">
@@ -71,7 +74,12 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="form-group">
+                    <label for="feedback">Feedback</label>
+                    <textarea class="form-control" id="feedback" name="feedback" rows="4" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </form>
         </div>
     </div>

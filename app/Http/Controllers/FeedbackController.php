@@ -17,49 +17,54 @@ class FeedbackController extends Controller
         return view('survey.feedback', ['survey' => $survey]);
     }
 
-
-
-    // app/Http/Controllers/FeedbackController.php
-
     public function store(Request $request)
     {
+        $survey = $this->survey();
         $deviceIdentifier = Cookie::get('device_identifier');
 
-        // If the cookie exists
-        if ($deviceIdentifier) {
-            // Check if the user has already submitted a response for survey_id = 2
-            $existingEntry = Entry::where('device_identifier', $deviceIdentifier)
-                ->where('survey_id', 2)
-                ->first();
-
-            if ($existingEntry) {
-                return redirect()->back()->with('error', 'You have already submitted a response.');
-            }
-
-            // Validate the request data
-            $request->validate([
-                'rating' => 'required|integer|min:1|max:5',
-            ]);
-
-            // Create a new entry with the validated rating
-            $entry = new Entry();
-            $entry->device_identifier = $deviceIdentifier;
-            $entry->survey_id = 2; // Assuming survey_id 2 is for the feedback survey
-            $entry->save();
-
-            // Save the answer to the entry
-            $entry->answers()->create([
-                'question_id' => 2, // Assuming question_id 2 is for the rating question
-                'value' => $request->input('rating'),
-            ]);
-
-            $currentTime = Carbon::now()->setTimezone('Asia/Manila')->toDateTimeString();
-
-            return redirect()->back()->with('success', 'Survey submitted successfully! Current Philippine time: ' . $currentTime);
+        // If the cookie does not exist, create a new unique identifier
+        if (!$deviceIdentifier) {
+            $deviceIdentifier = $request->ip() . '-' . Str::random(40);
+            $expiresAt = Carbon::now()->setTimezone('Asia/Manila')->endOfDay();
+            Cookie::queue('device_identifier', $deviceIdentifier, $expiresAt->diffInMinutes());
         }
 
-        // If the cookie does not exist, redirect to /guest-survey
-        return redirect('/guest-survey');
+        // Check if the user has already submitted a response today
+        $existingEntry = Entry::where('survey_id', $survey->id)
+            ->where('device_identifier', $deviceIdentifier)
+            ->whereDate('created_at', Carbon::today())
+            ->first();
+
+        if ($existingEntry) {
+            return redirect()->back()->with('error', 'You have already submitted a response today.');
+        }
+
+        // Validate the request data
+        $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'feedback' => 'required|string|max:255',
+        ]);
+
+        // Create a new entry with the validated rating
+        $entry = new Entry();
+        $entry->device_identifier = $deviceIdentifier;
+        $entry->survey_id = $survey->id;
+        $entry->save();
+
+        // Save the answers to the entry
+        $entry->answers()->create([
+            'question_id' => 14, // Assuming question_id 14 is for the rating question
+            'value' => $request->input('rating'),
+        ]);
+
+        $entry->answers()->create([
+            'question_id' => 15, // Assuming question_id 15 is for the feedback question
+            'value' => $request->input('feedback'),
+        ]);
+
+        $currentTime = Carbon::now()->setTimezone('Asia/Manila')->toDateTimeString();
+
+        return redirect()->back()->with('success', 'Survey submitted successfully! Current Philippine time: ' . $currentTime);
     }
 
     protected function survey()
