@@ -15,6 +15,8 @@
                             <th>Nationality</th>
                             <th>Gender</th>
                             <th>PWD</th>
+                            <th>Time In</th>
+                            <th>Time Out</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -27,17 +29,13 @@
                                 <td>{{ $entry['nationality'] }}</td>
                                 <td>{{ $entry['gender'] }}</td>
                                 <td>{{ $entry['pwd'] }}</td>
+                                <td>{{ \Carbon\Carbon::parse($entry['time_in'])->format('F d, Y h:i A') }}</td>
+                                <td>{{ $entry['time_out'] ? \Carbon\Carbon::parse($entry['time_out'])->format('F d, Y h:i A') : 'N/A' }}</td>
                                 <td>
                                     <div class="d-flex justify-content-around">
                                         <a href="#" class="btn btn-info btn-sm mx-1" title="View" onclick="viewEntry({{ $entry['id'] }})">
                                             <i class="fas fa-eye"></i>
                                         </a>
-{{--                                        <a href="#" class="btn btn-warning btn-sm mx-1" title="Edit" onclick="editEntry({{ $entry['id'] }})">--}}
-{{--                                            <i class="fas fa-edit"></i>--}}
-{{--                                        </a>--}}
-{{--                                        <a href="#" class="btn btn-danger btn-sm mx-1" title="Delete" onclick="deleteEntry({{ $entry['id'] }})">--}}
-{{--                                            <i class="fas fa-trash"></i>--}}
-{{--                                        </a>--}}
                                     </div>
                                 </td>
                             </tr>

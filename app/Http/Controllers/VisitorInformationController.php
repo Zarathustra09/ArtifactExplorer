@@ -19,12 +19,35 @@ class VisitorInformationController extends Controller
 
     private function getVisitorData()
     {
+        $usedEntryIds = [];
+
         return DB::table('answers')
             ->select('entry_id', 'question_id', 'value')
-            ->whereIn('question_id', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) // Include question 13
+            ->whereIn('question_id', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
             ->get()
             ->groupBy('entry_id')
-            ->map(function ($answers, $entryId) {
+            ->map(function ($answers, $entryId) use (&$usedEntryIds) {
+                if (in_array($entryId, $usedEntryIds)) {
+                    return null;
+                }
+
+                $entry1 = DB::table('entries')->where('id', $entryId)->where('survey_id', 1)->first();
+
+                if (!$entry1) {
+                    return null;
+                }
+
+                $entry2 = DB::table('entries')
+                    ->where('device_identifier', $entry1->device_identifier)
+                    ->where('survey_id', 2)
+                    ->whereNotIn('id', $usedEntryIds)
+                    ->first();
+
+                if ($entry2) {
+                    $usedEntryIds[] = $entryId;
+                    $usedEntryIds[] = $entry2->id;
+                }
+
                 $result = [
                     'id' => $entryId,
                     'bus_number' => null,
@@ -40,6 +63,8 @@ class VisitorInformationController extends Controller
                     'age_18_30' => null,
                     'age_31_45' => null,
                     'age_60_above' => null,
+                    'time_in' => $entry1 ? $entry1->created_at : null,
+                    'time_out' => $entry2 ? $entry2->created_at : null,
                 ];
 
                 foreach ($answers as $answer) {
@@ -88,6 +113,7 @@ class VisitorInformationController extends Controller
 
                 return $result;
             })
+            ->filter()
             ->values();
     }
 

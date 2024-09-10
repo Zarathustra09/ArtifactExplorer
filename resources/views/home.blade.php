@@ -6,33 +6,43 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <!-- Weather Widget and Stat Cards in One Row -->
-            <div class="col-md-4">
+            <!-- Single Row with Weather Widget and Stat Cards -->
+            <div class="col-md-12">
                 <div class="card shadow-lg p-4 mb-4">
                     <div class="card-body">
-                        <div id="weatherapi-weather-widget-4"></div>
-                        <script type='text/javascript' src='https://www.weatherapi.com/weather/widget.ashx?loc=1857837&wid=4&tu=1&div=weatherapi-weather-widget-4' async></script>
-                        <noscript><a href="https://www.weatherapi.com/weather/q/pantay-1857837" alt="Hour by hour Pantay weather">10 day hour by hour Pantay weather</a></noscript>
-                    </div>
-                </div>
-            </div>
+                        <div class="row">
+                            <!-- Weather Widget on the Left -->
+                            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                                <div id="weatherapi-weather-widget-4"></div>
+                                <script type='text/javascript' src='https://www.weatherapi.com/weather/widget.ashx?loc=1857837&wid=4&tu=1&div=weatherapi-weather-widget-4' async></script>
+                                <noscript><a href="https://www.weatherapi.com/weather/q/pantay-1857837" alt="Hour by hour Pantay weather">10 day hour by hour Pantay weather</a></noscript>
+                            </div>
 
-            <!-- Visits Today Card -->
-            <div class="col-md-4">
-                <div class="card text-center shadow-lg p-4 mb-4 border-0">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 1.5em; font-weight: bold;">Visits Today</h5>
-                        <p class="card-text" style="font-size: 3em; font-weight: bold;">{{ $visitToday }}</p>
-                    </div>
-                </div>
-            </div>
+                            <!-- Stat Cards on the Right -->
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <!-- Visits Today Card -->
+                                    <div class="col-12">
+                                        <div class="card text-center shadow-lg p-4 mb-4 border-0">
+                                            <div class="card-body">
+                                                <h5 class="card-title" style="font-size: 1.5em; font-weight: bold;">Visits Today</h5>
+                                                <p class="card-text" style="font-size: 3em; font-weight: bold;">{{ $visitToday }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
 
-            <!-- Visits This Month Card -->
-            <div class="col-md-4">
-                <div class="card text-center shadow-lg p-4 mb-4 border-0">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 1.5em; font-weight: bold;">Visits This Month</h5>
-                        <p class="card-text" style="font-size: 3em; font-weight: bold;">{{ $visitMonth }}</p>
+                                    <!-- Visits This Month Card -->
+                                    <div class="col-12">
+                                        <div class="card text-center shadow-lg p-4 mb-4 border-0">
+                                            <div class="card-body">
+                                                <h5 class="card-title" style="font-size: 1.5em; font-weight: bold;">Visits This Month</h5>
+                                                <p class="card-text" style="font-size: 3em; font-weight: bold;">{{ $visitMonth }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- End of Stat Cards Column -->
+                        </div> <!-- End of Row -->
                     </div>
                 </div>
             </div>
@@ -73,10 +83,10 @@
 
 
 
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Fetch age demographics data
             fetch('/age-demographics')
                 .then(response => response.json())
                 .then(data => {
@@ -111,45 +121,37 @@
                         },
                         options: {
                             scales: {
-                                y: {
-                                    beginAtZero: true,
+                                yAxes: [{
                                     ticks: {
-                                        color: '#333', // Darker tick marks
-                                        font: {
-                                            size: 14, // Custom font size for y-axis labels
-                                            weight: 'bold'
-                                        }
+                                        beginAtZero: true,  // Force y-axis to start at zero
+                                        fontColor: '#333',  // Darker tick marks
+                                        fontSize: 12,       // Smaller font size for y-axis labels
+                                        fontStyle: 'bold'
                                     },
-                                    grid: {
-                                        borderColor: '#CCC', // Custom grid color
+                                    gridLines: {
+                                        color: '#CCC'       // Custom grid color
                                     }
-                                },
-                                x: {
+                                }],
+                                xAxes: [{
                                     ticks: {
-                                        color: '#333', // Darker tick marks for x-axis
-                                        font: {
-                                            size: 14,
-                                            weight: 'bold'
-                                        }
+                                        fontColor: '#333',  // Darker tick marks for x-axis
+                                        fontSize: 12,       // Smaller font size for x-axis labels
+                                        fontStyle: 'bold'
                                     },
-                                    grid: {
-                                        borderColor: '#CCC', // Custom grid color for x-axis
+                                    gridLines: {
+                                        color: '#CCC'       // Custom grid color for x-axis
                                     }
-                                }
+                                }]
                             },
-                            plugins: {
-                                legend: {
-                                    labels: {
-                                        color: '#333',  // Custom color for the legend text
-                                        font: {
-                                            size: 16,
-                                            weight: 'bold'
-                                        }
-                                    }
+                            legend: {
+                                labels: {
+                                    fontColor: '#333',  // Custom color for the legend text
+                                    fontSize: 14,       // Legend text size
+                                    fontStyle: 'bold'
                                 }
                             },
                             responsive: true,
-                            maintainAspectRatio: false, // Makes the graph responsive
+                            maintainAspectRatio: false,  // Makes the graph responsive
                             layout: {
                                 padding: {
                                     top: 10,
@@ -159,15 +161,16 @@
                                 }
                             },
                             animation: {
-                                duration: 1500,  // Custom animation duration
-                                easing: 'easeOutBounce'  // Custom easing function
+                                duration: 1500,           // Custom animation duration
+                                easing: 'easeOutBounce'   // Custom easing function
                             }
                         }
                     });
                 });
-        });
 
-        fetch('/gender-demographics')
+
+        });
+            fetch('/gender-demographics')
             .then(response => response.json())
             .then(data => {
                 // Map genders and counts
