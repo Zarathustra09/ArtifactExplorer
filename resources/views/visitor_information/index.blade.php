@@ -1,10 +1,22 @@
-<!-- resources/views/visitor_information/index.blade.php -->
 @extends('layouts.app')
 
 @section('content')
     <div class="container-fluid">
         <div class="card shadow mb-4">
             <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="me-2">
+                        <select id="exportPeriod" class="form-select">
+                            <option value="monthly">Monthly</option>
+                            <option value="quarterly">Quarterly</option>
+                            <option value="semi-annually">Semi-Annually</option>
+                            <option value="annually">Annually</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button id="exportButton" class="btn btn-primary">Export</button>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -78,5 +90,10 @@
                     });
                 });
         }
+
+        document.getElementById('exportButton').addEventListener('click', function() {
+            const period = document.getElementById('exportPeriod').value;
+            window.location.href = `/visitor/export?period=${period}`;
+        });
     </script>
 @endsection

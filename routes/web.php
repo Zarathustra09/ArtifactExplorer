@@ -41,6 +41,7 @@ Route::post('/guest-survey', [GuestController::class, 'store'])->name('guest.sur
 Route::get('/visitor/index', [VisitorInformationController::class, 'index'])->name('visitor.index');
 Route::get('/visitor-information/data-table', [VisitorInformationController::class, 'dataTable'])->name('visitor-information.data-table');
 Route::get('/visitor-information', [VisitorInformationController::class, 'getVisitorData'])->name('visitor.info');
+Route::get('/visitor/export', [VisitorInformationController::class, 'export'])->name('visitor.export');
 
 Route::get('/visitor/demographics/{entryId}', [VisitorInformationController::class, 'view'])->name('visitor.demographics');
 

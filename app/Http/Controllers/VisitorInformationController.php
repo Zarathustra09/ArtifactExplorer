@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\VisitorInformationExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use MattDaneshvar\Survey\Models\Answer;
 
 class VisitorInformationController extends Controller
@@ -236,5 +238,11 @@ class VisitorInformationController extends Controller
         $demographicData = $ageDemographics->merge($schoolDemographics);
 
         return response()->json($demographicData, 200);
+    }
+
+    public function export(Request $request)
+    {
+        $period = $request->input('period', 'monthly'); // Default to 'monthly' if not provided
+        return Excel::download(new VisitorInformationExport($period), 'visitor_information.xlsx');
     }
 }

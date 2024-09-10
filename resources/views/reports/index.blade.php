@@ -34,7 +34,7 @@
                             <div class="mb-4">
                                 <strong class="d-block mb-1">How was your visit:</strong>
                                 <div class="star-rating">
-                                    @for($i = 5; $i >= 1; $i--)
+                                    @for($i = 1; $i <= 5; $i++)
                                         <i class="fas fa-star {{ $result->visit_rating >= $i ? 'text-warning' : 'text-muted' }}"></i>
                                     @endfor
                                 </div>
@@ -92,7 +92,7 @@
                                         <strong class="d-block mb-1">How was your visit:</strong>
                                         <div class="star-rating">
                                             ${[...Array(5).keys()].map(i => `
-                                                <i class="fas fa-star ${result.visit_rating >= 5 - i ? 'text-warning' : 'text-muted'}"></i>
+                                                <i class="fas fa-star ${result.visit_rating >= i + 1 ? 'text-warning' : 'text-muted'}"></i>
                                             `).join('')}
                                         </div>
                                     </div>
