@@ -11,6 +11,11 @@ class ReportController extends Controller
     {
         $search = $request->input('search');
         $results = $this->getSurveyReport($search);
+
+        if ($request->ajax()) {
+            return response()->json(['results' => $results->items()]);
+        }
+
         return view('reports.index', ['results' => $results, 'search' => $search]);
     }
 
