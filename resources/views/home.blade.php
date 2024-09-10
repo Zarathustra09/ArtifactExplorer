@@ -1,10 +1,12 @@
-<!-- resources/views/home.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
-
     <div class="container">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <a href="#" id = "generateReportButton" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        </div>
         <div class="row justify-content-center">
             <!-- Single Row with Weather Widget and Stat Cards -->
             <div class="col-md-12">
@@ -79,14 +81,18 @@
                 </div>
             </div>
         </div>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-12 text-center">
+                <button id="printCharts" class="btn btn-primary">Print Charts</button>
+            </div>
+        </div>
     </div>
-
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Fetch and render charts
             fetch('/age-demographics')
                 .then(response => response.json())
                 .then(data => {
@@ -166,149 +172,210 @@
                             }
                         }
                     });
+
+                    // Store age data for transfer
+                    window.ageData = {
+                        '17 y/o and below': data.seventeen,
+                        '18-30 y/o': data.thirty,
+                        '31-45 y/o': data.fortyfive,
+                        '60 y/o and above': data.sixty
+                    };
+                    console.log('Age Data:', window.ageData);
                 });
 
-
-        });
             fetch('/gender-demographics')
-            .then(response => response.json())
-            .then(data => {
-                // Map genders and counts
-                const genders = data.map(item => item.gender);
-                const counts = data.map(item => item.count);
+                .then(response => response.json())
+                .then(data => {
+                    // Map genders and counts
+                    const genders = data.map(item => item.gender);
+                    const counts = data.map(item => item.count);
 
-                const ctx = document.getElementById('genderDemographicsChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: genders,  // Use the gender labels from the data
-                        datasets: [{
-                            label: 'Gender Demographics',
-                            data: counts,  // Use the count values from the data
-                            backgroundColor: [
-                                '#97CC70',  // Base color
-                                '#6FAE55',  // Darker shade
-                            ],
-                            borderColor: [
-                                '#5B8B42',  // Border color
-                                '#497C34',  // Darker border color
-                            ],
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        cutout: '50%',
-                        plugins: {
-                            legend: {
-                                labels: {
-                                    color: '#333',
-                                    font: {
-                                        size: 16,
-                                        weight: 'bold'
-                                    }
-                                }
-                            }
-                        },
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        animation: {
-                            duration: 1500,
-                            easing: 'easeOutBounce'
-                        }
-                    }
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching gender demographics data:', error);
-            });
-
-
-
-        fetch('/most-visited')
-            .then(response => response.json())
-            .then(data => {
-                const days = data.map(item => item.day);
-                const visits = data.map(item => item.visits);
-
-                const baseColor = '#97CC70';
-                const colorShades = [
-                    '#97CC70',  // Base color
-                    '#6FAE55',  // Darker shade
-                    '#4F8B43',  // Even darker
-                    '#3C6D34',  // Darkest
-                    '#2A5420'   // Deeper shade if there are more than 4 records
-                ];
-
-                // Use shades based on the number of records, repeating colors if necessary
-                const backgroundColors = days.map((_, index) => colorShades[index % colorShades.length]);
-                const borderColors = days.map((_, index) => colorShades[index % colorShades.length]);
-
-                const ctx = document.getElementById('mostVisitedChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: days,
-                        datasets: [{
-                            label: 'Number of Visits',
-                            data: visits,
-                            backgroundColor: backgroundColors,  // Dynamic shades
-                            borderColor: borderColors,          // Dynamic border color
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true,
-                                    fontColor: '#333',  // Darker tick marks
-                                    fontSize: 14,       // Custom font size for y-axis labels
-                                    fontStyle: 'bold'
-                                },
-                                gridLines: {
-                                    color: '#CCC'  // Custom grid color
-                                }
-                            }],
-                            xAxes: [{
-                                ticks: {
-                                    fontColor: '#333',  // Darker tick marks for x-axis
-                                    fontSize: 14,
-                                    fontStyle: 'bold'
-                                },
-                                gridLines: {
-                                    color: '#CCC'  // Custom grid color for x-axis
-                                }
+                    const ctx = document.getElementById('genderDemographicsChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: genders,  // Use the gender labels from the data
+                            datasets: [{
+                                label: 'Gender Demographics',
+                                data: counts,  // Use the count values from the data
+                                backgroundColor: [
+                                    '#97CC70',  // Base color
+                                    '#6FAE55',  // Darker shade
+                                ],
+                                borderColor: [
+                                    '#5B8B42',  // Border color
+                                    '#497C34',  // Darker border color
+                                ],
+                                borderWidth: 2
                             }]
                         },
-                        legend: {
-                            labels: {
-                                fontColor: '#333',  // Custom color for the legend text
-                                fontSize: 16,
-                                fontStyle: 'bold'
+                        options: {
+                            cutout: '50%',
+                            plugins: {
+                                legend: {
+                                    labels: {
+                                        color: '#333',
+                                        font: {
+                                            size: 16,
+                                            weight: 'bold'
+                                        }
+                                    }
+                                }
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            animation: {
+                                duration: 1500,
+                                easing: 'easeOutBounce'
                             }
-                        },
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        layout: {
-                            padding: {
-                                top: 10,
-                                bottom: 10,
-                                left: 20,
-                                right: 20
-                            }
-                        },
-                        animation: {
-                            duration: 1500,  // Custom animation duration
-                            easing: 'easeOutBounce'  // Custom easing function
                         }
-                    }
+                    });
+
+                    // Store gender data for transfer
+                    window.genderData = data.reduce((acc, item) => {
+                        acc[item.gender] = item.count;
+                        return acc;
+                    }, {});
+                    console.log('Gender Data:', window.genderData);
+                })
+                .catch(error => {
+                    console.error('Error fetching gender demographics data:', error);
                 });
-            })
-            .catch(error => {
-                console.error('Error fetching most visited data:', error);
-            });
 
+            fetch('/most-visited')
+                .then(response => response.json())
+                .then(data => {
+                    const days = data.map(item => item.day);
+                    const visits = data.map(item => item.visits);
 
+                    const baseColor = '#97CC70';
+                    const colorShades = [
+                        '#97CC70',  // Base color
+                        '#6FAE55',  // Darker shade
+                        '#4F8B43',  // Even darker
+                        '#3C6D34',  // Darkest
+                        '#2A5420'   // Deeper shade if there are more than 4 records
+                    ];
 
+                    // Use shades based on the number of records, repeating colors if necessary
+                    const backgroundColors = days.map((_, index) => colorShades[index % colorShades.length]);
+                    const borderColors = days.map((_, index) => colorShades[index % colorShades.length]);
+
+                    const ctx = document.getElementById('mostVisitedChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: days,
+                            datasets: [{
+                                label: 'Number of Visits',
+                                data: visits,
+                                backgroundColor: backgroundColors,  // Dynamic shades
+                                borderColor: borderColors,          // Dynamic border color
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        fontColor: '#333',  // Darker tick marks
+                                        fontSize: 14,       // Custom font size for y-axis labels
+                                        fontStyle: 'bold'
+                                    },
+                                    gridLines: {
+                                        color: '#CCC'  // Custom grid color
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        fontColor: '#333',  // Darker tick marks for x-axis
+                                        fontSize: 14,
+                                        fontStyle: 'bold'
+                                    },
+                                    gridLines: {
+                                        color: '#CCC'  // Custom grid color for x-axis
+                                    }
+                                }]
+                            },
+                            legend: {
+                                labels: {
+                                    fontColor: '#333',  // Custom color for the legend text
+                                    fontSize: 16,
+                                    fontStyle: 'bold'
+                                }
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            layout: {
+                                padding: {
+                                    top: 10,
+                                    bottom: 10,
+                                    left: 20,
+                                    right: 20
+                                }
+                            },
+                            animation: {
+                                duration: 1500,  // Custom animation duration
+                                easing: 'easeOutBounce'  // Custom easing function
+                            }
+                        }
+                    });
+
+                    // Store most visited data for transfer
+                    window.mostVisitedData = data.reduce((acc, item) => {
+                        acc[item.day] = item.visits;
+                        return acc;
+                    }, {});
+                    console.log('Most Visited Data:', window.mostVisitedData);
+                })
+                .catch(error => {
+                    console.error('Error fetching most visited data:', error);
+                });
+
+            function printCharts() {
+                const ageChart = document.getElementById('ageDemographicsChart').toDataURL('image/png');
+                const genderChart = document.getElementById('genderDemographicsChart').toDataURL('image/png');
+                const mostVisitedChart = document.getElementById('mostVisitedChart').toDataURL('image/png');
+
+                const requestData = {
+                    ageChart: ageChart,
+                    genderChart: genderChart,
+                    mostVisitedChart: mostVisitedChart,
+                    ageData: window.ageData,
+                    genderData: window.genderData,
+                    mostVisitedData: window.mostVisitedData
+                };
+
+                console.log('Data being sent to ChartController:', requestData);
+
+                fetch('/save-charts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify(requestData)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            window.location.href = '/print-charts';
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Failed to save charts. Please try again.'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error saving charts:', error);
+                    });
+            }
+
+            document.getElementById('printCharts').addEventListener('click', printCharts);
+            document.getElementById('generateReportButton').addEventListener('click', printCharts);
+        });
     </script>
 @endsection

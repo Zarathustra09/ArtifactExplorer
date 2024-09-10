@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
@@ -47,6 +48,10 @@ Route::get('/visitor/demographics/{entryId}', [VisitorInformationController::cla
 
 Route::get('/feedback-survey', [FeedbackController::class, 'create'])->name('feedback.survey.create');
 Route::post('/feedback-survey', [FeedbackController::class, 'store'])->name('feedback.survey.store');
+
+
+Route::post('/save-charts', [ChartController::class, 'saveCharts'])->name('save.charts');
+Route::get('/print-charts', [ChartController::class, 'printCharts'])->name('print.charts');
 
 
 
