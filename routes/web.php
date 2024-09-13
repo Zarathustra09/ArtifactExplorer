@@ -4,6 +4,7 @@ use App\Http\Controllers\ChartController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\VisitorInformationController;
 use Illuminate\Support\Facades\Auth;
@@ -20,9 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LandingPageController::class, 'index'])->name('home');
 
 Auth::routes();
 
@@ -53,6 +52,12 @@ Route::post('/feedback-survey', [FeedbackController::class, 'store'])->name('fee
 Route::post('/save-charts', [ChartController::class, 'saveCharts'])->name('save.charts');
 Route::get('/print-charts', [ChartController::class, 'printCharts'])->name('print.charts');
 
+Route::get('/gallery',function (){
+    return view('gallery.gallery');
+})->name('gallery');
 
+Route::get('/single',function (){
+    return view('gallery.single');
+})->name('about');
 
 Route::get('/report', [ReportController::class, 'index'])->name('report.index');
