@@ -36,16 +36,16 @@
             <div class="span3 footer-col">
                 <h5>Gallery</h5>
                 <ul class="img-feed">
-                    <li><a href="#"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 1&2/Battle of Zapote Bridge/battale_of_zapote.jpg') }}"  style="height: 60px; width: 60px" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 1&2/Bronilla/bronilla.jpg') }}"  style="height: 60px; width: 60px" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 1&2/Gen. Miguel Malvar fighting on horseback/horseback.jpg') }}"  style="height: 60px; width: 60px" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 1&2/Gen. Miguel malvar Leader of the Masses/leader_of_masses.jpg') }}"  style="height: 60px; width: 60px" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 1&2/Gen. Miguel Malvar on Horseback/hoseback_figure.jpg') }}"  style="height: 60px; width: 60px" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 1&2/Hen. Miguel Malvar Centenary/centenary.jpg') }}"  style="height: 60px; width: 60px" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 1&2/Miguel Malvar with his wife Paula/his_wife_paula.jpg') }}"  style="height: 60px; width: 60px" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 3/The Surrender/the_surrender.jpg') }}"  style="height: 60px; width: 60px" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="{{ asset('Assets/ARTIFACTS/HALLWAY/Battle in Tayabas/battle_of_tayabas.jpg') }}"  style="height: 60px; width: 60px" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="{{ asset('Assets/ARTIFACTS/HALLWAY/General Miguel Malvar_s victory in the battle of Talisay/victory_talisay.jpg') }}"  style="height: 60px; width: 60px" alt="Image Feed"></a></li>
+                    <li><a href="{{route('gallery')}}"><img src="{{ asset('gallery_img/gallery_1n2/Battle-of-Zapote-Bridge.jpg') }}" loading="lazy"  style="height: 60px; width: 60px" alt="Image Feed"></a></li>
+                    <li><a href="{{route('gallery')}}"><img src="{{ asset('gallery_img/gallery_1n2/Emilio-Aguinaldo-Centenary.jpg') }}" loading="lazy" style="height: 60px; width: 60px" alt="Image Feed"></a></li>
+                    <li><a href="{{route('gallery')}}"><img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Centenary.jpg') }}" loading="lazy" style="height: 60px; width: 60px" alt="Image Feed"></a></li>
+                    <li><a href="{{route('gallery')}}"><img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-fighting-on-horseback.jpg') }}" loading="lazy" style="height: 60px; width: 60px" alt="Image Feed"></a></li>
+                    <li><a href="{{route('gallery')}}"><img src="{{ asset('gallery_img/gallery_1n2/Miguel-malvar-Leader-of-the-Masses.jpg') }}" loading="lazy" style="height: 60px; width: 60px" alt="Image Feed"></a></li>
+                    <li><a href="{{route('gallery')}}"><img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Wearing-his-Uniform.jpg') }}" loading="lazy" style="height: 60px; width: 60px" alt="Image Feed"></a></li>
+                    <li><a href="{{route('gallery')}}"><img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-with-his-wife-Paula.jpg') }}" loading="lazy" style="height: 60px; width: 60px" alt="Image Feed"></a></li>
+                    <li><a href="{{route('gallery')}}"><img src="{{ asset('gallery_img/gallery_1n2/Silver-finial.jpg') }}"  style="height: 60px; width: 60px" alt="Image Feed"></a></li>
+                    <li><a href="{{route('gallery')}}"><img src="{{ asset('gallery_img/gallery_3/1965-Malvar-Centennial-Commemorative-Medallions.jpg') }}" loading="lazy" style="height: 60px; width: 60px" alt="Image Feed"></a></li>
+                    <li><a href="{{route('gallery')}}"><img src="{{ asset('gallery_img/gallery_3/2015-Malvar-Sesquicentennial-Commemorative-Coins.jpg') }}" loading="lazy" style="height: 60px; width: 60px" alt="Image Feed"></a></li>
 
                 </ul>
             </div>

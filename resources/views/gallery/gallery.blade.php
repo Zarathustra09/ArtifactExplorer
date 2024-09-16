@@ -31,8 +31,53 @@
     <script src="{{ asset('landing-page/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('landing-page/js/jquery.flexslider.js') }}"></script>
     <script src="{{ asset('landing-page/js/jquery.custom.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <style>
+        /* Skeleton loading effect */
+        .skeleton {
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
 
+        .skeleton::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: -150%;
+            height: 100%;
+            width: 150%;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
+            animation: skeleton-loading 1.5s infinite;
+        }
+
+        @keyframes skeleton-loading {
+            0% {
+                left: -150%;
+            }
+            50% {
+                left: 100%;
+            }
+            100% {
+                left: -150%;
+            }
+        }
+
+        .skeleton-image {
+            height: 160px;
+            width: 300px;
+        }
+
+        .skeleton-text {
+            width: 80%;
+            height: 20px;
+            margin-top: 10px;
+        }
+
+    </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
@@ -89,151 +134,157 @@
             <div class="row clearfix no-margin">
                 <ul class="gallery-post-grid holder">
 
-                    <!-- Gallery Item 1 -->
-                    <li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
-                        <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                            <span class="gallery-icons">
-                                <a href="img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                <a href="gallery-single.htm" class="item-details-link"></a>
-                            </span>
-                        </span>
-                        <a href=""><img src="{{ asset('img/Gera.jpg') }}" alt="Gallery"></a>
+                    <h3>Gallery 1 and 2</h3>
+
+                    <!-- Gallery 1 and 2 Items -->
+                    <li class="span3 gallery-item" data-id="id-1" data-type="illustration">
+            <span class="gallery-hover-4col hidden-phone hidden-tablet">
+            </span>
+                        <a href=""><img src="{{ asset('gallery_img/gallery_1n2/Battle-of-Zapote-Bridge.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
+                        <span class="project-details"><a href="">Battle of Zapote Bridge</a>For an international ad campaign.</span>
+                    </li>
+
+                    <li class="span3 gallery-item" data-id="id-2" data-type="illustration">
+            <span class="gallery-hover-4col hidden-phone hidden-tablet">
+                <span class="gallery-icons">
+                </span>
+            </span>
+                        <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-fighting-on-horseback.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
+                        <span class="project-details"><a href="gallery-single.htm">Malvar fighting on horseback</a>For a regional festival event.</span>
+                    </li>
+
+                    <li class="span3 gallery-item" data-id="id-3" data-type="web">
+            <span class="gallery-hover-4col hidden-phone hidden-tablet">
+                <span class="gallery-icons">
+                </span>
+            </span>
+                        <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_1n2/Miguel-malvar-Leader-of-the-Masses.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
+                        <span class="project-details"><a href="gallery-single.htm">Malvar leader of the masses</a>Created for a best selling children's book.</span>
+                    </li>
+
+                    <li class="span3 gallery-item" data-id="id-4" data-type="video">
+            <span class="gallery-hover-4col hidden-phone hidden-tablet">
+                <span class="gallery-icons">
+                </span>
+            </span>
+                        <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Wearing-his-Uniform.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
+                        <span class="project-details"><a href="gallery-single.htm">Miguel wearing his Uniform</a>For an international add campaign.</span>
+                    </li>
+
+                    <li class="span3 gallery-item" data-id="id-5" data-type="web illustration">
+            <span class="gallery-hover-4col hidden-phone hidden-tablet">
+                <span class="gallery-icons">
+                </span>
+            </span>
+                        <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-with-his-wife-Paula.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
+                        <span class="project-details"><a href="gallery-single.htm">Miguel Malvar with his wife Paula</a>Classic retro style illustration.</span>
+                    </li>
+
+                    <li class="span3 gallery-item" data-id="id-6" data-type="illustration">
+            <span class="gallery-hover-4col hidden-phone hidden-tablet">
+                <span class="gallery-icons">
+                </span>
+            </span>
+                        <a href=""><img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Centenary.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
                         <span class="project-details"><a href="">Custom Illustration</a>For an international ad campaign.</span>
                     </li>
 
-                    <!-- Gallery Item 2 -->
-                    <li class="span3 gallery-item" data-id="id-2" data-type="illustration">
-                        <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                            <span class="gallery-icons">
-                                <a href="img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                <a href="gallery-single.htm" class="item-details-link"></a>
-                            </span>
-                        </span>
-                        <a href="gallery-single.htm"><img src="{{ asset('img/baril.jpg') }}" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">3 Color Poster Design</a>For a regional festival event.</span>
+                    <li class="span3 gallery-item" data-id="id-7" data-type="illustration">
+            <span class="gallery-hover-4col hidden-phone hidden-tablet">
+                <span class="gallery-icons">
+                </span>
+            </span>
+                        <a href=""><img src="{{ asset('gallery_img/gallery_1n2/Emilio-Aguinaldo-Centenary.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
+                        <span class="project-details"><a href="">Emilio Aguinaldo Centenary</a>For an international ad campaign.</span>
                     </li>
 
-                    <!-- Gallery Item 3 -->
-                    <li class="span3 gallery-item" data-id="id-3" data-type="web">
-                        <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                            <span class="gallery-icons">
-                                <a href="img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                <a href="gallery-single.htm" class="item-details-link"></a>
-                            </span>
-                        </span>
-                        <a href="gallery-single.htm"><img src="{{ asset('img/kabayo.jpg') }}" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Ink Pen Illustration</a>Created for a best selling children's book.</span>
+                    <li class="span3 gallery-item" data-id="id-8" data-type="illustration">
+            <span class="gallery-hover-4col hidden-phone hidden-tablet">
+                <span class="gallery-icons">
+                </span>
+            </span>
+                        <a href=""><img src="{{ asset('gallery_img/gallery_1n2/Silver-finial.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
+                        <span class="project-details"><a href="">Silver Finial for Salakot</a>For an international ad campaign.</span>
                     </li>
 
-                    <!-- Gallery Item 4 -->
-                    <li class="span3 gallery-item" data-id="id-4" data-type="video">
-                        <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                            <span class="gallery-icons">
-                                <a href="img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                <a href="gallery-single.htm" class="item-details-link"></a>
-                            </span>
-                        </span>
-                        <a href="gallery-single.htm"><img src="{{ asset('img/KKK.jpg') }}" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Custom Illustration</a>For an international add campaign.</span>
+                    <h3>Gallery 3</h3>
+
+                    <!-- Gallery 3 Items -->
+                    <li class="span3 gallery-item" data-id="id-9" data-type="illustration design">
+            <span class="gallery-hover-4col hidden-phone hidden-tablet">
+                <span class="gallery-icons">
+                </span>
+            </span>
+                        <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_3/1965-Malvar-Centennial-Commemorative-Medallions.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
+                        <span class="project-details"><a href="#">Centennial Commorative Medallions</a>Creative storyboard illustration</span>
                     </li>
 
-                    <!-- Gallery Item 5 -->
-                    <li class="span3 gallery-item" data-id="id-5" data-type="web illustration">
-                        <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                            <span class="gallery-icons">
-                                <a href="img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                <a href="gallery-single.htm" class="item-details-link"></a>
-                            </span>
-                        </span>
-                        <a href="gallery-single.htm"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 1&2/Battle of Zapote Bridge/battale_of_zapote.jpg') }}" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Icon Design</a>Classic retro style illustration.</span>
+                    <li class="span3 gallery-item" data-id="id-10" data-type="design">
+            <span class="gallery-hover-4col hidden-phone hidden-tablet">
+                <span class="gallery-icons">
+                </span>
+            </span>
+                        <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_3/2015-Malvar-Sesquicentennial-Commemorative-Coins.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
+                        <span class="project-details"><a href="gallery-single.htm">Sesquicientennial Coins</a>Regional ad for a local company.</span>
                     </li>
 
-                    <!-- Gallery Item 6 -->
-                    <li class="span3 gallery-item" data-id="id-6" data-type="illustration design">
-                        <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                            <span class="gallery-icons">
-                                <a href="img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                <a href="#" class="item-details-link"></a>
-                            </span>
-                        </span>
-                        <a href="gallery-single.htm"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 1&2/Bronilla/bronilla.jpg') }}" alt="Gallery"></a>
-                        <span class="project-details"><a href="#">Animation Cell</a>Creative storyboard illustration</span>
+                    <li class="span3 gallery-item" data-id="id-11" data-type="web video">
+            <span class="gallery-hover-4col hidden-phone hidden-tablet">
+                <span class="gallery-icons">
+                </span>
+            </span>
+                        <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_3/Case-of-Coins-and-Medals.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
+                        <span class="project-details"><a href="gallery-single.htm">Case of Coins and Medals</a>For an international add campaign.</span>
                     </li>
 
-                    <!-- Gallery Item 7 -->
-                    <li class="span3 gallery-item" data-id="id-7" data-type="design">
-                        <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                            <span class="gallery-icons">
-                                <a href="img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                <a href="gallery-single.htm" class="item-details-link"></a>
-                            </span>
-                        </span>
-                        <a href="gallery-single.htm"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 1&2/Gen. Miguel Malvar fighting on horseback/horseback.jpg') }}" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Poster Ad Campaign</a>Regional ad for a local company.</span>
+                    <li class="span3 gallery-item" data-id="id-12" data-type="design">
+            <span class="gallery-hover-4col hidden-phone hidden-tablet">
+                <span class="gallery-icons">
+                </span>
+            </span>
+                        <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_3/Pamana-ni-Miguel-Malvar.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
+                        <span class="project-details"><a href="gallery-single.htm">Pamana ni Miguel Malvar</a>For a feature film.</span>
                     </li>
 
-                    <!-- Gallery Item 8 -->
-                    <li class="span3 gallery-item" data-id="id-8" data-type="web video">
-                        <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                            <span class="gallery-icons">
-                                <a href="img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                <a href="gallery-single.htm" class="item-details-link"></a>
-                            </span>
-                        </span>
-                        <a href="gallery-single.htm"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 1&2/Gen. Miguel malvar Leader of the Masses/leader_of_masses.jpg') }}" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Magazine Ad</a>For an international add campaign.</span>
+                    <li class="span3 gallery-item" data-id="id-13" data-type="web design">
+            <span class="gallery-hover-4col hidden-phone hidden-tablet">
+                <span class="gallery-icons">
+                </span>
+            </span>
+                        <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_3/The-Surrender.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
+                        <span class="project-details"><a href="gallery-single.htm">The Surrender</a>For an international add campaign.</span>
                     </li>
 
-                    <!-- Gallery Item 9 -->
-                    <li class="span3 gallery-item" data-id="id-9" data-type="design">
-                        <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                            <span class="gallery-icons">
-                                <a href="img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                <a href="gallery-single.htm" class="item-details-link"></a>
-                            </span>
-                        </span>
-                        <a href="gallery-single.htm"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 1&2/Gen. Miguel Malvar on Horseback/hoseback_figure.jpg') }}" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Character Designs</a>For a feature film.</span>
-                    </li>
-
-                    <!-- Gallery Item 10 -->
-                    <li class="span3 gallery-item" data-id="id-10" data-type="web design">
-                        <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                            <span class="gallery-icons">
-                                <a href="img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                <a href="gallery-single.htm" class="item-details-link"></a>
-                            </span>
-                        </span>
-                        <a href="gallery-single.htm"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 1&2/Hen. Miguel Malvar Centenary/centenary.jpg') }}" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Poster and Ad Design</a>For an international add campaign.</span>
-                    </li>
-
-                    <!-- Gallery Item 11 -->
-                    <li class="span3 gallery-item" data-id="id-11" data-type="illustration">
-                        <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                            <span class="gallery-icons">
-                                <a href="img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                <a href="gallery-single.htm" class="item-details-link"></a>
-                            </span>
-                        </span>
-                        <a href="gallery-single.htm"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 1&2/Miguel Malvar with his wife Paula/his_wife_paula.jpg') }}" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Website and Animation</a>For a local business.</span>
-                    </li>
-
-                    <!-- Gallery Item 12 -->
-                    <li class="span3 gallery-item" data-id="id-12" data-type="illustration video">
-                        <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                            <span class="gallery-icons">
-                                <a href="img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                <a href="gallery-single.htm" class="item-details-link"></a>
-                            </span>
-                        </span>
-                        <a href="gallery-single.htm"><img src="{{ asset('Assets/ARTIFACTS/GALLERY 3/The Surrender/the_surrender.jpg') }}" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Branding Design</a>For an international add campaign.</span>
-                    </li>
                 </ul>
             </div>
+
+            <!-- New Section for Hallway Images -->
+            <div class="row clearfix no-margin">
+                <ul class="gallery-post-grid holder">
+
+                    <h3>Hallway</h3>
+
+                    <li class="span3 gallery-item" data-id="id-14" data-type="illustration">
+            <span class="gallery-hover-4col hidden-phone hidden-tablet">
+                <span class="gallery-icons">
+                </span>
+            </span>
+                        <a href="gallery-single.htm"><img src="{{ asset('gallery_img/hallway/Battle-in-Tayabas.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
+                        <span class="project-details"><a href="gallery-single.htm">Battle in Tayabas</a>For a local business.</span>
+                    </li>
+
+                    <li class="span3 gallery-item" data-id="id-15" data-type="illustration video">
+            <span class="gallery-hover-4col hidden-phone hidden-tablet">
+                <span class="gallery-icons">
+                </span>
+            </span>
+                        <a href="gallery-single.htm"><img src="{{ asset('gallery_img/hallway/Malvar-victory-in-the-battle-of-Talisay.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
+                        <span class="project-details"><a href="gallery-single.htm">Malvar Victory in the battle of Talisay</a>For an international add campaign.</span>
+                    </li>
+
+                </ul>
+            </div>
+
         </div>
 
     </div><!-- End Gallery Row -->
@@ -287,4 +338,185 @@
         });
     });
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        const galleryItems = [
+            {
+                id: "id-1",
+                title: "Battle of Zapote Bridge",
+                artist: "Juanito Torres",
+                size: "101 x 65 cms",
+                type: "Oil on Canvas",
+                imageUrl: "{{ asset('gallery_img/gallery_1n2/Battle-of-Zapote-Bridge.jpg') }}"
+            },
+            {
+                id: "id-2",
+                title: "General Miguel Malvar fighting on horseback",
+                artist: "Othoniel Neri",
+                size: "104 x 135 cms",
+                type: "Oil on Canvas",
+                imageUrl: "{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-fighting-on-horseback.jpg') }}"
+            },
+            {
+                id: "id-3",
+                title: "General Miguel Malvar Leader of the Masses",
+                artist: "Juanito Torres",
+                size: "152 x 182.5 cms",
+                type: "Oil on Canvas",
+                imageUrl: "{{ asset('gallery_img/gallery_1n2/Miguel-malvar-Leader-of-the-Masses.jpg') }}"
+            },
+            {
+                id: "id-4",
+                title: "General Miguel Malvar wearing his uniform",
+                artist: "Fernando Amorsolo",
+                size: "160 x 300 px",
+                type: "Illustration",
+                imageUrl: "{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Wearing-his-Uniform.jpg') }}"
+            },
+            {
+                id: "id-5",
+                title: "Miguel Malvar with his Wife Paula",
+                artist: "Othoniel M. Neri",
+                size: "63 x 70 cms",
+                type: "Oil on Canvas",
+                imageUrl: "{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-with-his-wife-Paula.jpg') }}"
+            },
+            {
+                id: "id-6",
+                title: "Hen. Miguel Malvar Centenary",
+                artist: "Unknown",
+                size: "160 x 300 px",
+                type: "Sculpture",
+                imageUrl: "{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Centenary.jpg') }}"
+            },
+            {
+                id: "id-7",
+                title: "Emilio Aguinaldo Centenary",
+                artist: "Unknown",
+                size: "160 x 300 px",
+                type: "Sculpture",
+                imageUrl: "{{ asset('gallery_img/gallery_1n2/Emilio-Aguinaldo-Centenary.jpg') }}"
+            },
+            {
+                id: "id-8",
+                title: "Silver Finial for Salakot",
+                artist: "Unknown",
+                size: "160 x 300 px",
+                type: "Artifact",
+                imageUrl: "{{ asset('gallery_img/gallery_1n2/Silver-finial.jpg') }}"
+            },
+            {
+                id: "id-9",
+                title: "1965 Malvar Centennial Commemorative Medallions",
+                artist: "Unknown",
+                size: "160 x 300 px",
+                type: "Artifact",
+                imageUrl: "{{ asset('gallery_img/gallery_3/1965-Malvar-Centennial-Commemorative-Medallions.jpg') }}"
+            },
+            {
+                id: "id-10",
+                title: "2015 Malvar Sesquicentennial Commemorative Coins",
+                artist: "Unknown",
+                size: "160 x 300 px",
+                type: "Artifact",
+                imageUrl: "{{ asset('gallery_img/gallery_3/2015-Malvar-Sesquicentennial-Commemorative-Coins.jpg') }}"
+            },
+            {
+                id: "id-11",
+                title: "Case of Coins and Medals",
+                artist: "Unknown",
+                size: "160 x 300 px",
+                type: "Artifact",
+                imageUrl: "{{ asset('gallery_img/gallery_3/Case-of-Coins-and-Medals.jpg') }}"
+            },
+            {
+                id: "id-12",
+                title: "Pamana ni Hen. Miguel Malvar",
+                artist: "Unknown",
+                size: "160 x 300 px",
+                type: "Gravestone",
+                imageUrl: "{{ asset('gallery_img/gallery_3/Pamana-ni-Miguel-Malvar.jpg') }}"
+            },
+            {
+                id: "id-13",
+                title: "The Surrender",
+                artist: "Ka-Leon",
+                size: "109 x 184.5 cms",
+                type: "Oil on Canvas",
+                imageUrl: "{{ asset('gallery_img/gallery_3/The-Surrender.jpg') }}"
+            },
+            {
+                id: "id-14",
+                title: "Battle in Tayabas",
+                artist: "Carlos Valino",
+                size: "101 x 182 cms",
+                type: "Oil on Canvas",
+                imageUrl: "{{ asset('gallery_img/hallway/Battle-in-Tayabas.jpg') }}"
+            },
+            {
+                id: "id-15",
+                title: "General Miguel Malvar's victory in the battle of Talisay",
+                artist: "Othoniel M. Neri",
+                size: "855 x 322 cms",
+                type: "Oil on Canvas",
+                imageUrl: "{{ asset('gallery_img/hallway/Malvar-victory-in-the-battle-of-Talisay.jpg') }}"
+            },
+            {
+                id: "id-16",
+                title: "General Gregorio del Pilar at the Battle of Pasong Tirad",
+                artist: "Othoniel Neri",
+                size: "101 x 65 cms",
+                type: "Illustration",
+                imageUrl: "{{ asset('gallery_img/gallery_1n2/General-Gregorio-del-Pilar-at-the-Battle-of-Pasong-Tirad.jpg') }}"
+            }
+        ];
+
+        galleryItems.forEach(item => {
+            $(`li.gallery-item[data-id="${item.id}"]`).click(function (e) {
+                e.preventDefault(); // Prevent default action
+
+                // Show SweetAlert with the information
+                Swal.fire({
+                    title: item.title,
+                    html: `<strong>Artist:</strong> ${item.artist || 'N/A'}<br>` +
+                        `<strong>Size:</strong> ${item.size || 'N/A'}<br>` +
+                        `<strong>Type:</strong> ${item.type || 'N/A'}`,
+                    imageUrl: item.imageUrl,
+                    confirmButtonText: 'Close',
+                    confirmButtonColor: '#97CC70', // Button color
+                    customClass: {
+                        container: 'swal-container', // Custom class for container
+                        popup: 'swal-popup', // Custom class for popup
+                        title: 'swal-title', // Custom class for title
+                        content: 'swal-content', // Custom class for content
+                        confirmButton: 'swal-confirm-button' // Custom class for confirm button
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+<style>
+    /* Custom styles for SweetAlert */
+    .swal-container {
+        background-color: #ffffff; /* Background color for the SweetAlert container */
+    }
+    .swal-popup {
+        border-radius: 10px; /* Rounded corners for the popup */
+    }
+    /*.swal-title {*/
+    /*    color: #97CC70; !* Title color *!*/
+    /*}*/
+    .swal-content {
+        color: #333333; /* Content color */
+    }
+    .swal-confirm-button {
+        background-color: #97CC70; /* Confirm button color */
+        border: none;
+        color: #ffffff; /* Text color on the confirm button */
+    }
+</style>
+
 </html>

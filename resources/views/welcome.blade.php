@@ -83,22 +83,22 @@
             <div class="owl-carousel owl-theme">
                 <div class="item">
                     <a href="{{ asset('landing-page/gallery-single.htm') }}">
-                        <img src="{{ asset('img/baril.jpg') }}" alt="slider" width="600" height="400"/>
+                        <img src="{{ asset('gallery_img/gallery_1n2/Battle-of-Zapote-Bridge.jpg') }}" alt="slider" width="600" height="400"/>
                     </a>
                 </div>
                 <div class="item">
                     <a href="{{ asset('landing-page/gallery-single.htm') }}">
-                        <img src="{{ asset('img/Gera.jpg') }}" alt="slider" width="600" height="400"/>
+                        <img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-fighting-on-horseback.jpg') }}" alt="slider" width="600" height="400"/>
                     </a>
                 </div>
                 <div class="item">
                     <a href="{{ asset('landing-page/gallery-single.htm') }}">
-                        <img src="{{ asset('img/kabayo.jpg') }}" alt="slider" width="600" height="400"/>
+                        <img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-with-his-wife-Paula.jpg') }}" alt="slider" width="600" height="400"/>
                     </a>
                 </div>
                 <div class="item">
                     <a href="{{ asset('landing-page/gallery-single.htm') }}">
-                        <img src="{{ asset('img/KKK.jpg') }}" alt="slider" width="600" height="400"/>
+                        <img src="{{ asset('gallery_img/gallery_3/The-Surrender.jpg') }}" alt="slider" width="600" height="400"/>
                     </a>
                 </div>
             </div>

@@ -23,8 +23,8 @@
                 <li class="{{ $currentRoute == 'gallery' ? 'active' : '' }}">
                     <a href="{{ url('gallery') }}">Gallery</a>
                 </li>
-                <li>
-                    <a href="https://www.facebook.com/museonimiguelmalvar">Contact</a>
+                <li class="{{ $currentRoute == 'contact' ? 'active' : '' }}">
+                    <a href="{{ url('contact') }}">Contact</a>
                 </li>
                 <li class="{{ $currentRoute == 'login' ? 'active' : '' }}">
                     <a href="{{ route('login') }}">Login</a>

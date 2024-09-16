@@ -60,4 +60,8 @@ Route::get('/single',function (){
     return view('gallery.single');
 })->name('about');
 
+Route::get('/contact',function (){
+    return view('contact');
+})->name('contact');
+
 Route::get('/report', [ReportController::class, 'index'])->name('report.index');
