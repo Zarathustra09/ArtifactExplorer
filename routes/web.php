@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
@@ -51,6 +52,11 @@ Route::post('/feedback-survey', [FeedbackController::class, 'store'])->name('fee
 
 Route::post('/save-charts', [ChartController::class, 'saveCharts'])->name('save.charts');
 Route::get('/print-charts', [ChartController::class, 'printCharts'])->name('print.charts');
+
+Route::get('/event/admin', [EventController::class, 'index'])->name('event.index');
+Route::get('/event/data', [EventController::class, 'getEvents'])->name('event.data');
+Route::post('/event/store', [EventController::class, 'store'])->name('event.store');
+
 
 Route::get('/gallery',function (){
     return view('gallery.gallery');
