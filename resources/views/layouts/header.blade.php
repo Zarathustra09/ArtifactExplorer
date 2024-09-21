@@ -23,6 +23,11 @@
                 <li class="{{ $currentRoute == 'gallery' ? 'active' : '' }}">
                     <a href="{{ url('gallery') }}">Gallery</a>
                 </li>
+
+                <li class="{{ $currentRoute == 'event' ? 'active' : '' }}">
+                    <a href="{{ route('event') }}">Events</a>
+                </li>
+
                 <li class="{{ $currentRoute == 'contact' ? 'active' : '' }}">
                     <a href="{{ url('contact') }}">Contact</a>
                 </li>

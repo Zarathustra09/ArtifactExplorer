@@ -18,6 +18,7 @@
         "@fullcalendar/interaction": "^6.1.15",
         "@fullcalendar/list": "^6.1.15",
         "@fullcalendar/multimonth": "^6.1.15",
-        "@fullcalendar/timegrid": "^6.1.15"
+        "@fullcalendar/timegrid": "^6.1.15",
+        "sweetalert2": "^11.14.0"
     }
 }

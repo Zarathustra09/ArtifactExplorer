@@ -56,6 +56,8 @@ Route::get('/print-charts', [ChartController::class, 'printCharts'])->name('prin
 Route::get('/event/admin', [EventController::class, 'index'])->name('event.index');
 Route::get('/event/data', [EventController::class, 'getEvents'])->name('event.data');
 Route::post('/event/store', [EventController::class, 'store'])->name('event.store');
+Route::post('/event/edit/{id}', [EventController::class, 'edit'])->name('event.edit');
+Route::delete('/event/destroy/{id}', [EventController::class, 'destroy'])->name('event.destroy');
 
 
 Route::get('/gallery',function (){
@@ -69,5 +71,9 @@ Route::get('/single',function (){
 Route::get('/contact',function (){
     return view('contact');
 })->name('contact');
+
+Route::get('/event',function (){
+    return view('event');
+})->name('event');
 
 Route::get('/report', [ReportController::class, 'index'])->name('report.index');

@@ -229,6 +229,13 @@
                 </a>
             </li>
 
+            <li class="nav-item {{ Route::currentRouteName() == 'event.index' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('event.index') }}">
+                    <i class="fas fa-fw fa-calendar-alt"></i>
+                    <span>Events</span>
+                </a>
+            </li>
+
 
             <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
