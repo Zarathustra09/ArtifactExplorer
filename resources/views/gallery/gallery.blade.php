@@ -171,41 +171,41 @@
                         <span class="project-details"><a href="gallery-single.htm">Miguel wearing his Uniform</a>For an international add campaign.</span>
                     </li>
 
-                    <li class="span3 gallery-item" data-id="id-5" data-type="web illustration">
-            <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                <span class="gallery-icons">
-                </span>
-            </span>
-                        <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-with-his-wife-Paula.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Miguel Malvar with his wife Paula</a>Classic retro style illustration.</span>
-                    </li>
+{{--                    <li class="span3 gallery-item" data-id="id-5" data-type="web illustration">--}}
+{{--            <span class="gallery-hover-4col hidden-phone hidden-tablet">--}}
+{{--                <span class="gallery-icons">--}}
+{{--                </span>--}}
+{{--            </span>--}}
+{{--                        <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-with-his-wife-Paula.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>--}}
+{{--                        <span class="project-details"><a href="gallery-single.htm">Miguel Malvar with his wife Paula</a>Classic retro style illustration.</span>--}}
+{{--                    </li>--}}
 
-                    <li class="span3 gallery-item" data-id="id-6" data-type="illustration">
-            <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                <span class="gallery-icons">
-                </span>
-            </span>
-                        <a href=""><img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Centenary.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
-                        <span class="project-details"><a href="">Custom Illustration</a>For an international ad campaign.</span>
-                    </li>
+{{--                    <li class="span3 gallery-item" data-id="id-6" data-type="illustration">--}}
+{{--            <span class="gallery-hover-4col hidden-phone hidden-tablet">--}}
+{{--                <span class="gallery-icons">--}}
+{{--                </span>--}}
+{{--            </span>--}}
+{{--                        <a href=""><img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Centenary.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>--}}
+{{--                        <span class="project-details"><a href="">Custom Illustration</a>For an international ad campaign.</span>--}}
+{{--                    </li>--}}
 
-                    <li class="span3 gallery-item" data-id="id-7" data-type="illustration">
-            <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                <span class="gallery-icons">
-                </span>
-            </span>
-                        <a href=""><img src="{{ asset('gallery_img/gallery_1n2/Emilio-Aguinaldo-Centenary.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
-                        <span class="project-details"><a href="">Emilio Aguinaldo Centenary</a>For an international ad campaign.</span>
-                    </li>
+{{--                    <li class="span3 gallery-item" data-id="id-7" data-type="illustration">--}}
+{{--            <span class="gallery-hover-4col hidden-phone hidden-tablet">--}}
+{{--                <span class="gallery-icons">--}}
+{{--                </span>--}}
+{{--            </span>--}}
+{{--                        <a href=""><img src="{{ asset('gallery_img/gallery_1n2/Emilio-Aguinaldo-Centenary.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>--}}
+{{--                        <span class="project-details"><a href="">Emilio Aguinaldo Centenary</a>For an international ad campaign.</span>--}}
+{{--                    </li>--}}
 
-                    <li class="span3 gallery-item" data-id="id-8" data-type="illustration">
-            <span class="gallery-hover-4col hidden-phone hidden-tablet">
-                <span class="gallery-icons">
-                </span>
-            </span>
-                        <a href=""><img src="{{ asset('gallery_img/gallery_1n2/Silver-finial.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
-                        <span class="project-details"><a href="">Silver Finial for Salakot</a>For an international ad campaign.</span>
-                    </li>
+{{--                    <li class="span3 gallery-item" data-id="id-8" data-type="illustration">--}}
+{{--            <span class="gallery-hover-4col hidden-phone hidden-tablet">--}}
+{{--                <span class="gallery-icons">--}}
+{{--                </span>--}}
+{{--            </span>--}}
+{{--                        <a href=""><img src="{{ asset('gallery_img/gallery_1n2/Silver-finial.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>--}}
+{{--                        <span class="project-details"><a href="">Silver Finial for Salakot</a>For an international ad campaign.</span>--}}
+{{--                    </li>--}}
 
                     <h3>Gallery 3</h3>
 

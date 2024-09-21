@@ -17,6 +17,7 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <link rel="stylesheet" href="{{ asset('landing-page/css/style-ie.css') }}"/>
     <![endif]-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="{{ asset('new_logo.png') }}">
@@ -202,7 +203,7 @@
                 </ul>
             </div>
 
-        </div> <!--End page content column-->
+        </div>
 
         <!-- Sidebar -->
         <div class="span4 sidebar page-sidebar"><!-- Begin sidebar column -->
@@ -215,13 +216,22 @@
 
             <address>
                 <strong>Ayesha Sayseng-Apostol</strong><br>
-                <a href="mailto:#">mmm@nhcp.gov.ph</a>
+                <a href="mailto:mmm@nhcp.gov.ph">mmm@nhcp.gov.ph</a>
             </address>
+            <!-- Add Facebook Page link -->
+            <h5 class="title-bg">Follow Us on Facebook</h5>
+            <p>
+                <a href="https://www.facebook.com/museonimiguelmalvar" target="_blank">
+                    <i class="fab fa-facebook-f"></i> Visit our Facebook Page
+                </a>
+            </p>
+
 
             <h5 class="title-bg">Map Us</h5>
             <div class="map-container">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241.84014873784312!2d121.1421986987333!3d14.110062074424741!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd65967f38a1e3%3A0xc87b76eeea6afa6f!2sMuseo%20Ni%20Miguel%20Malvar!5e0!3m2!1sen!2sph!4v1726496256042!5m2!1sen!2sph" style="border:0; width: 100%; height: 300px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
+
         </div><!-- End sidebar column -->
 
     </div><!-- End container row -->

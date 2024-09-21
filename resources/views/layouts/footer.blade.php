@@ -22,17 +22,17 @@
                     <abbr title="Phone">P:</abbr> (123) 456-7890
                 </address>
             </div>
-            <div class="span3 footer-col">
-                <h5>Email Us</h5>
-                <form action="#" method="post">
-                    <div class="input-group">
-                        <input type="email" class="form-control" placeholder="Your email address" required>
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit">Subscribe</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+{{--            <div class="span3 footer-col">--}}
+{{--                <h5>Email Us</h5>--}}
+{{--                <form action="#" method="post">--}}
+{{--                    <div class="input-group">--}}
+{{--                        <input type="email" class="form-control" placeholder="Your email address" required>--}}
+{{--                        <div class="input-group-append">--}}
+{{--                            <button class="btn btn-primary" type="submit">Subscribe</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
+{{--            </div>--}}
             <div class="span3 footer-col">
                 <h5>Gallery</h5>
                 <ul class="img-feed">
