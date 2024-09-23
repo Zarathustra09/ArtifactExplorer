@@ -14,6 +14,7 @@ class Event extends Model
         'description',
         'start_date',
         'end_date',
-        'location'
+        'location',
+        'image_url'
     ];
 }
