@@ -160,6 +160,52 @@
             max-width: 1200px;
             margin: 20px auto; /* Add margin for better spacing */
         }
+
+        .event-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .event-item h4 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .event-item p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .event-item img {
+            border-radius: 8px;
+            margin-top: 15px;
+            transition: opacity 0.3s ease;
+        }
+
+        .event-item img:hover {
+            opacity: 0.8;
+        }
+
+        .owl-carousel .owl-nav button {
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .owl-carousel .owl-dots .owl-dot.active {
+            background-color: #007bff;
+        }
     </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
@@ -218,31 +264,10 @@
 
         <!-- Sidebar -->
         <div class="span4 sidebar page-sidebar"><!-- Begin sidebar column -->
-            <h5 class="title-bg">Our Location</h5>
-            <address>
-                <strong>Museo ni Miguel Malvar</strong><br>
-                446R+2WV, Gov. Malvar St,<br>
-                Poblacion 1, Santo Tomas, 4234 Batangas<br>
-            </address>
-
-            <address>
-                <strong>Ayesha Sayseng-Apostol</strong><br>
-                <a href="mailto:mmm@nhcp.gov.ph">mmm@nhcp.gov.ph</a>
-            </address>
-            <!-- Add Facebook Page link -->
-            <h5 class="title-bg">Follow Us on Facebook</h5>
-            <p>
-                <a href="https://www.facebook.com/museonimiguelmalvar" target="_blank">
-                    <i class="fab fa-facebook-f"></i> Visit our Facebook Page
-                </a>
-            </p>
-
-
-            <h5 class="title-bg">Map Us</h5>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241.84014873784312!2d121.1421986987333!3d14.110062074424741!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd65967f38a1e3%3A0xc87b76eeea6afa6f!2sMuseo%20Ni%20Miguel%20Malvar!5e0!3m2!1sen!2sph!4v1726496256042!5m2!1sen!2sph" style="border:0; width: 100%; height: 300px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <h5 class="title-bg">Upcoming Events</h5>
+            <div class="owl-carousel owl-theme" id="eventCarousel">
+                <!-- Event items will be populated here by JavaScript -->
             </div>
-
         </div><!-- End sidebar column -->
 
     </div><!-- End container row -->
@@ -257,51 +282,141 @@
 
 <!-- FullCalendar JS -->
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<!-- Custom Styling -->
+<style>
+    .event-item {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .event-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .event-item h4 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #007bff;
+    }
+
+    .event-item p {
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .event-item img {
+        border-radius: 8px;
+        margin-top: 15px;
+        transition: opacity 0.3s ease;
+    }
+
+    .event-item img:hover {
+        opacity: 0.8;
+    }
+
+    .owl-carousel .owl-nav button {
+        background-color: #007bff;
+        color: white;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+    }
+
+    .owl-carousel .owl-dots .owl-dot.active {
+        background-color: #007bff;
+    }
+</style>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth', // Set the default view (Month)
+            initialView: 'dayGridMonth',
             headerToolbar: {
-                left: 'prev,next today', // Navigation buttons
-                center: 'title', // Calendar title
-                right: 'dayGridMonth,timeGridWeek,timeGridDay' // Buttons for Month, Week, and Day views
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
             views: {
-                dayGridMonth: { // Month view
-                    buttonText: 'Month'
-                },
-                timeGridWeek: { // Week view
-                    buttonText: 'Week'
-                },
-                timeGridDay: { // Day view
-                    buttonText: 'Day'
-                }
+                dayGridMonth: { buttonText: 'Month' },
+                timeGridWeek: { buttonText: 'Week' },
+                timeGridDay: { buttonText: 'Day' }
             },
             events: function(fetchInfo, successCallback, failureCallback) {
                 fetch('/event/data')
                     .then(response => response.json())
                     .then(data => {
-                        // Transform the API data to match FullCalendar's expected structure
                         const events = data.map(event => ({
                             id: event.id,
                             title: event.title,
-                            start: event.start_date, // FullCalendar expects 'start'
-                            end: event.end_date,     // FullCalendar expects 'end'
+                            start: event.start_date,
+                            end: event.end_date,
                             description: event.description,
-                            location: event.location
+                            location: event.location,
+                            image_url: event.image_url
                         }));
-                        successCallback(events); // Provide transformed data to FullCalendar
+                        successCallback(events);
+                        populateEventCarousel(events);
                     })
                     .catch(() => {
                         failureCallback();
                         alert('There was an error while fetching events!');
                     });
+            },
+            eventClick: function(info) {
+                const event = info.event;
+                Swal.fire({
+                    title: event.title,
+                    text: event.description,
+                    imageUrl: event.extendedProps.image_url ? '/storage/' + event.extendedProps.image_url : '',
+                    imageAlt: 'Event Image',
+                    showCloseButton: true,
+                    showCancelButton: false,
+                    focusConfirm: true
+                });
             }
         });
         calendar.render();
+
+        function populateEventCarousel(events) {
+            const eventCarousel = document.getElementById('eventCarousel');
+            events.forEach(event => {
+                const eventItem = document.createElement('div');
+                eventItem.classList.add('item');
+                eventItem.innerHTML = `
+                    <div class="event-item">
+                        <h4>${event.title}</h4>
+                        <p>${event.description.length > 100 ? event.description.substring(0, 100) + '...' : event.description}</p>
+                        <p><strong>Location:</strong> ${event.location}</p>
+                        <p><strong>Start:</strong> ${new Date(event.start).toLocaleString()}</p>
+                        <p><strong>End:</strong> ${event.end ? new Date(event.end).toLocaleString() : 'N/A'}</p>
+                        ${event.image_url ? `<img src="/storage/${event.image_url}" alt="${event.title}" style="width: 100%; height: auto;">` : ''}
+                    </div>
+                `;
+                eventCarousel.appendChild(eventItem);
+            });
+
+            $('#eventCarousel').owlCarousel({
+                items: 1,
+                loop: true,
+                margin: 10,
+                nav: true,
+                dots: true,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                autoplayHoverPause: true
+            });
+        }
     });
 </script>
 
 </body>
+
 </html>
