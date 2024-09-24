@@ -6,6 +6,7 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\VisitorInformationController;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +59,10 @@ Route::get('/event/data', [EventController::class, 'getEvents'])->name('event.da
 Route::post('/event/store', [EventController::class, 'store'])->name('event.store');
 Route::post('/event/edit/{id}', [EventController::class, 'edit'])->name('event.edit');
 Route::delete('/event/destroy/{id}', [EventController::class, 'destroy'])->name('event.destroy');
+
+
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
 
 Route::get('/gallery',function (){

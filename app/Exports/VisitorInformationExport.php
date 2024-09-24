@@ -5,8 +5,11 @@ namespace App\Exports;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class VisitorInformationExport implements FromCollection
+class VisitorInformationExport implements FromCollection, WithHeadings, WithStyles
 {
     protected $period;
 
@@ -15,9 +18,6 @@ class VisitorInformationExport implements FromCollection
         $this->period = $period;
     }
 
-    /**
-     * @return \Illuminate\Support\Collection
-     */
     public function collection(): Collection
     {
         $usedEntryIds = [];
@@ -26,7 +26,6 @@ class VisitorInformationExport implements FromCollection
             ->select('entry_id', 'question_id', 'value')
             ->whereIn('question_id', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
 
-        // Apply date filter based on the period
         switch ($this->period) {
             case 'monthly':
                 $query->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()]);
@@ -134,13 +133,68 @@ class VisitorInformationExport implements FromCollection
             ->filter()
             ->values();
 
-        $labels = [
-            'id', 'bus_number', 'full_name', 'address', 'nationality', 'gender',
-            'students_grade_school', 'students_high_school', 'students_college',
-            'pwd', 'age_17_below', 'age_18_30', 'age_31_45', 'age_60_above',
-            'time_in', 'time_out'
-        ];
+        return collect($data);
+    }
 
-        return collect([$labels])->merge($data);
+    public function headings(): array
+    {
+        return [
+            'ID', 'Bus Number', 'Full Name', 'Address', 'Nationality', 'Gender',
+            'Students Grade School', 'Students High School', 'Students College',
+            'PWD', 'Age 17 Below', 'Age 18-30', 'Age 31-45', 'Age 60 Above',
+            'Time In', 'Time Out'
+        ];
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        // Style the first row (headings) with a background color and bold text
+        $sheet->getStyle('A1:P1')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'color' => ['argb' => 'FFFFFFFF'], // White text
+            ],
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => [
+                    'argb' => 'FF4CAF50', // Green background color for headers
+                ],
+            ],
+        ]);
+
+        // Apply alternating row colors
+        $rowCount = $sheet->getHighestRow();
+        for ($row = 2; $row <= $rowCount; $row++) {
+            // Check if the row is even or odd and apply different styles
+            if ($row % 2 == 0) {
+                // Apply a light gray background for even rows
+                $sheet->getStyle('A'.$row.':P'.$row)->applyFromArray([
+                    'fill' => [
+                        'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                        'startColor' => [
+                            'argb' => 'FFF2F2F2', // Light gray background
+                        ],
+                    ],
+                ]);
+            } else {
+                // Apply a white background for odd rows
+                $sheet->getStyle('A'.$row.':P'.$row)->applyFromArray([
+                    'fill' => [
+                        'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                        'startColor' => [
+                            'argb' => 'FFFFFFFF', // White background
+                        ],
+                    ],
+                ]);
+            }
+        }
+
+        // Style the "Time In" and "Time Out" columns to use a different format
+        $sheet->getStyle('O2:P'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_DATE_DATETIME);
+
+        return [
+            // Bold headings on the first row
+            1 => ['font' => ['bold' => true]],
+        ];
     }
 }
