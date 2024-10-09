@@ -3,7 +3,7 @@
     <!-- Logo
     ================================================== -->
     <div class="span5 logo">
-        <a href=""><img src="{{ asset('img/Logo.png') }}" style="height: 150px; width: 150px"alt="" /></a>
+        <a href="{{url('/')}}"><img src="{{ asset('img/Logo.png') }}" style="height: 150px; width: 150px"alt="" /></a>
         <h5>Museo ni Miguel Malvar </h5>
     </div>
 

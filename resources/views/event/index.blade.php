@@ -62,7 +62,7 @@
         .swal2-input {
             font-size: 16px;
             padding: 10px;
-            width: 100%;
+            width: calc(100% - 20px); /* Adjust width for padding */
         }
 
         /* Label styles */
@@ -87,6 +87,12 @@
             margin-top: 10px;
             max-width: 100%;
             height: auto;
+        }
+
+        /* Custom Swal styles */
+        .custom-swal-responsive {
+            width: auto !important; /* Allow for automatic width */
+            max-width: 600px; /* Set a maximum width */
         }
     </style>
 
@@ -250,32 +256,35 @@
                     showCancelButton: true,
                     confirmButtonText: 'Submit',
                     cancelButtonText: 'Cancel',
+                    customClass: {
+                        popup: 'custom-swal-responsive'
+                    },
                     html: `
-                    <div class="swal2-field">
-                        <label for="title">Title</label>
-                        <input type="text" id="title" class="swal2-input" placeholder="Enter title" required>
-                    </div>
-                    <div class="swal2-field">
-                        <label for="description">Description</label>
-                        <input type="text" id="description" class="swal2-input" placeholder="Enter description" required>
-                    </div>
-                    <div class="swal2-field">
-                        <label for="start_date">Start Date</label>
-                        <input type="datetime-local" id="start_date" class="swal2-input" required>
-                    </div>
-                    <div class="swal2-field">
-                        <label for="end_date">End Date</label>
-                        <input type="datetime-local" id="end_date" class="swal2-input" required>
-                    </div>
-                    <div class="swal2-field">
-                        <label for="location">Location</label>
-                        <input type="text" id="location" class="swal2-input" placeholder="Enter location" required>
-                    </div>
-                    <div class="swal2-field">
-                        <label for="image_url">Image URL</label>
-                        <input type="file" id="image_url" class="swal2-input">
-                    </div>
-                `,
+        <div class="swal2-field">
+            <label for="title">Title</label>
+            <input type="text" id="title" class="swal2-input" placeholder="Enter title" required>
+        </div>
+        <div class="swal2-field">
+            <label for="description">Description</label>
+            <input type="text" id="description" class="swal2-input" placeholder="Enter description" required>
+        </div>
+        <div class="swal2-field">
+            <label for="start_date">Start Date</label>
+            <input type="datetime-local" id="start_date" class="swal2-input" required>
+        </div>
+        <div class="swal2-field">
+            <label for="end_date">End Date</label>
+            <input type="datetime-local" id="end_date" class="swal2-input" required>
+        </div>
+        <div class="swal2-field">
+            <label for="location">Location</label>
+            <input type="text" id="location" class="swal2-input" placeholder="Enter location" required>
+        </div>
+        <div class="swal2-field">
+            <label for="image_url">Image URL</label>
+            <input type="file" id="image_url" class="swal2-input" accept="image/*">
+        </div>
+    `,
                     focusConfirm: false,
                     preConfirm: () => {
                         const title = Swal.getPopup().querySelector('#title').value;
@@ -297,7 +306,9 @@
                         formData.append('start_date', result.value.start_date);
                         formData.append('end_date', result.value.end_date);
                         formData.append('location', result.value.location);
-                        formData.append('image_url', result.value.image_url);
+                        if (result.value.image_url) {
+                            formData.append('image_url', result.value.image_url);
+                        }
 
                         fetch('/event/store', {
                             method: 'POST',

@@ -166,7 +166,6 @@
     <div class="span12">
         <h5 class="title-bg">Explore History with ARtifact Explorer
             <small>Discover artifacts like never before</small>
-            <a href="{{asset('NEW CONTENT/Malvar.apk')}}" download class="btn btn-primary btn-mini pull-right">DOWNLOAD APP</a>
         </h5>
 
         <img src="{{ asset('NEW CONTENT/Artifact Explorer.png') }}" alt="ARtifact Explorer App" style="width: 100%; height: auto;">

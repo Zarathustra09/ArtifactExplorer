@@ -12,11 +12,11 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block position-relative"
-                                 style="background: #97CC70 url('{{ asset('img/miguel_malvar.png') }}'); background-position: bottom center; background-size: 50%; background-repeat: no-repeat;">
+                                 style="background: #97CC70 url('{{ asset('img/miguel_malvar.png') }}'); background-position: center 20%; background-size: 50%; background-repeat: no-repeat;">
                                 <!-- Overlay Text -->
-                                <div class="text-center position-absolute w-100" style="top: 20%; color: white; font-size: 2rem; font-weight: bold;">
+                                <div class="text-center position-absolute w-100" style="bottom: 5%; color: white; font-size: 2rem; font-weight: bold;">
                                     <span style="color: white;">Step into history with</span> <br>
-                                    <span style="color: #007A33;">ARtifact Explore</span> <br>
+                                    <span style="color: #007A33;">ARtifact Explorer</span> <br>
                                     <span style="color: white;">where the past meets the future</span>
                                 </div>
                             </div>

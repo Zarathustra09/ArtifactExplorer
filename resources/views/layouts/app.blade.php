@@ -189,9 +189,9 @@
 
         <!-- Sidebar - Brand -->
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html" style="padding: 100px 0;">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('/home')}}" style="padding: 100px 0;">
             <div class="sidebar-brand-icon">
-                <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 90%; height: auto;">
+                <img src="{{ asset('NEW CONTENT/malvar x app white.png') }}" alt="Logo" class="img-fluid" style="max-width: 90%; height: auto;">
             </div>
         </a>
 
