@@ -64,8 +64,100 @@
                     </div>
                 @endif
 
+
+
+                <!-- New Questions for APPLICATION -->
+                <h3>APPLICATION</h3>
                 <div class="form-group">
-                    <label for="rating">How was your visit?     </label>
+                    <label for="ease_of_navigation">How would you rate the ease of navigating the ARtifacts Explorer app?</label>
+                    <div class="star-rating">
+                        @for($i = 5; $i >= 1; $i--)
+                            <input type="radio" id="ease_of_navigation{{ $i }}" name="ease_of_navigation" value="{{ $i }}">
+                            <label for="ease_of_navigation{{ $i }}" title="{{ $i }} stars"><i class="fas fa-star"></i></label>
+                        @endfor
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ar_features">How well did the AR features (scanning markers, 3D content) function?</label>
+                    <div class="star-rating">
+                        @for($i = 5; $i >= 1; $i--)
+                            <input type="radio" id="ar_features{{ $i }}" name="ar_features" value="{{ $i }}">
+                            <label for="ar_features{{ $i }}" title="{{ $i }} stars"><i class="fas fa-star"></i></label>
+                        @endfor
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ar_experience">How engaging did you find the AR experience (immersiveness, interactivity)?</label>
+                    <div class="star-rating">
+                        @for($i = 5; $i >= 1; $i--)
+                            <input type="radio" id="ar_experience{{ $i }}" name="ar_experience" value="{{ $i }}">
+                            <label for="ar_experience{{ $i }}" title="{{ $i }} stars"><i class="fas fa-star"></i></label>
+                        @endfor
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="recommend_app">How likely are you to recommend the ARtifacts Explorer app to others?</label>
+                    <div class="star-rating">
+                        @for($i = 5; $i >= 1; $i--)
+                            <input type="radio" id="recommend_app{{ $i }}" name="recommend_app" value="{{ $i }}">
+                            <label for="recommend_app{{ $i }}" title="{{ $i }} stars"><i class="fas fa-star"></i></label>
+                        @endfor
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="improve_app">What would you improve in the ARtifacts Explorer app?</label>
+                    <textarea class="form-control" id="improve_app" name="improve_app" rows="4"></textarea>
+                </div>
+
+                <!-- New Questions for MUSEUM -->
+                <h3>MUSEUM</h3>
+                <div class="form-group">
+                    <label for="office_help">The office was willing to help, assist, and provide prompt service.</label>
+                    <div class="star-rating">
+                        @for($i = 5; $i >= 1; $i--)
+                            <input type="radio" id="office_help{{ $i }}" name="office_help" value="{{ $i }}">
+                            <label for="office_help{{ $i }}" title="{{ $i }} stars"><i class="fas fa-star"></i></label>
+                        @endfor
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="service_satisfaction">I am generally satisfied with the service I availed.</label>
+                    <div class="star-rating">
+                        @for($i = 5; $i >= 1; $i--)
+                            <input type="radio" id="service_satisfaction{{ $i }}" name="service_satisfaction" value="{{ $i }}">
+                            <label for="service_satisfaction{{ $i }}" title="{{ $i }} stars"><i class="fas fa-star"></i></label>
+                        @endfor
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="staff_knowledge">The staff was capable and knowledgeable to perform their duties.</label>
+                    <div class="star-rating">
+                        @for($i = 5; $i >= 1; $i--)
+                            <input type="radio" id="staff_knowledge{{ $i }}" name="staff_knowledge" value="{{ $i }}">
+                            <label for="staff_knowledge{{ $i }}" title="{{ $i }} stars"><i class="fas fa-star"></i></label>
+                        @endfor
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="response_clarity">The responses were clear and easily understood.</label>
+                    <div class="star-rating">
+                        @for($i = 5; $i >= 1; $i--)
+                            <input type="radio" id="response_clarity{{ $i }}" name="response_clarity" value="{{ $i }}">
+                            <label for="response_clarity{{ $i }}" title="{{ $i }} stars"><i class="fas fa-star"></i></label>
+                        @endfor
+                    </div>
+                </div>
+
+                <!-- Existing Questions -->
+                <div class="form-group">
+                    <label for="rating">How was your visit?</label>
                     <div class="star-rating">
                         @for($i = 5; $i >= 1; $i--)
                             <input type="radio" id="star{{ $i }}" name="rating" value="{{ $i }}">

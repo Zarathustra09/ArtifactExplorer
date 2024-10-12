@@ -82,6 +82,19 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
                     'age_60_above' => null,
                     'time_in' => $entry1 ? $entry1->created_at : null,
                     'time_out' => $entry2 ? $entry2->created_at : null,
+                    'blank1' => '', // Add first blank cell
+                    'blank2' => '', // Add second blank cell
+                    'visit_rating' => null,
+                    'feedback' => null,
+                    'ease_of_navigation' => null,
+                    'ar_features_function' => null,
+                    'ar_experience_engagement' => null,
+                    'recommend_app' => null,
+                    'improve_app' => null,
+                    'office_helpfulness' => null,
+                    'service_satisfaction' => null,
+                    'staff_knowledge' => null,
+                    'response_clarity' => null,
                 ];
 
                 foreach ($answers as $answer) {
@@ -128,6 +141,52 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
                     }
                 }
 
+                if ($entry2) {
+                    $entry2Answers = DB::table('answers')
+                        ->select('question_id', 'value')
+                        ->where('entry_id', $entry2->id)
+                        ->whereIn('question_id', [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24])
+                        ->get();
+
+                    foreach ($entry2Answers as $answer) {
+                        switch ($answer->question_id) {
+                            case 14:
+                                $result['visit_rating'] = $answer->value;
+                                break;
+                            case 15:
+                                $result['feedback'] = $answer->value;
+                                break;
+                            case 16:
+                                $result['ease_of_navigation'] = $answer->value;
+                                break;
+                            case 17:
+                                $result['ar_features_function'] = $answer->value;
+                                break;
+                            case 18:
+                                $result['ar_experience_engagement'] = $answer->value;
+                                break;
+                            case 19:
+                                $result['recommend_app'] = $answer->value;
+                                break;
+                            case 20:
+                                $result['improve_app'] = $answer->value;
+                                break;
+                            case 21:
+                                $result['office_helpfulness'] = $answer->value;
+                                break;
+                            case 22:
+                                $result['service_satisfaction'] = $answer->value;
+                                break;
+                            case 23:
+                                $result['staff_knowledge'] = $answer->value;
+                                break;
+                            case 24:
+                                $result['response_clarity'] = $answer->value;
+                                break;
+                        }
+                    }
+                }
+
                 return $result;
             })
             ->filter()
@@ -142,25 +201,38 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
             'ID', 'Bus Number', 'Full Name', 'Address', 'Nationality', 'Gender',
             'Students Grade School', 'Students High School', 'Students College',
             'PWD', 'Age 17 Below', 'Age 18-30', 'Age 31-45', 'Age 60 Above',
-            'Time In', 'Time Out'
+            'Time In', 'Time Out', '', '', // Add two blank headers
+            'Visit Rating', 'Feedback',
+            'Ease of Navigation', 'AR Features Function', 'AR Experience Engagement',
+            'Recommend App', 'Improve App', 'Office Helpfulness', 'Service Satisfaction',
+            'Staff Knowledge', 'Response Clarity'
         ];
     }
 
     public function styles(Worksheet $sheet)
     {
-        // Style the first row (headings) with a background color and bold text
-        $sheet->getStyle('A1:P1')->applyFromArray([
-            'font' => [
-                'bold' => true,
-                'color' => ['argb' => 'FFFFFFFF'], // White text
-            ],
-            'fill' => [
-                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                'startColor' => [
-                    'argb' => 'FF4CAF50', // Green background color for headers
-                ],
-            ],
-        ]);
+        // Get the highest column index
+        $highestColumn = $sheet->getHighestColumn();
+        $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
+
+        // Loop through each column in the first row
+        for ($col = 1; $col <= $highestColumnIndex; $col++) {
+            $cell = $sheet->getCellByColumnAndRow($col, 1);
+            if ($cell->getValue() !== '' && $col !== 17 && $col !== 18) { // Exclude columns Q (17th) and R (18th)
+                $sheet->getStyleByColumnAndRow($col, 1)->applyFromArray([
+                    'font' => [
+                        'bold' => true,
+                        'color' => ['argb' => 'FFFFFFFF'], // White text
+                    ],
+                    'fill' => [
+                        'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                        'startColor' => [
+                            'argb' => 'FF4CAF50', // Green background color for headers
+                        ],
+                    ],
+                ]);
+            }
+        }
 
         // Apply alternating row colors
         $rowCount = $sheet->getHighestRow();
@@ -168,7 +240,7 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
             // Check if the row is even or odd and apply different styles
             if ($row % 2 == 0) {
                 // Apply a light gray background for even rows
-                $sheet->getStyle('A'.$row.':P'.$row)->applyFromArray([
+                $sheet->getStyle('A'.$row.':'.$highestColumn.$row)->applyFromArray([
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                         'startColor' => [
@@ -178,7 +250,7 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
                 ]);
             } else {
                 // Apply a white background for odd rows
-                $sheet->getStyle('A'.$row.':P'.$row)->applyFromArray([
+                $sheet->getStyle('A'.$row.':'.$highestColumn.$row)->applyFromArray([
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                         'startColor' => [

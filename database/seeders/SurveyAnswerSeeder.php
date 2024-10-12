@@ -20,7 +20,7 @@ class SurveyAnswerSeeder extends Seeder
 
         $uniqueIdentifiers = collect();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 30; $i++) { // Updated to 30
             $uniqueIdentifier = Str::uuid()->toString();
             $uniqueIdentifiers->push($uniqueIdentifier);
 
@@ -55,6 +55,15 @@ class SurveyAnswerSeeder extends Seeder
             $feedbackEntry->answers()->createMany([
                 ['question_id' => 14, 'value' => rand(1, 5)],
                 ['question_id' => 15, 'value' => 'Feedback ' . $i],
+                ['question_id' => 16, 'value' => rand(1, 5)],
+                ['question_id' => 17, 'value' => rand(1, 5)],
+                ['question_id' => 18, 'value' => rand(1, 5)],
+                ['question_id' => 19, 'value' => rand(1, 5)],
+                ['question_id' => 20, 'value' => 'Improvement suggestion ' . $i],
+                ['question_id' => 21, 'value' => rand(1, 5)],
+                ['question_id' => 22, 'value' => rand(1, 5)],
+                ['question_id' => 23, 'value' => rand(1, 5)],
+                ['question_id' => 24, 'value' => rand(1, 5)],
             ]);
         }
     }

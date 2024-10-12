@@ -24,7 +24,7 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <!-- Logo Image on Top of Login -->
-                                        <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="img-fluid mb-4" style="max-width: 150px;">
+                                        <img src="{{ asset('NEW CONTENT/malvar x app black.png') }}" alt="Logo" class="img-fluid mb-4" style="max-width: 150px;">
 
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
