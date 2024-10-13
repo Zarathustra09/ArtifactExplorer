@@ -141,7 +141,7 @@
             <span class="gallery-hover-4col hidden-phone hidden-tablet">
             </span>
                         <a href=""><img src="{{ asset('gallery_img/gallery_1n2/Battle-of-Zapote-Bridge.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
-                        <span class="project-details"><a href="">Battle of Zapote Bridge</a>For an international ad campaign.</span>
+                        <span class="project-details"><a href="">Battle of Zapote Bridge</a></span>
                     </li>
 
                     <li class="span3 gallery-item" data-id="id-2" data-type="illustration">
@@ -150,7 +150,7 @@
                 </span>
             </span>
                         <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-fighting-on-horseback.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Malvar fighting on horseback</a>For a regional festival event.</span>
+                        <span class="project-details"><a href="gallery-single.htm">Malvar fighting on horseback</a></span>
                     </li>
 
                     <li class="span3 gallery-item" data-id="id-3" data-type="web">
@@ -159,7 +159,7 @@
                 </span>
             </span>
                         <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_1n2/Miguel-malvar-Leader-of-the-Masses.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Malvar leader of the masses</a>Created for a best selling children's book.</span>
+                        <span class="project-details"><a href="gallery-single.htm">Malvar leader of the masses</a></span>
                     </li>
 
                     <li class="span3 gallery-item" data-id="id-4" data-type="video">
@@ -168,7 +168,7 @@
                 </span>
             </span>
                         <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Wearing-his-Uniform.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Miguel wearing his Uniform</a>For an international add campaign.</span>
+                        <span class="project-details"><a href="gallery-single.htm">Miguel wearing his Uniform</a></span>
                     </li>
 
 {{--                    <li class="span3 gallery-item" data-id="id-5" data-type="web illustration">--}}
@@ -216,7 +216,7 @@
                 </span>
             </span>
                         <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_3/1965-Malvar-Centennial-Commemorative-Medallions.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
-                        <span class="project-details"><a href="#">Centennial Commorative Medallions</a>Creative storyboard illustration</span>
+                        <span class="project-details"><a href="#">Centennial Commorative Medallions</a></span>
                     </li>
 
                     <li class="span3 gallery-item" data-id="id-10" data-type="design">
@@ -225,7 +225,7 @@
                 </span>
             </span>
                         <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_3/2015-Malvar-Sesquicentennial-Commemorative-Coins.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Sesquicientennial Coins</a>Regional ad for a local company.</span>
+                        <span class="project-details"><a href="gallery-single.htm">Sesquicientennial Coins</a></span>
                     </li>
 
                     <li class="span3 gallery-item" data-id="id-11" data-type="web video">
@@ -234,7 +234,7 @@
                 </span>
             </span>
                         <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_3/Case-of-Coins-and-Medals.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Case of Coins and Medals</a>For an international add campaign.</span>
+                        <span class="project-details"><a href="gallery-single.htm">Case of Coins and Medals</a></span>
                     </li>
 
                     <li class="span3 gallery-item" data-id="id-12" data-type="design">
@@ -243,7 +243,7 @@
                 </span>
             </span>
                         <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_3/Pamana-ni-Miguel-Malvar.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Pamana ni Miguel Malvar</a>For a feature film.</span>
+                        <span class="project-details"><a href="gallery-single.htm">Pamana ni Miguel Malvar</a></span>
                     </li>
 
                     <li class="span3 gallery-item" data-id="id-13" data-type="web design">
@@ -252,7 +252,7 @@
                 </span>
             </span>
                         <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_3/The-Surrender.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">The Surrender</a>For an international add campaign.</span>
+                        <span class="project-details"><a href="gallery-single.htm">The Surrender</a></span>
                     </li>
 
                 </ul>
@@ -270,7 +270,7 @@
                 </span>
             </span>
                         <a href="gallery-single.htm"><img src="{{ asset('gallery_img/hallway/Battle-in-Tayabas.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Battle in Tayabas</a>For a local business.</span>
+                        <span class="project-details"><a href="gallery-single.htm">Battle in Tayabas</a></span>
                     </li>
 
                     <li class="span3 gallery-item" data-id="id-15" data-type="illustration video">
@@ -279,14 +279,23 @@
                 </span>
             </span>
                         <a href="gallery-single.htm"><img src="{{ asset('gallery_img/hallway/Malvar-victory-in-the-battle-of-Talisay.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm">Malvar Victory in the battle of Talisay</a>For an international add campaign.</span>
+                        <span class="project-details"><a href="gallery-single.htm">Malvar Victory in the battle of Talisay</a></span>
                     </li>
 
                 </ul>
             </div>
 
         </div>
-
+        <div class="row">
+            <div class="span12">
+                <p class="lead text-center mt-4">
+                    To explore a wider collection of artifacts, we invite you to visit the Miguel Malvar Museum!
+                    <a href="https://www.facebook.com/museonimiguelmalvar/">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
     </div><!-- End Gallery Row -->
 
 

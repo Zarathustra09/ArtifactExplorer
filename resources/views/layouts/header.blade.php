@@ -31,9 +31,6 @@
                 <li class="{{ $currentRoute == 'contact' ? 'active' : '' }}">
                     <a href="{{ url('contact') }}">Contact</a>
                 </li>
-                <li class="{{ $currentRoute == 'login' ? 'active' : '' }}">
-                    <a href="{{ route('login') }}">Login</a>
-                </li>
             </ul>
 
         </div>

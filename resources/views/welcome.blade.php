@@ -124,7 +124,7 @@
 
         <!-- Visitor Ratings
         ================================================== -->
-        <div class="span6">
+        <div class="span12">
 
             <h5 class="title-bg">Visitor Ratings
                 <small>All the latest feedback</small>

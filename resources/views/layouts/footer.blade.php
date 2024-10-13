@@ -56,9 +56,12 @@
                 <div class="row no-margin">
                     <div class="span6"><span class="left">Copyright 2024 Artifact Explorer. All rights reserved.</span></div>
                     <div class="span6">
-                            <span class="right">
-                            <a href="{{url('/')}}">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="{{route('gallery')}}">Gallery</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="https://www.facebook.com/museonimiguelmalvar/">Contact</a>
-                            </span>
+                        <span class="right">
+                            <a href="{{url('/')}}">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                            <a href="{{route('gallery')}}">Gallery</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                            <a href="https://www.facebook.com/museonimiguelmalvar/">Contact</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                            <a href="{{route('login')}}">Login</a>
+                        </span>
                     </div>
                 </div>
             </div>
