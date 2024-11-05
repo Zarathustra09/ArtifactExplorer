@@ -362,6 +362,7 @@
                             location: event.location,
                             image_url: event.image_url
                         }));
+                        console.log(events);
                         successCallback(events);
                         populateEventCarousel(events);
                     })

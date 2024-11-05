@@ -163,11 +163,11 @@
         </div>
         <div class="swal2-field">
             <label for="start_date">Start Date</label>
-            <input type="datetime-local" id="start_date" class="swal2-input" value="${new Date(event.start).toISOString().slice(0, 16)}" required>
+            <input type="datetime-local" id="start_date" class="swal2-input" value="${moment(event.start).format('YYYY-MM-DDTHH:mm')}" required>
         </div>
         <div class="swal2-field">
             <label for="end_date">End Date</label>
-            <input type="datetime-local" id="end_date" class="swal2-input" value="${event.end ? new Date(event.end).toISOString().slice(0, 16) : ''}" required>
+            <input type="datetime-local" id="end_date" class="swal2-input" value="${event.end ? moment(event.end).format('YYYY-MM-DDTHH:mm') : ''}" required>
         </div>
         <div class="swal2-field">
             <label for="location">Location</label>

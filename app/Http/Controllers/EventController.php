@@ -34,8 +34,8 @@ class EventController extends Controller
             $imagePath = $request->file('image_url')->store('images', 'public');
         }
 
-        $startDate = Carbon::parse($request->start_date)->setTimezone('Asia/Manila');
-        $endDate = $request->end_date ? Carbon::parse($request->end_date)->setTimezone('Asia/Manila') : null;
+        $startDate = Carbon::createFromFormat('Y-m-d\TH:i', $request->start_date, 'Asia/Manila');
+        $endDate = $request->end_date ? Carbon::createFromFormat('Y-m-d\TH:i', $request->end_date, 'Asia/Manila') : null;
 
         Event::create([
             'title' => $request->title,
@@ -45,6 +45,9 @@ class EventController extends Controller
             'location' => $request->location,
             'image_url' => $imagePath
         ]);
+
+        Log::info($startDate->format('F j, Y g:i A'));
+        Log::info($endDate ? $endDate->format('F j, Y g:i A') : 'No end date');
 
         return response()->json(['success' => true, 'message' => 'Event created successfully']);
     }
@@ -70,8 +73,8 @@ class EventController extends Controller
             $imagePath = $request->file('image_url')->store('images', 'public');
         }
 
-        $startDate = Carbon::parse($request->start_date)->setTimezone('Asia/Manila');
-        $endDate = $request->end_date ? Carbon::parse($request->end_date)->setTimezone('Asia/Manila') : null;
+        $startDate = Carbon::createFromFormat('Y-m-d\TH:i', $request->start_date, 'Asia/Manila');
+        $endDate = $request->end_date ? Carbon::createFromFormat('Y-m-d\TH:i', $request->end_date, 'Asia/Manila') : null;
 
         $event->update([
             'title' => $request->title,
@@ -81,6 +84,9 @@ class EventController extends Controller
             'location' => $request->location,
             'image_url' => $imagePath
         ]);
+
+        Log::info($startDate->format('F j, Y g:i A'));
+        Log::info($endDate ? $endDate->format('F j, Y g:i A') : 'No end date');
 
         return response()->json(['success' => true, 'message' => 'Event updated successfully']);
     }
