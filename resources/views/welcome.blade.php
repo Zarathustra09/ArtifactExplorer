@@ -65,6 +65,12 @@
             });
         });
     </script>
+<style>
+    .btn-custom {
+        padding: 15px 30px; /* Increase padding for a larger button */
+        font-size: 1.2em;    /* Increase font size */
+    }
+</style>
 
 </head>
 
@@ -183,9 +189,10 @@
     <div class="span12">
         <h5 class="title-bg">Explore History with ARtifact Explorer
             <small>Discover artifacts like never before</small>
-            <a href="{{asset('NEW CONTENT/Malvar.apk')}}" download class="btn btn-primary btn-mini pull-right">DOWNLOAD APP</a>
+            <a href="{{asset('NEW CONTENT/Malvar.apk')}}" download class="btn btn-success btn-lg pull-right">DOWNLOAD APP</a>
+
         </h5>
-        <img src="{{ asset('NEW CONTENT/handapp.png') }}" alt="ARtifact Explorer App" style="width: 100%; height: auto;">
+        <img src="{{ asset('NEW CONTENT/new-promotion.png') }}" alt="ARtifact Explorer App" style="width: 100%; height: auto;">
     </div>
 
 </div><!-- End New Section -->

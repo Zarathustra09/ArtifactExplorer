@@ -17,41 +17,45 @@ class GuestController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $survey = $this->survey();
-        $deviceIdentifier = Cookie::get('device_identifier');
+{
+    $survey = $this->survey();
+    $deviceIdentifier = Cookie::get('device_identifier');
 
-        // If the cookie does not exist, create a new unique identifier
-        if (!$deviceIdentifier) {
-            $deviceIdentifier = $request->ip() . '-' . Str::random(40);
-            $expiresAt = Carbon::now()->setTimezone('Asia/Manila')->endOfDay();
-            Cookie::queue('device_identifier', $deviceIdentifier, $expiresAt->diffInMinutes());
-        }
-
-        // Check if the user has already submitted a response today
-        $existingEntry = Entry::where('survey_id', $survey->id)
-            ->where('device_identifier', $deviceIdentifier)
-            ->whereDate('created_at', Carbon::today())
-            ->first();
-
-        if ($existingEntry) {
-            return redirect()->back()->with('error', 'You have already submitted a response today.');
-        }
-
-        // Validate the request data using the survey rules
-        $answers = $request->validate($survey->rules);
-
-        // Create a new entry with the validated answers
-        $entry = new Entry();
-        $entry->survey_id = $survey->id;
-        $entry->device_identifier = $deviceIdentifier;
-        $entry->save();
-
-        // Save the answers to the entry
-        $entry->fromArray($answers)->push();
-
-        return redirect()->back()->with('success', 'Survey submitted successfully!');
+    // If the cookie does not exist, create a new unique identifier
+    if (!$deviceIdentifier) {
+        $deviceIdentifier = $request->ip() . '-' . Str::random(40);
+        $expiresAt = Carbon::now()->setTimezone('Asia/Manila')->endOfDay();
+        Cookie::queue('device_identifier', $deviceIdentifier, $expiresAt->diffInMinutes());
     }
+
+    // Check if the user has already submitted a response today
+    $existingEntry = Entry::where('survey_id', $survey->id)
+        ->where('device_identifier', $deviceIdentifier)
+        ->whereDate('created_at', Carbon::today())
+        ->first();
+
+    if ($existingEntry) {
+        return redirect()->back()->with('error', 'You have already submitted a response today.');
+    }
+
+    // Validate the request data using the survey rules
+    $answers = $request->validate($survey->rules);
+
+    // Create a new entry with the validated answers
+    $entry = new Entry();
+    $entry->survey_id = $survey->id;
+    $entry->device_identifier = $deviceIdentifier;
+    $entry->created_at = Carbon::now()->setTimezone('Asia/Manila');
+    $entry->updated_at = Carbon::now()->setTimezone('Asia/Manila');
+    $entry->save();
+
+    // Save the answers to the entry
+    $entry->fromArray($answers)->push();
+
+    $currentTime = Carbon::now()->setTimezone('Asia/Manila')->toDateTimeString();
+
+    return redirect()->back()->with('success', 'Survey submitted successfully!');
+}
 
     protected function survey()
     {

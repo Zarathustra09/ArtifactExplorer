@@ -22,79 +22,91 @@ class EventController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'start_date' => 'required|date',
-            'image_url' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'start_date' => 'required|date',
+        'image_url' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048'
+    ]);
 
-        $imagePath = null;
-        if ($request->hasFile('image_url')) {
-            $imagePath = $request->file('image_url')->store('images', 'public');
-        }
-
-        $startDate = Carbon::parse($request->start_date)->setTimezone('Asia/Manila');
-        $endDate = $request->end_date ? Carbon::parse($request->end_date)->setTimezone('Asia/Manila') : null;
-
-        Event::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'start_date' => $startDate,
-            'end_date' => $endDate,
-            'location' => $request->location,
-            'image_url' => $imagePath
-        ]);
-
-        return response()->json(['success' => true, 'message' => 'Event created successfully']);
+    $imagePath = null;
+    if ($request->hasFile('image_url')) {
+        // Store the image directly in public/storage/images
+        $filename = $request->file('image_url')->getClientOriginalName();
+        // Save to the correct disk without a subdirectory
+        $imagePath = $request->file('image_url')->storeAs('', $filename, 'hostinger_public'); // Updated to use your custom disk
     }
 
-    public function edit(Request $request, $id)
-    {
-        Log::info('Edit function called', ['id' => $id]);
+        $startDate = Carbon::createFromFormat('Y-m-d\TH:i', $request->start_date, 'Asia/Manila');
+        $endDate = $request->end_date ? Carbon::createFromFormat('Y-m-d\TH:i', $request->end_date, 'Asia/Manila') : null;
 
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'start_date' => 'required|date',
-            'image_url' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
 
-        $event = Event::findOrFail($id);
+    Event::create([
+        'title' => $request->title,
+        'description' => $request->description,
+        'start_date' => $startDate,
+        'end_date' => $endDate,
+        'location' => $request->location,
+        'image_url' => $imagePath
+    ]);
 
-        $imagePath = $event->image_url;
-        if ($request->hasFile('image_url')) {
-            if ($imagePath) {
-                Storage::disk('public')->delete($imagePath);
-                Log::info('Previous image deleted', ['image_url' => $imagePath]);
-            }
-            $imagePath = $request->file('image_url')->store('images', 'public');
+    return response()->json(['success' => true, 'message' => 'Event created successfully']);
+}
+
+public function edit(Request $request, $id)
+{
+    Log::info('Edit function called', ['id' => $id]);
+
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'start_date' => 'required|date',
+        'image_url' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048'
+    ]);
+
+    $event = Event::findOrFail($id);
+
+    $imagePath = $event->image_url;
+    if ($request->hasFile('image_url')) {
+        // Delete the old image if it exists
+        if ($imagePath) {
+            Storage::disk('hostinger_public')->delete($imagePath);
+            Log::info('Previous image deleted', ['image_url' => $imagePath]);
         }
-
-        $startDate = Carbon::parse($request->start_date)->setTimezone('Asia/Manila');
-        $endDate = $request->end_date ? Carbon::parse($request->end_date)->setTimezone('Asia/Manila') : null;
-
-        $event->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'start_date' => $startDate,
-            'end_date' => $endDate,
-            'location' => $request->location,
-            'image_url' => $imagePath
-        ]);
-
-        return response()->json(['success' => true, 'message' => 'Event updated successfully']);
+        // Store the new image directly in public/storage/images
+        $filename = $request->file('image_url')->getClientOriginalName();
+        $imagePath = $request->file('image_url')->storeAs('', $filename, 'hostinger_public'); // Updated to use your custom disk
     }
 
-    // app/Http/Controllers/EventController.php
+     $startDate = Carbon::createFromFormat('Y-m-d\TH:i', $request->start_date, 'Asia/Manila');
+        $endDate = $request->end_date ? Carbon::createFromFormat('Y-m-d\TH:i', $request->end_date, 'Asia/Manila') : null;
+
+
+    $event->update([
+        'title' => $request->title,
+        'description' => $request->description,
+        'start_date' => $startDate,
+        'end_date' => $endDate,
+        'location' => $request->location,
+        'image_url' => $imagePath
+    ]);
+
+    return response()->json(['success' => true, 'message' => 'Event updated successfully']);
+}
+
 
     public function destroy($id)
     {
         $event = Event::findOrFail($id);
 
+        // Delete the image if it exists
+        if ($event->image_url) {
+            Storage::disk('hostinger_public')->delete($event->image_url);
+            Log::info('Image deleted', ['image_url' => $event->image_url]);
+        }
+
         // Delete the event
         $event->delete();
 
-        // Return a success response with a 200 status code
         return response()->json([
             'success' => true,
             'message' => 'Event deleted successfully'

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <body class="bg-gradient-success">
+<body class="bg-gradient-success">
     <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -44,8 +44,9 @@
                                         </div>
 
                                         <!-- Password Input -->
-                                        <div class="form-group">
+                                        <div class="form-group position-relative">
                                             <input id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
+                                            <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password" style="cursor: pointer; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"></span>
 
                                             @error('password')
                                             <span class="invalid-feedback" role="alert">
@@ -87,6 +88,16 @@
             </div>
         </div>
     </div>
-    </body>
+
+    <script>
+        // Toggle Password Visibility
+        document.querySelector('.toggle-password').addEventListener('click', function () {
+            const passwordInput = document.querySelector('#password');
+            const passwordType = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', passwordType);
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
+</body>
 
 @endsection

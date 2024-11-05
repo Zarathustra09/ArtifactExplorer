@@ -52,19 +52,19 @@ class SurveySeeder extends Seeder
         $sectionTwo->questions()->create([
             'content' => 'No. of Students / Grade School',
             'type' => 'number',
-            'rules' => ['required', 'numeric']
+            'rules' => ['required', 'numeric', 'min:0']
         ]);
 
         $sectionTwo->questions()->create([
             'content' => 'No. of Students / High School',
             'type' => 'number',
-            'rules' => ['required', 'numeric']
+            'rules' => ['required', 'numeric', 'min:0']
         ]);
 
         $sectionTwo->questions()->create([
             'content' => 'No. of Students / College / GradSchool',
             'type' => 'number',
-            'rules' => ['required', 'numeric']
+            'rules' => ['required', 'numeric', 'min:0']
         ]);
 
         $sectionTwo->questions()->create([
@@ -75,28 +75,25 @@ class SurveySeeder extends Seeder
         $sectionTwo->questions()->create([
             'content' => '17 y/o and below',
             'type' => 'number',
-            'rules' => ['required', 'numeric']
+            'rules' => ['required', 'numeric', 'min:0']
         ]);
 
         $sectionTwo->questions()->create([
             'content' => '18-30 y/o',
             'type' => 'number',
-            'rules' => ['required', 'numeric']
+            'rules' => ['required', 'numeric', 'min:0']
         ]);
 
         $sectionTwo->questions()->create([
             'content' => '31-45 y/o',
             'type' => 'number',
-            'rules' => ['required', 'numeric']
+            'rules' => ['required', 'numeric', 'min:0']
         ]);
 
         $sectionTwo->questions()->create([
             'content' => '60 y/o and above',
             'type' => 'number',
-            'rules' => ['required', 'numeric']
+            'rules' => ['required', 'numeric', 'min:0']
         ]);
-
-
-
     }
 }

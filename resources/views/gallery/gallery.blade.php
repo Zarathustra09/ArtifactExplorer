@@ -167,7 +167,7 @@
                 <span class="gallery-icons">
                 </span>
             </span>
-                        <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Wearing-his-Uniform.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
+                        <a href="gallery-single.htm"><img src="{{ asset('gallery_img/gallery_1n2/nakatayo head.jpg') }}" loading="lazy" style="height: 160px; width: 300px" alt="Gallery"></a>
                         <span class="project-details"><a href="gallery-single.htm">Miguel wearing his Uniform</a></span>
                     </li>
 

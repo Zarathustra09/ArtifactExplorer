@@ -379,7 +379,7 @@
                     <p><strong>Location:</strong> ${event.extendedProps.location}</p>
                     <p><strong>Start:</strong> ${new Date(event.start).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })}</p>
                     <p><strong>End:</strong> ${event.end ? new Date(event.end).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true }) : 'N/A'}</p>
-                    ${event.extendedProps.image_url ? `<img src="/storage/${event.extendedProps.image_url}" alt="${event.title}" style="width: 100%; height: auto;">` : ''}
+                    ${event.extendedProps.image_url ? `<img src="/storage/images/${event.extendedProps.image_url}" alt="${event.title}" style="width: 100%; height: auto;">` : ''}
                 `,
                     showCloseButton: true,
                     showCancelButton: false,
@@ -390,22 +390,23 @@
         calendar.render();
 
         function populateEventCarousel(events) {
-            const eventCarousel = document.getElementById('eventCarousel');
-            events.forEach(event => {
-                const eventItem = document.createElement('div');
-                eventItem.classList.add('item');
-                eventItem.innerHTML = `
-                <div class="event-item">
-                    <h4>${event.title}</h4>
-                    <p>${event.description.length > 100 ? event.description.substring(0, 100) + '...' : event.description}</p>
-                    <p><strong>Location:</strong> ${event.location}</p>
-                    <p><strong>Start:</strong> ${new Date(event.start).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })}</p>
-                    <p><strong>End:</strong> ${event.end ? new Date(event.end).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true }) : 'N/A'}</p>
-                    ${event.image_url ? `<img src="/storage/${event.image_url}" alt="${event.title}" style="width: 100%; height: auto;">` : ''}
-                </div>
-            `;
-                eventCarousel.appendChild(eventItem);
-            });
+    const eventCarousel = document.getElementById('eventCarousel');
+    events.forEach(event => {
+        const eventItem = document.createElement('div');
+        eventItem.classList.add('item');
+        eventItem.innerHTML = `
+            <div class="event-item">
+                <h4>${event.title}</h4>
+                <p>${event.description.length > 100 ? event.description.substring(0, 100) + '...' : event.description}</p>
+                <p><strong>Location:</strong> ${event.location}</p>
+                <p><strong>Start:</strong> ${new Date(event.start).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })}</p>
+                <p><strong>End:</strong> ${event.end ? new Date(event.end).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true }) : 'N/A'}</p>
+                ${event.image_url ? `<img src="/storage/images/${event.image_url}" alt="${event.title}" style="width: 100%; height: auto;">` : ''}
+            </div>
+        `;
+        eventCarousel.appendChild(eventItem);
+    });
+
 
             $('#eventCarousel').owlCarousel({
                 items: 1,

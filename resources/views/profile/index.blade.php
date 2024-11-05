@@ -49,16 +49,25 @@
                 margin-top: 0.25rem;
             }
 
-            .alert-success {
-                background-color: #d4edda;
-                border-color: #c3e6cb;
-                color: #155724;
-                border-radius: 8px;
-                padding: 10px;
+            .password-toggle {
+                position: relative;
             }
+
+            .toggle-password {
+                position: absolute;
+                right: 10px;
+                top:75%; /* Lowered the icon by increasing the top value */
+                transform: translateY(-50%);
+                cursor: pointer;
+                font-size: 1.2rem;
+                color: #6c757d; /* Optional: make the icon more subtle */
+                z-index: 1;
+            }
+
 
         </style>
     @endpush
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -92,9 +101,11 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
+                            <!-- New Password Field with Eye Icon -->
+                            <div class="form-group password-toggle">
                                 <label for="password" class="form-label">New Password (optional)</label>
                                 <input type="password" class="form-control profile-input @error('password') is-invalid @enderror" id="password" name="password">
+                                <i class="fa fa-eye toggle-password" onclick="togglePassword('password')"></i>
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -102,9 +113,11 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
+                            <!-- Confirm New Password Field with Eye Icon -->
+                            <div class="form-group password-toggle">
                                 <label for="password_confirmation" class="form-label">Confirm New Password</label>
                                 <input type="password" class="form-control profile-input" id="password_confirmation" name="password_confirmation">
+                                <i class="fa fa-eye toggle-password" onclick="togglePassword('password_confirmation')"></i>
                             </div>
 
                             <div class="form-group text-center">
@@ -122,4 +135,21 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function togglePassword(fieldId) {
+            const passwordField = document.getElementById(fieldId);
+            const icon = passwordField.nextElementSibling;
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+
 @endsection

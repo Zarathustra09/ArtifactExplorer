@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'public'), // Set the default to 'public'
 
     /*
     |--------------------------------------------------------------------------
@@ -40,6 +40,14 @@ return [
             'driver' => 'local',
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'hostinger_public' => [ // Custom disk for Hostinger's public path
+            'driver' => 'local',
+            'root' => public_path('storage/images'),
+            'url' => env('APP_URL').'/storage/images',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -71,6 +79,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('storage/images') => storage_path('app/public/images'), // Ensure images folder is linked
     ],
 
 ];
