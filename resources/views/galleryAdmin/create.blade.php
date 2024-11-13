@@ -47,6 +47,10 @@
                 <input type="text" id="gallery_name" name="gallery_name" class="form-control" placeholder="Enter gallery name" required>
             </p>
             <p>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" class="form-control" placeholder="Enter gallery description"></textarea>
+            </p>
+            <p>
                 <label for="upload_imgs" class="button hollow">Select Your Images +</label>
                 <input class="show-for-sr" type="file" id="upload_imgs" name="upload_imgs[]" multiple/>
             </p>

@@ -26,6 +26,7 @@ class GalleryController extends Controller
 
         $validator = \Validator::make($request->all(), [
             'gallery_name' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'upload_imgs.*' => 'required|image|mimes:jpeg,png,jpg|max:4096',
         ]);
 
@@ -38,6 +39,7 @@ class GalleryController extends Controller
         // Create the gallery
         $gallery = Gallery::create([
             'name' => $request->input('gallery_name'),
+            'description' => $request->input('description'),
         ]);
 
         Log::info('Gallery created', ['gallery' => $gallery]);
@@ -61,6 +63,40 @@ class GalleryController extends Controller
         return redirect()->route('gallery.index')->with('success', 'Gallery created successfully.');
     }
 
+    public function update(Request $request, $id)
+    {
+        Log::info('Update method called');
+        Log::info('Request data', ['request' => $request->all()]);
+
+        $validator = \Validator::make($request->all(), [
+            'gallery_name' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        Log::info('Validation passed');
+
+        // Find the gallery
+        $gallery = Gallery::findOrFail($id);
+
+        if ($request->has('gallery_name')) {
+            $gallery->name = $request->input('gallery_name');
+        }
+
+        if ($request->has('description')) {
+            $gallery->description = $request->input('description');
+        }
+
+        $gallery->save();
+
+        Log::info('Gallery updated', ['gallery' => $gallery]);
+
+        return back()->with('success', 'Gallery updated successfully.');
+    }
+
     public function show($id)
     {
         $gallery = Gallery::with('images')->findOrFail($id);
@@ -73,30 +109,7 @@ class GalleryController extends Controller
         return view('galleryAdmin.edit', compact('gallery'));
     }
 
-    public function update(Request $request, $id)
-    {
-        Log::info('Update method called');
-        Log::info('Request data', ['request' => $request->all()]);
 
-        $validator = \Validator::make($request->all(), [
-            'gallery_name' => 'required|string|max:255',
-        ]);
-
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
-
-        Log::info('Validation passed');
-
-        // Find the gallery
-        $gallery = Gallery::findOrFail($id);
-        $gallery->name = $request->input('gallery_name');
-        $gallery->save();
-
-        Log::info('Gallery updated', ['gallery' => $gallery]);
-
-        return back()->with('success', 'Gallery updated successfully.');
-    }
 
     public function destroy($id)
     {

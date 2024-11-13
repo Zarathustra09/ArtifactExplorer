@@ -9,6 +9,12 @@
                 <a href="{{ route('gallery.index') }}" class="btn btn-secondary ms-auto">Back to Galleries</a>
             </div>
         </div>
+        <div class="row mb-4">
+            <div class="col-12 d-flex align-items-center">
+                <p id="gallery-description">{{ $gallery->description }}</p>
+                <i class="fas fa-pencil-alt ms-3" style="cursor: pointer;" onclick="editGalleryDescription()"></i>
+            </div>
+        </div>
         <div class="row">
             @if($gallery->images->isEmpty())
                 <div class="col-12">
@@ -52,8 +58,8 @@
             </div>
         </div>
     </div>
-        <script>
-            function editGalleryName() {
+    <script>
+        function editGalleryName() {
             Swal.fire({
                 title: 'Edit Gallery Name',
                 input: 'text',
@@ -75,7 +81,7 @@
                             if (!response.ok) {
                                 throw new Error(response.statusText);
                             }
-                            return response.text(); // Expecting HTML response
+                            return response.text();
                         })
                         .catch(error => {
                             Swal.showValidationMessage(
@@ -91,11 +97,54 @@
                         text: 'Gallery name updated successfully.',
                         icon: 'success'
                     }).then(() => {
-                        location.reload(); // Reload the page to reflect changes
+                        location.reload();
+                    });
+                }
+            });
+        }
+
+        function editGalleryDescription() {
+            Swal.fire({
+                title: 'Edit Gallery Description',
+                input: 'textarea',
+                inputLabel: 'New Gallery Description',
+                inputValue: document.getElementById('gallery-description').innerText,
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+                showLoaderOnConfirm: true,
+                preConfirm: (newDescription) => {
+                    return fetch('{{ route('gallery.update', $gallery->id) }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({ description: newDescription, _method: 'PUT' })
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(response.statusText);
+                            }
+                            return response.text();
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                                `Request failed: ${error}`
+                            );
+                        });
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Gallery description updated successfully.',
+                        icon: 'success'
+                    }).then(() => {
+                        location.reload();
                     });
                 }
             });
         }
     </script>
-
 @endsection
