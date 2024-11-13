@@ -39,6 +39,9 @@
             </a>
         </li>
 
+        <!-- Interface Section -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Landing Page</span></li>
+
         <!-- Events -->
         <li class="menu-item {{ Route::currentRouteName() == 'event.index' ? 'active' : '' }}">
             <a href="{{ route('event.index') }}" class="menu-link">
@@ -46,6 +49,15 @@
                 <div data-i18n="Events">Events</div>
             </a>
         </li>
+
+        <li class="menu-item {{ Route::is('gallery.index', 'gallery.create', 'gallery.store', 'gallery.show', 'gallery.edit', 'gallery.update', 'gallery.destroy') ? 'active' : '' }}">
+            <a href="{{ route('gallery.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-images"></i>
+                <div data-i18n="Gallery">Gallery</div>
+            </a>
+        </li>
+
+
 
         <!-- Sidebar Toggler -->
         <div class="text-center d-none d-md-inline">

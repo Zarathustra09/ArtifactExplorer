@@ -31,7 +31,7 @@ class GalleryController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'errors' => $validator->errors()], 400);
+            return back()->with('error', 'Validation failed. Please check your inputs. Note that you can only upload 4mb images')->withErrors($validator)->withInput();
         }
 
         Log::info('Validation passed');

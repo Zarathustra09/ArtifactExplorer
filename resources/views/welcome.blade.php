@@ -15,7 +15,7 @@
                     <p class="pt-20 pb-20 text-white">
                         A museum that showcases the life and times of Gen. Miguel Malvar.
                     </p>
-                    <a href="#" class="primary-btn text-uppercase">Get Started</a>
+                    <a href="{{route('contact')}}" class="primary-btn text-uppercase">Visit Now!</a>
                 </div>
             </div>
         </div>

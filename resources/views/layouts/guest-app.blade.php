@@ -50,9 +50,9 @@
     <div class="container">
         <div class="row align-items-center justify-content-between d-flex">
             <div id="logo">
-                <a href="index.html">
-                    <img src="{{ asset('NEW CONTENT/malvar x app black.png') }}" alt="" title="" style="height: 25px;" />
-                </a>
+{{--                <a href="{{url('/')}}">--}}
+{{--                    <img src="{{ asset('NEW CONTENT/SOLO APP LOGO.png') }}" alt="" title="" style="height: 50px;" />--}}
+{{--                </a>--}}
             </div>
 
             <nav id="nav-menu-container">

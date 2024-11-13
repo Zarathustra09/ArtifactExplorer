@@ -6,6 +6,7 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GalleryImageController;
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\GuestGalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProfileController;
@@ -69,7 +70,7 @@ Route::put('/profile/update', [ProfileController::class, 'update'])->name('profi
 Route::get('/gallery/index', [GalleryController::class, 'index'])->name('gallery.index');
 Route::get('/gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
 Route::post('/gallery/store', [GalleryController::class, 'store'])->name('gallery.store');
-Route::get('/gallery/{id}', [GalleryController::class, 'show'])->name('gallery.show');
+Route::get('/gallery/show/{id}', [GalleryController::class, 'show'])->name('gallery.show');
 Route::get('/gallery/{id}/edit', [GalleryController::class, 'edit'])->name('gallery.edit');
 Route::put('/gallery/{id}', [GalleryController::class, 'update'])->name('gallery.update');
 Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
@@ -80,9 +81,8 @@ Route::delete('/gallery/image/{id}', [GalleryImageController::class, 'destroy'])
 Route::post('/gallery/{galleryId}/image', [GalleryImageController::class, 'store'])->name('gallery.image.store');
 Route::post('/gallery/image/{id}/edit', [GalleryImageController::class, 'edit'])->name('gallery.image.edit');
 
-Route::get('/gallery',function (){
-    return view('gallery.gallery');
-})->name('gallery');
+Route::get('/gallery', [GuestGalleryController::class, 'index'])->name('gallery');
+Route::get('/gallery/{id}', [GuestGalleryController::class, 'show'])->name('gallery.guest.show');
 
 Route::get('/single',function (){
     return view('gallery.single');
