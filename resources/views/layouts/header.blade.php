@@ -1,57 +1,55 @@
-<div class="row header"><!-- Begin Header -->
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo">
+        <a href="{{ url('/home') }}" class="app-brand-link">
+            <img src="{{ asset('NEW CONTENT/SOLO MM LOGO.png') }}" style="height: 200px" alt="Artifact Explorer Logo" class="app-brand-logo">
+        </a>
 
-    <!-- Logo
-    ================================================== -->
-    <div class="span5 logo">
-        <a href="{{url('/')}}"><img src="{{ asset('NEW CONTENT/malvar x app black.png') }}" style="height: 150px; width: 150px"alt="" /></a>
-        <h5>Museo ni Miguel Malvar </h5>
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
     </div>
+    <li class="menu-header small text-uppercase"><span class="menu-header-text">Welcome!</span></li>
+    <div class="menu-inner-shadow"></div>
 
-    <!-- Main Navigation
-    ================================================== -->
-    <div class="span7 navigation">
-        <div class="navbar hidden-phone">
+    <ul class="menu-inner py-1">
+        <!-- Dashboard -->
+        <li class="menu-item {{ Route::currentRouteName() == 'home' ? 'active' : '' }}">
+            <a href="{{ route('home') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Dashboard">Dashboard</div>
+            </a>
+        </li>
 
-            @php
-                $currentRoute = Request::path();
-            @endphp
+        <!-- Interface Section -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Interface</span></li>
 
-            <ul class="nav">
-                <li class="{{ $currentRoute == '/' ? 'active' : '' }}">
-                    <a href="{{ url('/') }}">Home</a>
-                </li>
-                <li class="{{ $currentRoute == 'gallery' ? 'active' : '' }}">
-                    <a href="{{ url('gallery') }}">Gallery</a>
-                </li>
+        <!-- Visitor Information -->
+        <li class="menu-item {{ Route::currentRouteName() == 'visitor.index' ? 'active' : '' }}">
+            <a href="{{ route('visitor.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div data-i18n="Visitor Information">Visitor Information</div>
+            </a>
+        </li>
 
-                <li class="{{ $currentRoute == 'event' ? 'active' : '' }}">
-                    <a href="{{ route('event') }}">Events</a>
-                </li>
+        <!-- Reports -->
+        <li class="menu-item {{ Route::currentRouteName() == 'report.index' ? 'active' : '' }}">
+            <a href="{{ route('report.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Reports">Reports</div>
+            </a>
+        </li>
 
-                <li class="{{ $currentRoute == 'contact' ? 'active' : '' }}">
-                    <a href="{{ url('contact') }}">Contact</a>
-                </li>
-            </ul>
+        <!-- Events -->
+        <li class="menu-item {{ Route::currentRouteName() == 'event.index' ? 'active' : '' }}">
+            <a href="{{ route('event.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-calendar"></i>
+                <div data-i18n="Events">Events</div>
+            </a>
+        </li>
 
+        <!-- Sidebar Toggler -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
-
-        <!-- Mobile Nav
-        ================================================== -->
-        <form action="#" id="mobile-nav" class="visible-phone">
-            <div class="mobile-nav-select">
-                <select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
-                    <option value="">Navigate...</option>
-                    <option value="{{ url('/') }}">Home</option>
-                    <option value="{{ url('gallery') }}">- Gallery</option>
-                    <option value="{{ route('event') }}">- Events</option>
-                    <option value="{{ url('contact') }}">- Contact</option>
-                    <option value="{{ route('login') }}">Login</option>
-                </select>
-            </div>
-        </form>
-
-    </div>
-
-</div><!-- End Header -->
-
-<div class="row headline"><!-- Begin Headline -->
+    </ul>
+</aside>

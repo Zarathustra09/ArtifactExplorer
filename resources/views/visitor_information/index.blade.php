@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="visitorDataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>Bus Number</th>
@@ -61,8 +61,16 @@
 @endsection
 
 @section('scripts')
+    <!-- Include DataTables CSS and JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        $(document).ready(function() {
+            $('#visitorDataTable').DataTable();
+        });
+
         function viewEntry(entryId) {
             fetch(`/visitor/demographics/${entryId}`)
                 .then(response => response.json())
