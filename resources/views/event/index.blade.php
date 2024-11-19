@@ -94,6 +94,24 @@
             width: auto !important; /* Allow for automatic width */
             max-width: 600px; /* Set a maximum width */
         }
+
+        /* Media query for small screens */
+        @media screen and (max-width: 768px) {
+            .fc-toolbar {
+                padding: 5px; /* Reduce padding */
+                flex-direction: column; /* Stack toolbar items vertically */
+            }
+            .fc-toolbar-title {
+                font-size: 18px; /* Reduce font size */
+            }
+            .fc .fc-toolbar-chunk .fc-button {
+                font-size: 12px; /* Reduce button font size */
+                padding: 5px 10px; /* Reduce button padding */
+            }
+            #calendar {
+                margin-top: 50px; /* Add margin to push the calendar down */
+            }
+        }
     </style>
 
     <!-- Button to trigger SweetAlert -->
@@ -133,7 +151,7 @@
                 description: event.description,
                 location: event.location,
                 // Use the correct image URL without repeating the base URL
-                image_url: event.image_url ? `${event.image_url}` : null 
+                image_url: event.image_url ? `${event.image_url}` : null
             }));
             // Log the image URLs for debugging
             console.log(events.map(event => event.image_url));

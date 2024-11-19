@@ -120,7 +120,7 @@
 {{--                                <i class="fa fa-eye toggle-password" onclick="togglePassword('password_confirmation')"></i>--}}
                             </div>
 
-                            <div class="form-group text-center">
+                            <div class="form-group text-center pt-3">
                                 <button type="submit" class="btn btn-primary profile-btn">Update Profile</button>
                             </div>
                         </form>
