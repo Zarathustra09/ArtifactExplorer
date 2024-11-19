@@ -105,7 +105,7 @@
                             <div class="form-group password-toggle">
                                 <label for="password" class="form-label">New Password (optional)</label>
                                 <input type="password" class="form-control profile-input @error('password') is-invalid @enderror" id="password" name="password">
-                                <i class="fa fa-eye toggle-password" onclick="togglePassword('password')"></i>
+{{--                                <i class="fa fa-eye toggle-password" onclick="togglePassword('password')"></i>--}}
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -117,7 +117,7 @@
                             <div class="form-group password-toggle">
                                 <label for="password_confirmation" class="form-label">Confirm New Password</label>
                                 <input type="password" class="form-control profile-input" id="password_confirmation" name="password_confirmation">
-                                <i class="fa fa-eye toggle-password" onclick="togglePassword('password_confirmation')"></i>
+{{--                                <i class="fa fa-eye toggle-password" onclick="togglePassword('password_confirmation')"></i>--}}
                             </div>
 
                             <div class="form-group text-center">
