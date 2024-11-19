@@ -38,6 +38,7 @@ Route::get('/gender-demographics', [HomeController::class, 'genderDemographics']
 Route::get('/most-visited', [HomeController::class, 'mostVisited'])->name('most-visited');
 Route::get('/most-visited-today', [HomeController::class, 'visitToday'])->name('most-visited-today');
 Route::get('/most-visited-month', [HomeController::class, 'visitThisMonth'])->name('most-visited-month');
+Route::get('/student-demographics', [HomeController::class, 'studentDemographics'])->name('student-demographics');
 
 Route::get('/guest-survey', [GuestController::class, 'create'])->name('guest.survey.create');
 Route::post('/guest-survey', [GuestController::class, 'store'])->name('guest.survey.store');

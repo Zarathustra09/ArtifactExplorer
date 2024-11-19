@@ -127,6 +127,29 @@
     </table>
 </div>
 
+<div class="section">
+    <h2 class="section-header">Student Demographics</h2>
+    <div class="chart">
+        <img src="file://{{ $studentChart }}" alt="Student Demographics Chart">
+    </div>
+    <table class="data-table">
+        <thead>
+        <tr>
+            <th>Student Group</th>
+            <th>Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($studentData as $studentGroup => $count)
+            <tr>
+                <td>{{ $studentGroup }}</td>
+                <td>{{ $count }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+</div>
+
 <div class="footer">
     <p>Generated on {{ \Carbon\Carbon::now()->format('F d, Y') }}</p>
 </div>

@@ -89,6 +89,52 @@ class HomeController extends Controller
         ]);
     }
 
+    public function studentDemographics(Request $request)
+    {
+        $filter = $request->input('filter', 'today');
+
+        $gradeSchoolQuery = Answer::where('question_id', 7);
+        $highSchoolQuery = Answer::where('question_id', 8);
+        $collegeQuery = Answer::where('question_id', 9);
+
+        switch ($filter) {
+            case 'week':
+                $gradeSchoolQuery->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+                $highSchoolQuery->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+                $collegeQuery->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+                break;
+            case 'month':
+                $gradeSchoolQuery->whereMonth('created_at', Carbon::now()->month)
+                    ->whereYear('created_at', Carbon::now()->year);
+                $highSchoolQuery->whereMonth('created_at', Carbon::now()->month)
+                    ->whereYear('created_at', Carbon::now()->year);
+                $collegeQuery->whereMonth('created_at', Carbon::now()->month)
+                    ->whereYear('created_at', Carbon::now()->year);
+                break;
+            case 'year':
+                $gradeSchoolQuery->whereYear('created_at', Carbon::now()->year);
+                $highSchoolQuery->whereYear('created_at', Carbon::now()->year);
+                $collegeQuery->whereYear('created_at', Carbon::now()->year);
+                break;
+            case 'today':
+            default:
+                $gradeSchoolQuery->whereDate('created_at', Carbon::today());
+                $highSchoolQuery->whereDate('created_at', Carbon::today());
+                $collegeQuery->whereDate('created_at', Carbon::today());
+                break;
+        }
+
+        $gradeSchool = $gradeSchoolQuery->selectRaw('SUM(value) as gradeSchool')->first();
+        $highSchool = $highSchoolQuery->selectRaw('SUM(value) as highSchool')->first();
+        $college = $collegeQuery->selectRaw('SUM(value) as college')->first();
+
+        return response()->json([
+            'gradeSchool' => $gradeSchool->gradeSchool,
+            'highSchool' => $highSchool->highSchool,
+            'college' => $college->college,
+        ]);
+    }
+
     public function genderDemographics(Request $request)
     {
         $filter = $request->input('filter', 'today');
