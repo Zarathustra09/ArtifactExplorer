@@ -24,7 +24,7 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
 
         $query = DB::table('answers')
             ->select('entry_id', 'question_id', 'value')
-            ->whereIn('question_id', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
+            ->whereIn('question_id', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);
 
         switch ($this->period) {
             case 'monthly':
@@ -71,7 +71,8 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
                     'full_name' => null,
                     'address' => null,
                     'nationality' => null,
-                    'gender' => null,
+                    'male' => null,
+                    'female' => null,
                     'students_grade_school' => null,
                     'students_high_school' => null,
                     'students_college' => null,
@@ -112,30 +113,33 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
                             $result['nationality'] = $answer->value;
                             break;
                         case 5:
-                            $result['gender'] = $answer->value;
+                            $result['male'] = $answer->value;
                             break;
                         case 6:
-                            $result['students_grade_school'] = $answer->value;
+                            $result['female'] = $answer->value;
                             break;
                         case 7:
-                            $result['students_high_school'] = $answer->value;
+                            $result['students_grade_school'] = $answer->value;
                             break;
                         case 8:
-                            $result['students_college'] = $answer->value;
+                            $result['students_high_school'] = $answer->value;
                             break;
                         case 9:
-                            $result['pwd'] = $answer->value;
+                            $result['students_college'] = $answer->value;
                             break;
                         case 10:
-                            $result['age_17_below'] = $answer->value;
+                            $result['pwd'] = $answer->value;
                             break;
                         case 11:
-                            $result['age_18_30'] = $answer->value;
+                            $result['age_17_below'] = $answer->value;
                             break;
                         case 12:
-                            $result['age_31_45'] = $answer->value;
+                            $result['age_18_30'] = $answer->value;
                             break;
                         case 13:
+                            $result['age_31_45'] = $answer->value;
+                            break;
+                        case 14:
                             $result['age_60_above'] = $answer->value;
                             break;
                     }
@@ -143,44 +147,43 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
 
                 if ($entry2) {
                     $entry2Answers = DB::table('answers')
-                        ->select('question_id', 'value')
                         ->where('entry_id', $entry2->id)
-                        ->whereIn('question_id', [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24])
+                        ->whereIn('question_id', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30])
                         ->get();
 
                     foreach ($entry2Answers as $answer) {
                         switch ($answer->question_id) {
-                            case 14:
+                            case 15:
                                 $result['visit_rating'] = $answer->value;
                                 break;
-                            case 15:
+                            case 16:
                                 $result['feedback'] = $answer->value;
                                 break;
-                            case 16:
+                            case 17:
                                 $result['ease_of_navigation'] = $answer->value;
                                 break;
-                            case 17:
+                            case 18:
                                 $result['ar_features_function'] = $answer->value;
                                 break;
-                            case 18:
+                            case 19:
                                 $result['ar_experience_engagement'] = $answer->value;
                                 break;
-                            case 19:
+                            case 20:
                                 $result['recommend_app'] = $answer->value;
                                 break;
-                            case 20:
+                            case 21:
                                 $result['improve_app'] = $answer->value;
                                 break;
-                            case 21:
+                            case 22:
                                 $result['office_helpfulness'] = $answer->value;
                                 break;
-                            case 22:
+                            case 23:
                                 $result['service_satisfaction'] = $answer->value;
                                 break;
-                            case 23:
+                            case 24:
                                 $result['staff_knowledge'] = $answer->value;
                                 break;
-                            case 24:
+                            case 25:
                                 $result['response_clarity'] = $answer->value;
                                 break;
                         }
@@ -198,14 +201,13 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
     public function headings(): array
     {
         return [
-            'ID', 'Bus Number', 'Full Name', 'Address', 'Nationality', 'Gender',
-            'Students Grade School', 'Students High School', 'Students College',
-            'PWD', 'Age 17 Below', 'Age 18-30', 'Age 31-45', 'Age 60 Above',
-            'Time In', 'Time Out', '', '', // Add two blank headers
-            'Visit Rating', 'Feedback',
-            'Ease of Navigation', 'AR Features Function', 'AR Experience Engagement',
-            'Recommend App', 'Improve App', 'Office Helpfulness', 'Service Satisfaction',
-            'Staff Knowledge', 'Response Clarity'
+            'ID', 'Bus Number', 'Full Name', 'Address', 'Nationality', 'Male', 'Female',
+            'Students Grade School', 'Students High School', 'Students College', 'PWD',
+            'Age 17 Below', 'Age 18-30', 'Age 31-45', 'Age 60 Above', 'Time In', 'Time Out',
+            '', '', // Add two blank headers
+            'Visit Rating', 'Feedback', 'Ease of Navigation', 'AR Features Function',
+            'AR Experience Engagement', 'Recommend App', 'Improve App', 'Office Helpfulness',
+            'Service Satisfaction', 'Staff Knowledge', 'Response Clarity'
         ];
     }
 
@@ -218,7 +220,7 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
         // Loop through each column in the first row
         for ($col = 1; $col <= $highestColumnIndex; $col++) {
             $cell = $sheet->getCellByColumnAndRow($col, 1);
-            if ($cell->getValue() !== '' && $col !== 17 && $col !== 18) { // Exclude columns Q (17th) and R (18th)
+            if ($cell->getValue() !== '' && $col !== 18 && $col !== 19) { // Exclude columns R (18th) and S (19th)
                 $sheet->getStyleByColumnAndRow($col, 1)->applyFromArray([
                     'font' => [
                         'bold' => true,
@@ -244,7 +246,7 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                         'startColor' => [
-                            'argb' => 'FFF2F2F2', // Light gray background
+                            'argb' => 'FFE0E0E0', // Light gray background color
                         ],
                     ],
                 ]);
@@ -254,7 +256,7 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                         'startColor' => [
-                            'argb' => 'FFFFFFFF', // White background
+                            'argb' => 'FFFFFFFF', // White background color
                         ],
                     ],
                 ]);
@@ -262,7 +264,10 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
         }
 
         // Style the "Time In" and "Time Out" columns to use a different format
-        $sheet->getStyle('O2:P'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_DATE_DATETIME);
+        $sheet->getStyle('Q2:Q'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_DATE_DATETIME);
+
+        // Set the "Age 60 Above" column to text format
+        $sheet->getStyle('O2:O'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_TEXT);
 
         return [
             // Bold headings on the first row

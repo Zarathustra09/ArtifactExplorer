@@ -25,7 +25,8 @@
                             <th>Full Name</th>
                             <th>Address</th>
                             <th>Nationality</th>
-                            <th>Gender</th>
+                            <th>Male Visitors</th>
+                            <th>Female Visitors</th>
                             <th>PWD</th>
                             <th>Time In</th>
                             <th>Time Out</th>
@@ -39,7 +40,8 @@
                                 <td>{{ $entry['full_name'] }}</td>
                                 <td>{{ $entry['address'] }}</td>
                                 <td>{{ $entry['nationality'] }}</td>
-                                <td>{{ $entry['gender'] }}</td>
+                                <td>{{ $entry['male'] }}</td>
+                                <td>{{ $entry['female'] }}</td>
                                 <td>{{ $entry['pwd'] }}</td>
                                 <td>{{ \Carbon\Carbon::parse($entry['time_in'])->format('F d, Y h:i A') }}</td>
                                 <td>{{ $entry['time_out'] ? \Carbon\Carbon::parse($entry['time_out'])->format('F d, Y h:i A') : 'N/A' }}</td>

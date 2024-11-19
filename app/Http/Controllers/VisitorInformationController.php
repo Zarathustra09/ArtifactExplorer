@@ -25,7 +25,7 @@ class VisitorInformationController extends Controller
 
         return DB::table('answers')
             ->select('entry_id', 'question_id', 'value')
-            ->whereIn('question_id', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
+            ->whereIn('question_id', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
             ->get()
             ->groupBy('entry_id')
             ->map(function ($answers, $entryId) use (&$usedEntryIds) {
@@ -56,7 +56,8 @@ class VisitorInformationController extends Controller
                     'full_name' => null,
                     'address' => null,
                     'nationality' => null,
-                    'gender' => null,
+                    'male' => null,
+                    'female' => null,
                     'students_grade_school' => null,
                     'students_high_school' => null,
                     'students_college' => null,
@@ -84,30 +85,33 @@ class VisitorInformationController extends Controller
                             $result['nationality'] = $answer->value;
                             break;
                         case 5:
-                            $result['gender'] = $answer->value;
+                            $result['male'] = $answer->value;
                             break;
                         case 6:
-                            $result['students_grade_school'] = $answer->value;
+                            $result['female'] = $answer->value;
                             break;
                         case 7:
-                            $result['students_high_school'] = $answer->value;
+                            $result['students_grade_school'] = $answer->value;
                             break;
                         case 8:
-                            $result['students_college'] = $answer->value;
+                            $result['students_high_school'] = $answer->value;
                             break;
                         case 9:
-                            $result['pwd'] = $answer->value;
+                            $result['students_college'] = $answer->value;
                             break;
                         case 10:
-                            $result['age_17_below'] = $answer->value;
+                            $result['pwd'] = $answer->value;
                             break;
                         case 11:
-                            $result['age_18_30'] = $answer->value;
+                            $result['age_17_below'] = $answer->value;
                             break;
                         case 12:
-                            $result['age_31_45'] = $answer->value;
+                            $result['age_18_30'] = $answer->value;
                             break;
                         case 13:
+                            $result['age_31_45'] = $answer->value;
+                            break;
+                        case 14:
                             $result['age_60_above'] = $answer->value;
                             break;
                     }

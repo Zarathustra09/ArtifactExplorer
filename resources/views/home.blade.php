@@ -53,34 +53,87 @@
         <!-- Charts Row Below -->
         <div class="row justify-content-center mt-4">
             <!-- Age Demographics Chart -->
-            <div class="col-md-6">
-                <div class="card shadow-lg p-4 mb-4">
-                    <div class="card-body">
-                        <canvas id="ageDemographicsChart" style="height: 400px"></canvas>
+            <div class="row justify-content-center mt-4">
+                <!-- Age Demographics Chart -->
+                <div class="col-md-6">
+                    <div class="card shadow-lg p-4 mb-4">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-end mb-3">
+                                <div class="input-group w-auto">
+                        <span class="input-group-text bg-light">
+                            <i class="fas fa-filter"></i>
+                        </span>
+                                    <select class="form-select" aria-label="Filter by Time Period">
+                                        <option selected>Filter by</option>
+                                        <option value="1">Today</option>
+                                        <option value="2">This Week</option>
+                                        <option value="3">This Month</option>
+                                        <option value="4">This Year</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="height: 400px;">
+                                <canvas id="ageDemographicsChart" style="height: 100%;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gender Demographics Chart -->
+                <div class="col-md-6">
+                    <div class="card shadow-lg p-4 mb-4">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-end mb-3">
+                                <div class="input-group w-auto">
+                        <span class="input-group-text bg-light">
+                            <i class="fas fa-filter"></i>
+                        </span>
+                                    <select class="form-select" aria-label="Filter by Time Period" id="genderFilter">
+                                        <option selected>Filter by</option>
+                                        <option value="1">Today</option>
+                                        <option value="2">This Week</option>
+                                        <option value="3">This Month</option>
+                                        <option value="4">This Year</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="height: 400px;">
+                                <canvas id="genderDemographicsChart" style="height: 100%;"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Gender Demographics Chart -->
-            <div class="col-md-6">
-                <div class="card shadow-lg p-4 mb-4">
-                    <div class="card-body">
-                        <canvas id="genderDemographicsChart" style="height: 400px"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Most Visited Chart Full Width Below -->
-        <div class="row justify-content-center mt-4">
-            <div class="col-md-12">
-                <div class="card shadow-lg p-4 mb-4">
-                    <div class="card-body">
-                        <canvas id="mostVisitedChart" style="height: 400px"></canvas>
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-12">
+                    <div class="card shadow-lg p-4 mb-4">
+                        <div class="card-body">
+                            <h3>Most Visited Day</h3>
+                            <div class="d-flex justify-content-end mb-3">
+                                <div class="input-group w-auto">
+                        <span class="input-group-text bg-light">
+                            <i class="fas fa-filter"></i>
+                        </span>
+                                    <select class="form-select" aria-label="Filter by Time Period" id="mostVisitedFilter">
+                                        <option selected>Filter by</option>
+                                        <option value="1">Today</option>
+                                        <option value="2">This Week</option>
+                                        <option value="3">This Month</option>
+                                        <option value="4">This Year</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="height: 400px;">
+                                <canvas id="mostVisitedChart" style="height: 100%;"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
 
         <div class="row justify-content-center mt-4">
             <div class="col-md-12 text-center">
@@ -92,246 +145,338 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Fetch and render charts
-            fetch('/age-demographics')
-                .then(response => response.json())
-                .then(data => {
-                    const ctx = document.getElementById('ageDemographicsChart').getContext('2d');
-                    new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: ['17 y/o and below', '18-30 y/o', '31-45 y/o', '60 y/o and above'],
-                            datasets: [{
-                                label: 'Age Demographics',
-                                data: [
-                                    data.seventeen,
-                                    data.thirty,
-                                    data.fortyfive,
-                                    data.sixty
-                                ],
-                                backgroundColor: [
-                                    '#97CC70',  // Base color
-                                    '#6FAE55',  // Darker shade for 18-30
-                                    '#4F8B43',  // Even darker for 31-45
-                                    '#3C6D34'   // Darkest for 60 and above
-                                ],
-                                borderColor: [
-                                    '#5B8B42',  // Border color for 17 y/o and below
-                                    '#497C34',  // Border color for 18-30
-                                    '#386829',  // Border color for 31-45
-                                    '#2A5420'   // Border color for 60 and above
-                                ],
-                                borderWidth: 2,  // Increased border width for better visual separation
-                                borderRadius: 5, // Rounded corners on the bars
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true,  // Force y-axis to start at zero
-                                        fontColor: '#333',  // Darker tick marks
-                                        fontSize: 12,       // Smaller font size for y-axis labels
-                                        fontStyle: 'bold'
-                                    },
-                                    gridLines: {
-                                        color: '#CCC'       // Custom grid color
-                                    }
-                                }],
-                                xAxes: [{
-                                    ticks: {
-                                        fontColor: '#333',  // Darker tick marks for x-axis
-                                        fontSize: 12,       // Smaller font size for x-axis labels
-                                        fontStyle: 'bold'
-                                    },
-                                    gridLines: {
-                                        color: '#CCC'       // Custom grid color for x-axis
-                                    }
+            let ageDemographicsChart = null;
+            let genderDemographicsChart = null;
+            let mostVisitedChart = null;
+
+            function fetchAgeDemographics(filter) {
+                fetch(`/age-demographics?filter=${filter}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const ctx = document.getElementById('ageDemographicsChart').getContext('2d');
+
+                        if (ageDemographicsChart) {
+                            ageDemographicsChart.destroy();
+                        }
+
+                        ageDemographicsChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['17 y/o and below', '18-30 y/o', '31-45 y/o', '60 y/o and above'],
+                                datasets: [{
+                                    label: 'Age Demographics',
+                                    data: [
+                                        data.seventeen,
+                                        data.thirty,
+                                        data.fortyfive,
+                                        data.sixty
+                                    ],
+                                    backgroundColor: [
+                                        '#97CC70',  // Base color
+                                        '#6FAE55',  // Darker shade for 18-30
+                                        '#4F8B43',  // Even darker for 31-45
+                                        '#3C6D34'   // Darkest for 60 and above
+                                    ],
+                                    borderColor: [
+                                        '#5B8B42',  // Border color for 17 y/o and below
+                                        '#497C34',  // Border color for 18-30
+                                        '#386829',  // Border color for 31-45
+                                        '#2A5420'   // Border color for 60 and above
+                                    ],
+                                    borderWidth: 2,  // Increased border width for better visual separation
+                                    borderRadius: 5, // Rounded corners on the bars
                                 }]
                             },
-                            legend: {
-                                labels: {
-                                    fontColor: '#333',  // Custom color for the legend text
-                                    fontSize: 14,       // Legend text size
-                                    fontStyle: 'bold'
-                                }
-                            },
-                            responsive: true,
-                            maintainAspectRatio: false,  // Makes the graph responsive
-                            layout: {
-                                padding: {
-                                    top: 10,
-                                    bottom: 10,
-                                    left: 20,
-                                    right: 20
-                                }
-                            },
-                            animation: {
-                                duration: 1500,           // Custom animation duration
-                                easing: 'easeOutBounce'   // Custom easing function
-                            }
-                        }
-                    });
-
-                    // Store age data for transfer
-                    window.ageData = {
-                        '17 y/o and below': data.seventeen,
-                        '18-30 y/o': data.thirty,
-                        '31-45 y/o': data.fortyfive,
-                        '60 y/o and above': data.sixty
-                    };
-                    console.log('Age Data:', window.ageData);
-                });
-
-            fetch('/gender-demographics')
-                .then(response => response.json())
-                .then(data => {
-                    // Map genders and counts
-                    const genders = data.map(item => item.gender);
-                    const counts = data.map(item => item.count);
-
-                    const ctx = document.getElementById('genderDemographicsChart').getContext('2d');
-                    new Chart(ctx, {
-                        type: 'doughnut',
-                        data: {
-                            labels: genders,  // Use the gender labels from the data
-                            datasets: [{
-                                label: 'Gender Demographics',
-                                data: counts,  // Use the count values from the data
-                                backgroundColor: [
-                                    '#97CC70',  // Base color
-                                    '#6FAE55',  // Darker shade
-                                ],
-                                borderColor: [
-                                    '#5B8B42',  // Border color
-                                    '#497C34',  // Darker border color
-                                ],
-                                borderWidth: 2
-                            }]
-                        },
-                        options: {
-                            cutout: '50%',
-                            plugins: {
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true,  // Force y-axis to start at zero
+                                            fontColor: '#333',  // Darker tick marks
+                                            fontSize: 12,       // Smaller font size for y-axis labels
+                                            fontStyle: 'bold'
+                                        },
+                                        gridLines: {
+                                            color: '#CCC'       // Custom grid color
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            fontColor: '#333',  // Darker tick marks for x-axis
+                                            fontSize: 12,       // Smaller font size for x-axis labels
+                                            fontStyle: 'bold'
+                                        },
+                                        gridLines: {
+                                            color: '#CCC'       // Custom grid color for x-axis
+                                        }
+                                    }]
+                                },
                                 legend: {
                                     labels: {
-                                        color: '#333',
-                                        font: {
-                                            size: 16,
-                                            weight: 'bold'
-                                        }
+                                        fontColor: '#333',  // Custom color for the legend text
+                                        fontSize: 14,       // Legend text size
+                                        fontStyle: 'bold'
                                     }
+                                },
+                                responsive: true,
+                                maintainAspectRatio: false,  // Makes the graph responsive
+                                layout: {
+                                    padding: {
+                                        top: 10,
+                                        bottom: 10,
+                                        left: 20,
+                                        right: 20
+                                    }
+                                },
+                                animation: {
+                                    duration: 1500,           // Custom animation duration
+                                    easing: 'easeOutBounce'   // Custom easing function
                                 }
-                            },
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            animation: {
-                                duration: 1500,
-                                easing: 'easeOutBounce'
                             }
-                        }
+                        });
+
+                        // Store age data for transfer
+                        window.ageData = {
+                            '17 y/o and below': data.seventeen,
+                            '18-30 y/o': data.thirty,
+                            '31-45 y/o': data.fortyfive,
+                            '60 y/o and above': data.sixty
+                        };
+                        console.log('Age Data:', window.ageData);
                     });
+            }
 
-                    // Store gender data for transfer
-                    window.genderData = data.reduce((acc, item) => {
-                        acc[item.gender] = item.count;
-                        return acc;
-                    }, {});
-                    console.log('Gender Data:', window.genderData);
-                })
-                .catch(error => {
-                    console.error('Error fetching gender demographics data:', error);
-                });
+            function fetchGenderDemographics(filter) {
+                fetch(`/gender-demographics?filter=${filter}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const genders = data.map(item => item.gender);
+                        const counts = data.map(item => item.count);
 
-            fetch('/most-visited')
-                .then(response => response.json())
-                .then(data => {
-                    const days = data.map(item => item.day);
-                    const visits = data.map(item => item.visits);
+                        const ctx = document.getElementById('genderDemographicsChart').getContext('2d');
 
-                    const baseColor = '#97CC70';
-                    const colorShades = [
-                        '#97CC70',  // Base color
-                        '#6FAE55',  // Darker shade
-                        '#4F8B43',  // Even darker
-                        '#3C6D34',  // Darkest
-                        '#2A5420'   // Deeper shade if there are more than 4 records
-                    ];
+                        if (genderDemographicsChart) {
+                            genderDemographicsChart.destroy();
+                        }
 
-                    // Use shades based on the number of records, repeating colors if necessary
-                    const backgroundColors = days.map((_, index) => colorShades[index % colorShades.length]);
-                    const borderColors = days.map((_, index) => colorShades[index % colorShades.length]);
-
-                    const ctx = document.getElementById('mostVisitedChart').getContext('2d');
-                    new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: days,
-                            datasets: [{
-                                label: 'Number of Visits',
-                                data: visits,
-                                backgroundColor: backgroundColors,  // Dynamic shades
-                                borderColor: borderColors,          // Dynamic border color
-                                borderWidth: 2
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true,
-                                        fontColor: '#333',  // Darker tick marks
-                                        fontSize: 14,       // Custom font size for y-axis labels
-                                        fontStyle: 'bold'
-                                    },
-                                    gridLines: {
-                                        color: '#CCC'  // Custom grid color
-                                    }
-                                }],
-                                xAxes: [{
-                                    ticks: {
-                                        fontColor: '#333',  // Darker tick marks for x-axis
-                                        fontSize: 14,
-                                        fontStyle: 'bold'
-                                    },
-                                    gridLines: {
-                                        color: '#CCC'  // Custom grid color for x-axis
-                                    }
+                        genderDemographicsChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: genders,
+                                datasets: [{
+                                    label: 'Gender Demographics',
+                                    data: counts,
+                                    backgroundColor: [
+                                        '#97CC70',
+                                        '#6FAE55',
+                                    ],
+                                    borderColor: [
+                                        '#5B8B42',
+                                        '#497C34',
+                                    ],
+                                    borderWidth: 2
                                 }]
                             },
-                            legend: {
-                                labels: {
-                                    fontColor: '#333',  // Custom color for the legend text
-                                    fontSize: 16,
-                                    fontStyle: 'bold'
+                            options: {
+                                cutout: '50%',
+                                plugins: {
+                                    legend: {
+                                        labels: {
+                                            color: '#333',
+                                            font: {
+                                                size: 16,
+                                                weight: 'bold'
+                                            }
+                                        }
+                                    }
+                                },
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                animation: {
+                                    duration: 1500,
+                                    easing: 'easeOutBounce'
                                 }
-                            },
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            layout: {
-                                padding: {
-                                    top: 10,
-                                    bottom: 10,
-                                    left: 20,
-                                    right: 20
-                                }
-                            },
-                            animation: {
-                                duration: 1500,  // Custom animation duration
-                                easing: 'easeOutBounce'  // Custom easing function
                             }
-                        }
-                    });
+                        });
 
-                    // Store most visited data for transfer
-                    window.mostVisitedData = data.reduce((acc, item) => {
-                        acc[item.day] = item.visits;
-                        return acc;
-                    }, {});
-                    console.log('Most Visited Data:', window.mostVisitedData);
-                })
-                .catch(error => {
-                    console.error('Error fetching most visited data:', error);
-                });
+                        window.genderData = data.reduce((acc, item) => {
+                            acc[item.gender] = item.count;
+                            return acc;
+                        }, {});
+                        console.log('Gender Data:', window.genderData);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching gender demographics data:', error);
+                    });
+            }
+
+            function fetchMostVisited(filter) {
+                fetch(`/most-visited?filter=${filter}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const days = data.map(item => item.day);
+                        const visits = data.map(item => item.visits);
+
+                        const ctx = document.getElementById('mostVisitedChart').getContext('2d');
+
+                        if (mostVisitedChart) {
+                            mostVisitedChart.destroy();
+                        }
+
+                        mostVisitedChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: days,
+                                datasets: [{
+                                    label: 'Most Visited Days',
+                                    data: visits,
+                                    backgroundColor: [
+                                        '#97CC70',  // Base color
+                                        '#6FAE55',  // Darker shade
+                                        '#4F8B43',  // Even darker
+                                        '#3C6D34',  // Darkest
+                                        '#2A5420'   // Deeper shade if there are more than 4 records
+                                    ],
+                                    borderColor: [
+                                        '#5B8B42',  // Border color for 17 y/o and below
+                                        '#497C34',  // Border color for 18-30
+                                        '#386829',  // Border color for 31-45
+                                        '#2A5420'   // Border color for 60 and above
+                                    ],
+                                    borderWidth: 2,  // Increased border width for better visual separation
+                                    borderRadius: 5, // Rounded corners on the bars
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true,  // Force y-axis to start at zero
+                                            fontColor: '#333',  // Darker tick marks
+                                            fontSize: 12,       // Smaller font size for y-axis labels
+                                            fontStyle: 'bold'
+                                        },
+                                        gridLines: {
+                                            color: '#CCC'       // Custom grid color
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            fontColor: '#333',  // Darker tick marks for x-axis
+                                            fontSize: 12,       // Smaller font size for x-axis labels
+                                            fontStyle: 'bold'
+                                        },
+                                        gridLines: {
+                                            color: '#CCC'       // Custom grid color for x-axis
+                                        }
+                                    }]
+                                },
+                                legend: {
+                                    labels: {
+                                        fontColor: '#333',  // Custom color for the legend text
+                                        fontSize: 14,       // Legend text size
+                                        fontStyle: 'bold'
+                                    }
+                                },
+                                responsive: true,
+                                maintainAspectRatio: false,  // Makes the graph responsive
+                                layout: {
+                                    padding: {
+                                        top: 10,
+                                        bottom: 10,
+                                        left: 20,
+                                        right: 20
+                                    }
+                                },
+                                animation: {
+                                    duration: 1500,           // Custom animation duration
+                                    easing: 'easeOutBounce'   // Custom easing function
+                                }
+                            }
+                        });
+
+                        // Store most visited data for transfer
+                        window.mostVisitedData = data.reduce((acc, item) => {
+                            acc[item.day] = item.visits;
+                            return acc;
+                        }, {});
+                        console.log('Most Visited Data:', window.mostVisitedData);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching most visited data:', error);
+                    });
+            }
+
+            // Initial fetch with default filter
+            fetchAgeDemographics('today');
+            fetchGenderDemographics('today');
+            fetchMostVisited('today');
+
+            // Handle filter change for age demographics
+            document.querySelector('select[aria-label="Filter by Time Period"]').addEventListener('change', function (event) {
+                const filter = event.target.value;
+                switch (filter) {
+                    case '1':
+                        fetchAgeDemographics('today');
+                        break;
+                    case '2':
+                        fetchAgeDemographics('week');
+                        break;
+                    case '3':
+                        fetchAgeDemographics('month');
+                        break;
+                    case '4':
+                        fetchAgeDemographics('year');
+                        break;
+                    default:
+                        fetchAgeDemographics('today');
+                        break;
+                }
+            });
+
+            // Handle filter change for gender demographics
+            document.getElementById('genderFilter').addEventListener('change', function (event) {
+                const filter = event.target.value;
+                switch (filter) {
+                    case '1':
+                        fetchGenderDemographics('today');
+                        break;
+                    case '2':
+                        fetchGenderDemographics('week');
+                        break;
+                    case '3':
+                        fetchGenderDemographics('month');
+                        break;
+                    case '4':
+                        fetchGenderDemographics('year');
+                        break;
+                    default:
+                        fetchGenderDemographics('today');
+                        break;
+                }
+            });
+
+            // Handle filter change for most visited
+            document.getElementById('mostVisitedFilter').addEventListener('change', function (event) {
+                const filter = event.target.value;
+                switch (filter) {
+                    case '1':
+                        fetchMostVisited('today');
+                        break;
+                    case '2':
+                        fetchMostVisited('week');
+                        break;
+                    case '3':
+                        fetchMostVisited('month');
+                        break;
+                    case '4':
+                        fetchMostVisited('year');
+                        break;
+                    default:
+                        fetchMostVisited('today');
+                        break;
+                }
+            });
 
             function printCharts() {
                 const ageChart = document.getElementById('ageDemographicsChart').toDataURL('image/png');
