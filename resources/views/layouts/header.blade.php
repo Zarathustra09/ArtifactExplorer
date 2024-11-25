@@ -35,7 +35,7 @@
         <li class="menu-item {{ Route::currentRouteName() == 'report.index' ? 'active' : '' }}">
             <a href="{{ route('report.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Reports">Reports</div>
+                <div data-i18n="Reports">Feedback</div>
             </a>
         </li>
 

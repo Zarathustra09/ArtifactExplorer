@@ -83,19 +83,6 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
                     'age_60_above' => null,
                     'time_in' => $entry1 ? $entry1->created_at : null,
                     'time_out' => $entry2 ? $entry2->created_at : null,
-                    'blank1' => '', // Add first blank cell
-                    'blank2' => '', // Add second blank cell
-                    'visit_rating' => null,
-                    'feedback' => null,
-                    'ease_of_navigation' => null,
-                    'ar_features_function' => null,
-                    'ar_experience_engagement' => null,
-                    'recommend_app' => null,
-                    'improve_app' => null,
-                    'office_helpfulness' => null,
-                    'service_satisfaction' => null,
-                    'staff_knowledge' => null,
-                    'response_clarity' => null,
                 ];
 
                 foreach ($answers as $answer) {
@@ -145,51 +132,6 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
                     }
                 }
 
-                if ($entry2) {
-                    $entry2Answers = DB::table('answers')
-                        ->where('entry_id', $entry2->id)
-                        ->whereIn('question_id', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30])
-                        ->get();
-
-                    foreach ($entry2Answers as $answer) {
-                        switch ($answer->question_id) {
-                            case 15:
-                                $result['visit_rating'] = $answer->value;
-                                break;
-                            case 16:
-                                $result['feedback'] = $answer->value;
-                                break;
-                            case 17:
-                                $result['ease_of_navigation'] = $answer->value;
-                                break;
-                            case 18:
-                                $result['ar_features_function'] = $answer->value;
-                                break;
-                            case 19:
-                                $result['ar_experience_engagement'] = $answer->value;
-                                break;
-                            case 20:
-                                $result['recommend_app'] = $answer->value;
-                                break;
-                            case 21:
-                                $result['improve_app'] = $answer->value;
-                                break;
-                            case 22:
-                                $result['office_helpfulness'] = $answer->value;
-                                break;
-                            case 23:
-                                $result['service_satisfaction'] = $answer->value;
-                                break;
-                            case 24:
-                                $result['staff_knowledge'] = $answer->value;
-                                break;
-                            case 25:
-                                $result['response_clarity'] = $answer->value;
-                                break;
-                        }
-                    }
-                }
-
                 return $result;
             })
             ->filter()
@@ -203,11 +145,7 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
         return [
             'ID', 'Bus Number', 'Full Name', 'Address', 'Nationality', 'Male', 'Female',
             'Students Grade School', 'Students High School', 'Students College', 'PWD',
-            'Age 17 Below', 'Age 18-30', 'Age 31-45', 'Age 60 Above', 'Time In', 'Time Out',
-            '', '', // Add two blank headers
-            'Visit Rating', 'Feedback', 'Ease of Navigation', 'AR Features Function',
-            'AR Experience Engagement', 'Recommend App', 'Improve App', 'Office Helpfulness',
-            'Service Satisfaction', 'Staff Knowledge', 'Response Clarity'
+            'Age 17 Below', 'Age 18-30', 'Age 31-45', 'Age 60 Above', 'Time In', 'Time Out'
         ];
     }
 
@@ -220,7 +158,7 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
         // Loop through each column in the first row
         for ($col = 1; $col <= $highestColumnIndex; $col++) {
             $cell = $sheet->getCellByColumnAndRow($col, 1);
-            if ($cell->getValue() !== '' && $col !== 18 && $col !== 19) { // Exclude columns R (18th) and S (19th)
+            if ($cell->getValue() !== '') {
                 $sheet->getStyleByColumnAndRow($col, 1)->applyFromArray([
                     'font' => [
                         'bold' => true,
