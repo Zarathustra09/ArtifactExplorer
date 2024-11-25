@@ -533,10 +533,10 @@
                 }
 
                 // Initial fetch with default filter
-                fetchAgeDemographics('today');
-                fetchGenderDemographics('today');
-                fetchMostVisited('today');
-                fetchStudentDemographics('today');
+                fetchAgeDemographics('week');
+                fetchGenderDemographics('week');
+                fetchMostVisited('week');
+                fetchStudentDemographics('week');
 
                 // Handle filter change for age demographics
                 document.querySelector('select[aria-label="Filter by Time Period"]').addEventListener('change', function (event) {
