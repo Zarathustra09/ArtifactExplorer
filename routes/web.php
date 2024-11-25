@@ -98,3 +98,4 @@ Route::get('/event',function (){
 })->name('event');
 
 Route::get('/report', [ReportController::class, 'index'])->name('report.index');
+Route::get('/report/data', [ReportController::class, 'dataTable'])->name('report.data');

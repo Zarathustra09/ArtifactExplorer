@@ -1,110 +1,208 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="mb-5 text-center">
-            <h2 class="mb-3">Survey Report</h2>
-            <p class="lead">Search and explore detailed feedback from users.</p>
-        </div>
-
-        <form id="search-form" method="GET" action="{{ route('report.index') }}" class="mb-5">
-            <div class="input-group">
-                <input type="text" name="search" id="search-input" class="form-control form-control-lg" placeholder="Search for feedback..." value="{{ request('search') }}">
-                <div class="input-group-append">
-                    <button class="btn btn-primary btn-lg" type="submit">Search</button>
+    <div class="container-fluid py-4">
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="d-flex flex-wrap gap-2">
+                    <button id="applicationButton" class="btn btn-primary">Application</button>
+                    <button id="museumButton" class="btn btn-secondary">Museum</button>
+                    <button id="allButton" class="btn btn-success">All</button>
                 </div>
             </div>
-        </form>
-
-        <div id="results-container" class="row">
-            @foreach($results as $result)
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow border-0 rounded-lg">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-4">
-                                <div class="mr-3">
-                                    <img src="https://via.placeholder.com/60" alt="Profile Picture" class="rounded-circle" width="60" height="60">
-                                </div>
-                                <div>
-                                    <h5 class="card-title mb-1">{{ $result->full_name }}</h5>
-                                    <div class="text-muted small">User</div>
-                                </div>
-                            </div>
-
-                            <div class="mb-4">
-                                <strong class="d-block mb-1">How was your visit:</strong>
-                                <div class="star-rating">
-                                    @for($i = 1; $i <= 5; $i++)
-                                        <i class="fas fa-star {{ $result->visit_rating >= $i ? 'text-warning' : 'text-muted' }}"></i>
-                                    @endfor
-                                </div>
-                            </div>
-
-                            <p class="card-text"><strong>Feedback:</strong> {{ $result->feedback }}</p>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body p-2 p-md-4">
+                        <div class="table-responsive-xl"> <!-- Changed to table-responsive-xl -->
+                            <table id="reportTable" class="table table-hover table-striped nowrap w-100"> <!-- Added nowrap class -->
+                                <thead class="table-light">
+                                <tr>
+                                    <th>Device ID</th>
+                                    <th>Visit</th>
+                                    <th>Feedback</th>
+                                    <th>Navigation</th>
+                                    <th>AR Features</th>
+                                    <th>Engagement</th>
+                                    <th>Recommend</th>
+                                    <th>Improve</th>
+                                    <th>Helpfulness</th>
+                                    <th>Satisfaction</th>
+                                    <th>Knowledge</th>
+                                    <th>Clarity</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- Data will be populated here by DataTables -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-            @endforeach
-        </div>
-
-        <div class="d-flex justify-content-center">
-            <nav>
-                <ul class="pagination">
-                    {{ $results->links('pagination::bootstrap-4') }}
-                </ul>
-            </nav>
+            </div>
         </div>
     </div>
 @endsection
 
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/scroller/2.0.7/css/scroller.bootstrap5.min.css">
+    <style>
+        /* Enable horizontal scrolling for the table */
+        .table-responsive-xl {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Ensure table takes full width */
+        .table {
+            min-width: 100%;
+            width: max-content !important;
+        }
+
+        /* Prevent text wrapping in cells */
+        .table td, .table th {
+            white-space: nowrap;
+            min-width: 100px; /* Minimum width for columns */
+        }
+
+        /* Custom styling for better mobile experience */
+        @media (max-width: 768px) {
+            .table td, .table th {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.875rem;
+            }
+
+            .dataTables_wrapper .dataTables_length,
+            .dataTables_wrapper .dataTables_filter {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+
+            .dataTables_wrapper .dataTables_filter input {
+                width: 100%;
+                margin-left: 0 !important;
+            }
+
+            /* Improved touch scrolling indicator */
+            .table-responsive-xl::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                width: 5px;
+                background: linear-gradient(to left, rgba(0,0,0,0.05), transparent);
+                pointer-events: none;
+            }
+        }
+
+        /* Custom scrollbar styling */
+        .table-responsive-xl::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-responsive-xl::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .table-responsive-xl::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        .table-responsive-xl::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+@endsection
+
 @section('scripts')
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/scroller/2.0.7/js/dataTables.scroller.min.js"></script>
+
     <script>
-        document.getElementById('search-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const searchQuery = document.getElementById('search-input').value;
+        $(document).ready(function() {
+            var table = $('#reportTable').DataTable({
+                ajax: '{{ route('report.data') }}',
+                columns: [
+                    { data: 'device_identifier' },
+                    { data: 'question_14' },
+                    { data: 'question_15' },
+                    { data: 'question_16' },
+                    { data: 'question_17' },
+                    { data: 'question_18' },
+                    { data: 'question_19' },
+                    { data: 'question_20' },
+                    { data: 'question_21' },
+                    { data: 'question_22' },
+                    { data: 'question_23' },
+                    { data: 'question_24' }
+                ],
+                pageLength: 10,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                scrollX: true, // Enable horizontal scrolling
+                scrollCollapse: true,
+                autoWidth: false, // Disable auto-width calculation
+                dom: '<"row"<"col-12 col-md-6"l><"col-12 col-md-6"f>>rtip',
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search records..."
+                },
+                initComplete: function() {
+                    // Set initial column widths
+                    table.columns.adjust();
 
-            fetch('{{ route('report.index') }}?search=' + searchQuery, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
+                    // Add swipe indication for mobile
+                    if (window.innerWidth < 768) {
+                        $('.dataTables_wrapper').append(
+                            '<div class="text-muted text-center small mt-2">Swipe left/right to see more columns</div>'
+                        );
+                    }
                 }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    const resultsContainer = document.getElementById('results-container');
-                    resultsContainer.innerHTML = '';
+            });
 
-                    data.results.forEach(result => {
-                        const card = `
-                        <div class="col-md-4 mb-4">
-                            <div class="card shadow border-0 rounded-lg">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center mb-4">
-                                        <div class="mr-3">
-                                            <img src="https://via.placeholder.com/60" alt="Profile Picture" class="rounded-circle" width="60" height="60">
-                                        </div>
-                                        <div>
-                                            <h5 class="card-title mb-1">${result.full_name}</h5>
-                                            <div class="text-muted small">User</div>
-                                        </div>
-                                    </div>
+            $('#applicationButton').on('click', function() {
+                table.columns([1, 2, 3, 4, 5, 6, 7]).visible(true);
+                table.columns([8, 9, 10, 11]).visible(false);
+                table.columns.adjust().draw();
+            });
 
-                                    <div class="mb-4">
-                                        <strong class="d-block mb-1">How was your visit:</strong>
-                                        <div class="star-rating">
-                                            ${[...Array(5).keys()].map(i => `
-                                                <i class="fas fa-star ${result.visit_rating >= i + 1 ? 'text-warning' : 'text-muted'}"></i>
-                                            `).join('')}
-                                        </div>
-                                    </div>
+            $('#museumButton').on('click', function() {
+                table.columns([1, 2, 3, 4, 5, 6, 7]).visible(false);
+                table.columns([8, 9, 10, 11]).visible(true);
+                table.columns.adjust().draw();
+            });
 
-                                    <p class="card-text"><strong>Feedback:</strong> ${result.feedback}</p>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                        resultsContainer.insertAdjacentHTML('beforeend', card);
-                    });
+            $('#allButton').on('click', function() {
+                table.columns([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]).visible(true);
+                table.columns.adjust().draw();
+            });
+
+            // Handle window resize
+            var resizeTimer;
+            $(window).on('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    table.columns.adjust();
+                }, 250);
+            });
+
+            // Add touch swipe indication
+            if ('ontouchstart' in window) {
+                var tableWrapper = $('.table-responsive-xl');
+                tableWrapper.on('scroll', function() {
+                    $(this).addClass('is-scrolling');
+                    clearTimeout($.data(this, 'scrollTimer'));
+                    $.data(this, 'scrollTimer', setTimeout(function() {
+                        tableWrapper.removeClass('is-scrolling');
+                    }, 250));
                 });
+            }
         });
     </script>
 @endsection

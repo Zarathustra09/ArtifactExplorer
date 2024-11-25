@@ -16,14 +16,14 @@ class FeedbackSeeder extends Seeder
         // Create a new survey
         $survey = Survey::create(['name' => 'Visitor Feedback', 'settings' =>  ['accept-guest-entries' => true]]);
 
-        // Existing questions
+        // 14
         $survey->questions()->create([
             'content' => 'How is your Visit?',
             'type' => 'rating',
             'options' => [1, 2, 3, 4, 5], // Representing 1 to 5 stars
             'rules' => ['required']
         ]);
-
+        // 15
         $survey->questions()->create([
             'content' => 'Feedback',
             'rules' => ['required']
@@ -32,6 +32,8 @@ class FeedbackSeeder extends Seeder
         // Section for APPLICATION
         $applicationSection = $survey->sections()->create(['name' => 'APPLICATION']);
 
+
+        //16
         $applicationSection->questions()->create([
             'content' => 'How would you rate the ease of navigating the ARtifacts Explorer app?',
             'type' => 'rating',
@@ -39,6 +41,7 @@ class FeedbackSeeder extends Seeder
             'rules' => ['required']
         ]);
 
+        //17
         $applicationSection->questions()->create([
             'content' => 'How well did the AR features (scanning markers, 3D content) function?',
             'type' => 'rating',
@@ -46,6 +49,7 @@ class FeedbackSeeder extends Seeder
             'rules' => ['required']
         ]);
 
+        //18
         $applicationSection->questions()->create([
             'content' => 'How engaging did you find the AR experience (immersiveness, interactivity)?',
             'type' => 'rating',
@@ -53,6 +57,7 @@ class FeedbackSeeder extends Seeder
             'rules' => ['required']
         ]);
 
+        //19
         $applicationSection->questions()->create([
             'content' => 'How likely are you to recommend the ARtifacts Explorer app to others?',
             'type' => 'rating',
@@ -60,6 +65,7 @@ class FeedbackSeeder extends Seeder
             'rules' => ['required']
         ]);
 
+        //20
         $applicationSection->questions()->create([
             'content' => 'What would you improve in the ARtifacts Explorer app?',
             'type' => 'text',
@@ -69,6 +75,7 @@ class FeedbackSeeder extends Seeder
         // Section for MUSEUM
         $museumSection = $survey->sections()->create(['name' => 'MUSEUM']);
 
+        //21
         $museumSection->questions()->create([
             'content' => 'The office was willing to help, assist, and provide prompt service.',
             'type' => 'rating',
@@ -76,6 +83,7 @@ class FeedbackSeeder extends Seeder
             'rules' => ['required']
         ]);
 
+        //22
         $museumSection->questions()->create([
             'content' => 'I am generally satisfied with the service I availed.',
             'type' => 'rating',
@@ -83,6 +91,7 @@ class FeedbackSeeder extends Seeder
             'rules' => ['required']
         ]);
 
+        //23
         $museumSection->questions()->create([
             'content' => 'The staff was capable and knowledgeable to perform their duties.',
             'type' => 'rating',
@@ -90,6 +99,7 @@ class FeedbackSeeder extends Seeder
             'rules' => ['required']
         ]);
 
+        //24
         $museumSection->questions()->create([
             'content' => 'The responses were clear and easily understood.',
             'type' => 'rating',
