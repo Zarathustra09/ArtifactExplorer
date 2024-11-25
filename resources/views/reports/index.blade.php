@@ -2,73 +2,86 @@
 
 @section('content')
     <div class="container-fluid py-4">
-        <div class="row mb-3">
-            <div class="col-12">
-                <div class="d-flex flex-wrap gap-2">
-                    <button id="applicationButton" class="btn btn-primary">Application</button>
-                    <button id="museumButton" class="btn btn-secondary">Museum</button>
-                    <button id="allButton" class="btn btn-success">All</button>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="card shadow-sm">
-                    <div class="card-body p-2 p-md-4">
-                        <div class="table-responsive-xl"> <!-- Changed to table-responsive-xl -->
-                            <table id="reportTable" class="table table-hover table-striped nowrap w-100"> <!-- Added nowrap class -->
-                                <thead class="table-light">
-                                <tr>
-                                    <th>Device ID</th>
-                                    <th>Visit</th>
-                                    <th>Feedback</th>
-                                    <th>Navigation</th>
-                                    <th>AR Features</th>
-                                    <th>Engagement</th>
-                                    <th>Recommend</th>
-                                    <th>Improve</th>
-                                    <th>Helpfulness</th>
-                                    <th>Satisfaction</th>
-                                    <th>Knowledge</th>
-                                    <th>Clarity</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <!-- Data will be populated here by DataTables -->
-                                </tbody>
-                            </table>
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header bg-white py-3">
+                <div class="row align-items-center g-3">
+                    <div class="col-12 col-md-6">
+                        <h5 class="mb-0 text-gray-800 fw-bold">Report Overview</h5>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="d-flex flex-wrap gap-2 justify-content-start justify-content-md-end">
+                            <select id="exportPeriod" class="form-select form-select-sm shadow-none">
+                                <option value="monthly">Monthly</option>
+                                <option value="quarterly">Quarterly</option>
+                                <option value="semi-annually">Semi-Annually</option>
+                                <option value="annually">Annually</option>
+                            </select>
+                            <button id="exportButton" class="btn btn-primary btn-sm">
+                                <i class="fas fa-download me-1"></i> Export
+                            </button>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="card-body p-2 p-md-4">
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="d-flex flex-wrap gap-2">
+                            <button id="applicationButton" class="btn btn-primary btn-sm">Application</button>
+                            <button id="museumButton" class="btn btn-secondary btn-sm">Museum</button>
+                            <button id="allButton" class="btn btn-success btn-sm">All</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive-xl">
+                    <table id="reportTable" class="table table-hover table-striped nowrap w-100">
+                        <thead class="table-light">
+                        <tr>
+                            <th>Device ID</th>
+                            <th>Visit</th>
+                            <th>Feedback</th>
+                            <th>Navigation</th>
+                            <th>AR Features</th>
+                            <th>Engagement</th>
+                            <th>Recommend</th>
+                            <th>Improve</th>
+                            <th>Helpfulness</th>
+                            <th>Satisfaction</th>
+                            <th>Knowledge</th>
+                            <th>Clarity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- Data will be populated here by DataTables -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 @endsection
 
+
 @section('styles')
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap5.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/scroller/2.0.7/css/scroller.bootstrap5.min.css">
     <style>
-        /* Enable horizontal scrolling for the table */
         .table-responsive-xl {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
 
-        /* Ensure table takes full width */
         .table {
             min-width: 100%;
             width: max-content !important;
         }
 
-        /* Prevent text wrapping in cells */
         .table td, .table th {
             white-space: nowrap;
-            min-width: 100px; /* Minimum width for columns */
+            min-width: 100px;
         }
 
-        /* Custom styling for better mobile experience */
         @media (max-width: 768px) {
             .table td, .table th {
                 padding: 0.5rem 0.75rem;
@@ -86,7 +99,6 @@
                 margin-left: 0 !important;
             }
 
-            /* Improved touch scrolling indicator */
             .table-responsive-xl::after {
                 content: '';
                 position: absolute;
@@ -99,7 +111,6 @@
             }
         }
 
-        /* Custom scrollbar styling */
         .table-responsive-xl::-webkit-scrollbar {
             height: 8px;
         }
@@ -145,19 +156,17 @@
                 ],
                 pageLength: 10,
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                scrollX: true, // Enable horizontal scrolling
+                scrollX: true,
                 scrollCollapse: true,
-                autoWidth: false, // Disable auto-width calculation
+                autoWidth: false,
                 dom: '<"row"<"col-12 col-md-6"l><"col-12 col-md-6"f>>rtip',
                 language: {
                     search: "_INPUT_",
                     searchPlaceholder: "Search records..."
                 },
                 initComplete: function() {
-                    // Set initial column widths
                     table.columns.adjust();
 
-                    // Add swipe indication for mobile
                     if (window.innerWidth < 768) {
                         $('.dataTables_wrapper').append(
                             '<div class="text-muted text-center small mt-2">Swipe left/right to see more columns</div>'
@@ -183,7 +192,11 @@
                 table.columns.adjust().draw();
             });
 
-            // Handle window resize
+            $('#exportButton').on('click', function() {
+                const period = $('#exportPeriod').val();
+                window.location.href = `/feedback/export?period=${period}`;
+            });
+
             var resizeTimer;
             $(window).on('resize', function() {
                 clearTimeout(resizeTimer);
@@ -192,7 +205,6 @@
                 }, 250);
             });
 
-            // Add touch swipe indication
             if ('ontouchstart' in window) {
                 var tableWrapper = $('.table-responsive-xl');
                 tableWrapper.on('scroll', function() {

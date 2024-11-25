@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FeedbackExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use MattDaneshvar\Survey\Models\Survey;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
 {
@@ -37,6 +39,11 @@ class ReportController extends Controller
         return response()->json(['data' => $entries]);
     }
 
+    public function exportFeedback(Request $request)
+    {
+        $period = $request->input('period', 'monthly');
+        return Excel::download(new FeedbackExport($period), 'feedback.xlsx');
+    }
 
 
 

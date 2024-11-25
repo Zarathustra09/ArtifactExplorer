@@ -99,3 +99,4 @@ Route::get('/event',function (){
 
 Route::get('/report', [ReportController::class, 'index'])->name('report.index');
 Route::get('/report/data', [ReportController::class, 'dataTable'])->name('report.data');
+Route::get('/feedback/export', [ReportController::class, 'exportFeedback']);
