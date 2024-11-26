@@ -16,6 +16,8 @@ class GalleryImageController extends Controller
         // Validate the request
         $validator = \Validator::make($request->all(), [
             'upload_img' => 'required|image|mimes:jpeg,png,jpg|max:4096',
+            'title' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -37,6 +39,8 @@ class GalleryImageController extends Controller
             $galleryImg = GalleryImage::create([
                 'gallery_id' => $gallery->id,
                 'image_path' => $path,
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
             ]);
 
             Log::info('Gallery image created', ['galleryImg' => $galleryImg]);
@@ -69,7 +73,9 @@ class GalleryImageController extends Controller
 
         // Validate the request
         $validator = \Validator::make($request->all(), [
-            'upload_img' => 'required|image|mimes:jpeg,png,jpg|max:4096',
+            'upload_img' => 'nullable|image|mimes:jpeg,png,jpg|max:4096',
+            'title' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -81,21 +87,25 @@ class GalleryImageController extends Controller
         // Find the image
         $image = GalleryImage::findOrFail($id);
 
-        // Delete the old image file from storage
-        \Storage::disk('public')->delete($image->image_path);
-
         // Handle the new image upload
         if ($request->hasFile('upload_img')) {
+            // Delete the old image file from storage
+            \Storage::disk('public')->delete($image->image_path);
+
             $newImage = $request->file('upload_img');
             $folderName = 'admin_gallery/' . $image->gallery->name;
             $path = $newImage->store($folderName, 'public');
 
-            // Update the image record
+            // Update the image path
             $image->image_path = $path;
-            $image->save();
-
-            Log::info('Gallery image updated', ['image' => $image]);
         }
+
+        // Update the title and description
+        $image->title = $request->input('title');
+        $image->description = $request->input('description');
+        $image->save();
+
+        Log::info('Gallery image updated', ['image' => $image]);
 
         return back()->with('success', 'Image updated successfully.');
     }

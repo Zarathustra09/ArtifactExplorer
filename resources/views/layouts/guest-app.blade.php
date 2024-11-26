@@ -137,7 +137,8 @@
 <script src="{{ asset('landing-page/js/parallax.min.js') }}"></script>
 <script src="{{ asset('landing-page/js/mail-script.js') }}"></script>
 <script src="{{ asset('landing-page/js/main.js') }}"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@stack('scripts')
 </body>
 </html>
 

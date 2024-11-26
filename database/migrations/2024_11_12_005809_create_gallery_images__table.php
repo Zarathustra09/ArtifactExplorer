@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('gallery_id');
             $table->string('image_path');
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
 
             $table->foreign('gallery_id')->references('id')->on('galleries')->onDelete('cascade');

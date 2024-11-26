@@ -35,14 +35,12 @@
                         <div class="card shadow-sm border-light rounded">
                             <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top" alt="Image" style="height: 200px; object-fit: cover;">
                             <div class="card-body position-relative">
+                                <h5 class="card-title">{{ $image->title }}</h5>
+                                <p class="card-text">{{ $image->description }}</p>
                                 <div class="position-absolute top-0 end-0 p-2">
-                                    <form action="{{ route('gallery.image.edit', $image->id) }}" method="POST" enctype="multipart/form-data" class="d-inline">
-                                        @csrf
-                                        <label for="edit_img_{{ $image->id }}" class="text-primary me-2" style="cursor: pointer;">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </label>
-                                        <input type="file" id="edit_img_{{ $image->id }}" name="upload_img" class="d-none" onchange="this.form.submit()">
-                                    </form>
+                                    <button class="btn btn-link text-primary p-0" onclick="showEditModal({{ $image->id }}, '{{ $image->title }}', '{{ $image->description }}')">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </button>
                                     <form action="{{ route('gallery.image.destroy', $image->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
@@ -57,21 +55,57 @@
                 @endforeach
             @endif
 
-            <!-- Upload New Image -->
+            <!-- Add New Image Button -->
             <div class="col-md-4 col-lg-3 mb-4 d-flex justify-content-center align-items-center">
-                <form action="{{ route('gallery.image.store', $gallery->id) }}" method="POST" enctype="multipart/form-data" class="w-100">
-                    @csrf
-                    <label for="upload_img" class="d-flex align-items-center justify-content-center" style="width: 200px; height: 200px; border: 2px dashed #ccc; cursor: pointer; border-radius: 10px;">
-                        <i class="fas fa-plus fa-3x text-muted"></i>
-                    </label>
-                    <input type="file" id="upload_img" name="upload_img" class="d-none" onchange="this.form.submit()">
-                </form>
+                <button class="btn btn-outline-primary" onclick="showCreateModal()">
+                    <i class="fas fa-plus"></i>
+                </button>
             </div>
         </div>
     </div>
 
     <!-- Scripts -->
     <script>
+        // Function to show the create modal
+        function showCreateModal() {
+            Swal.fire({
+                title: 'Create New Image',
+                html: `
+                    <form id="createForm" action="{{ route('gallery.image.store', $gallery->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                <input type="file" id="upload_img" name="upload_img" class="form-control mb-2">
+                <input type="text" name="title" placeholder="Title" class="form-control mb-2">
+                <textarea name="description" placeholder="Description" class="form-control mb-2"></textarea>
+            </form>
+`,
+                showCancelButton: true,
+                confirmButtonText: 'Create',
+                preConfirm: () => {
+                    document.getElementById('createForm').submit();
+                }
+            });
+        }
+
+        // Function to show the edit modal
+        function showEditModal(imageId, title, description) {
+            Swal.fire({
+                title: 'Edit Image',
+                html: `
+                    <form id="editForm" action="/gallery/image/${imageId}/edit" method="POST" enctype="multipart/form-data">
+                        @csrf
+                <input type="file" id="edit_img_${imageId}" name="upload_img" class="form-control mb-2">
+                        <input type="text" name="title" value="${title}" placeholder="Title" class="form-control mb-2">
+                        <textarea name="description" placeholder="Description" class="form-control mb-2">${description}</textarea>
+                    </form>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+                preConfirm: () => {
+                    document.getElementById('editForm').submit();
+                }
+            });
+        }
+
         // Edit Gallery Name Function
         function editGalleryName() {
             Swal.fire({
