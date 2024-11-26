@@ -33,7 +33,7 @@
                 @foreach($gallery->images as $image)
                     <div class="col-md-4 col-lg-3 mb-4">
                         <div class="card shadow-sm border-light rounded">
-                            <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top" alt="Image" style="height: 200px; object-fit: cover;">
+                            <img src="{{ asset('storage/' . $image->image_path) }}" class="card-img-top" alt="Image" style="height: 200px; object-fit: cover;" data-image="{{ asset('storage/' . $image->image_path) }}">
                             <div class="card-body position-relative">
                                 <h5 class="card-title">{{ $image->title }}</h5>
                                 <p class="card-text">{{ $image->description }}</p>
@@ -66,6 +66,21 @@
 
     <!-- Scripts -->
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const images = document.querySelectorAll('.card-img-top[data-image]');
+            images.forEach(image => {
+                image.addEventListener('click', function () {
+                    const imageUrl = this.getAttribute('data-image');
+                    Swal.fire({
+                        imageUrl: imageUrl,
+                        imageAlt: 'Gallery Image',
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                    });
+                });
+            });
+        });
+
         // Function to show the create modal
         function showCreateModal() {
             Swal.fire({
