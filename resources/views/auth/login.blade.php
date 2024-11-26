@@ -1,40 +1,46 @@
 @extends('layouts.app')
 
 @section('content')
-
-<body class="bg-gradient-success">
+    <body class="bg-gradient-success">
     <div class="container">
-        <!-- Outer Row -->
         <div class="row justify-content-center">
             <div class="col-xl-10 col-lg-12 col-md-9">
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block position-relative"
-                                 style="background: #97CC70;
-            min-height: 600px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;">
+                            <div class="col-lg-6 d-none d-lg-flex bg-login-image" style="
+                                background-color: #97CC70;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: space-between;
+                                min-height: 500px;
+                                position: relative;
+                                overflow: hidden;
+                            ">
                                 <!-- Image Container -->
-                                <div style="height: 60%;
-                background: url('{{ asset('img/miguel_malvar.png') }}') center center no-repeat;
-                background-size: 50%;
-                margin-top: 2rem;">
-                                </div>
+                                <div class="login-image" style="
+                                    height: 60%;
+                                    background: url('{{ asset('img/miguel_malvar.png') }}') center center no-repeat;
+                                    background-size: contain;
+                                    margin-top: 2rem;
+                                    flex-grow: 1;
+                                    max-width: 100%;
+                                "></div>
+
                                 <!-- Overlay Text -->
-                                <div class="text-center w-100"
-                                     style="color: white;
-                font-size: 2rem;
-                font-weight: bold;
-                padding: 2rem 1rem;
-                background: linear-gradient(to bottom, transparent, #97CC70 20%);">
+                                <div class="login-text text-center w-100" style="
+                                    color: white;
+                                    font-size: 1.5rem;
+                                    font-weight: bold;
+                                    padding: 1rem;
+                                    background: linear-gradient(to bottom, transparent, #97CC70 20%);
+                                ">
                                     <span style="color: white;">Step into history with</span> <br>
                                     <span style="color: #007A33;">ARtifact Explorer</span> <br>
                                     <span style="color: white;">where the past meets the future</span>
                                 </div>
                             </div>
+
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
@@ -43,13 +49,13 @@
 
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <!-- Start of Form -->
-                                    <!-- Start of Form -->
+
+                                    <!-- Login Form -->
                                     <form method="POST" action="{{ route('login') }}" class="user">
                                         @csrf
 
                                         <!-- Email Input -->
-                                        <div class="form-group mb-4">  <!-- Added mb-4 for bottom margin -->
+                                        <div class="form-group mb-4">
                                             <input id="email"
                                                    type="email"
                                                    class="form-control form-control-user @error('email') is-invalid @enderror"
@@ -62,15 +68,14 @@
 
                                             @error('email')
                                             <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                             @enderror
                                         </div>
 
                                         <!-- Password Input -->
-                                        <!-- Password Input -->
-                                        <div class="form-group mb-4 position-relative">  <!-- Added position-relative here -->
-                                            <div class="position-relative">  <!-- Added wrapper div -->
+                                        <div class="form-group mb-4 position-relative">
+                                            <div class="position-relative">
                                                 <input id="password"
                                                        type="password"
                                                        class="form-control form-control-user @error('password') is-invalid @enderror"
@@ -78,27 +83,29 @@
                                                        required
                                                        autocomplete="current-password"
                                                        placeholder="Password"
-                                                       style="padding-right: 40px;">  <!-- Added right padding to prevent text overlap with icon -->
+                                                       style="padding-right: 40px;">
                                                 <span toggle="#password"
                                                       class="fa fa-fw fa-eye field-icon toggle-password"
-                                                      style="cursor: pointer;
-                     position: absolute;
-                     right: 15px;
-                     top: 50%;
-                     transform: translateY(-50%);
-                     z-index: 2;">
-        </span>
+                                                      style="
+                                                          cursor: pointer;
+                                                          position: absolute;
+                                                          right: 15px;
+                                                          top: 50%;
+                                                          transform: translateY(-50%);
+                                                          z-index: 2;
+                                                      ">
+                                                </span>
                                             </div>
 
                                             @error('password')
                                             <span class="invalid-feedback" role="alert">
-        <strong>{{ $message }}</strong>
-    </span>
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                             @enderror
                                         </div>
 
                                         <!-- Remember Me Checkbox -->
-                                        <div class="form-group mb-4">  <!-- Added mb-4 for bottom margin -->
+                                        <div class="form-group mb-4">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox"
                                                        class="custom-control-input"
@@ -110,22 +117,19 @@
                                         </div>
 
                                         <!-- Login Button -->
-                                        <button type="submit" class="btn btn-primary btn-user btn-block mb-4">  <!-- Added mb-4 for bottom margin -->
+                                        <button type="submit" class="btn btn-primary btn-user btn-block mb-4">
                                             Login
                                         </button>
 
-                                        <hr class="mb-4">  <!-- Added mb-4 for bottom margin -->
+                                        <hr class="mb-4">
                                     </form>
 
-                                    <!-- Forgot Password and Register Links -->
+                                    <!-- Forgot Password Link -->
                                     <div class="text-center">
                                         @if (Route::has('password.request'))
                                             <a class="small" href="{{ route('password.request') }}">Forgot Password?</a>
                                         @endif
                                     </div>
-                                    {{--                                    <div class="text-center">--}}
-                                    {{--                                        <a class="small" href="{{ route('register') }}">Create an Account!</a>--}}
-                                    {{--                                    </div>--}}
                                 </div>
                             </div>
                         </div>
@@ -144,6 +148,5 @@
             this.classList.toggle('fa-eye-slash');
         });
     </script>
-</body>
-
+    </body>
 @endsection

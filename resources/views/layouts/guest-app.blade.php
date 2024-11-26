@@ -39,9 +39,6 @@
             <div class="col-6 top-head-right">
                 <ul>
                     <li><a href="https://www.facebook.com/museonimiguelmalvar"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                    <li><a href="#"><i class="fa fa-behance"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -50,9 +47,6 @@
     <div class="container">
         <div class="row align-items-center justify-content-between d-flex">
             <div id="logo">
-{{--                <a href="{{url('/')}}">--}}
-{{--                    <img src="{{ asset('NEW CONTENT/SOLO APP LOGO.png') }}" alt="" title="" style="height: 50px;" />--}}
-{{--                </a>--}}
             </div>
 
             <nav id="nav-menu-container">

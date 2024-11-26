@@ -114,8 +114,8 @@
             <div class="row d-flex justify-content-center">
                 <div class="menu-content pb-60 col-lg-10">
                     <div class="title text-center">
-                        <h1 class="mb-10">Survey Reports</h1>
-                        <p>Who are in extremely love with eco friendly system.</p>
+                        <h1 class="mb-10">Survey Reports</h1> <!-- Title without green color -->
+                        <p style="color: #5E8C00;">Who are in extremely love with eco friendly system.</p>
                     </div>
                 </div>
             </div>
@@ -123,16 +123,17 @@
                 <div class="active-exibition-carusel">
                     @foreach($results as $result)
                         <div class="single-exibition item">
-                            <h4>{{ $result->survey_name }}</h4>
-                            <p>{{ $result->question_content }}</p>
-                            <p>{!! $result->answer_value !!}</p>
-                            <p>Anonymous Visitor</p>
+                            <h4>{{ $result->survey_name }}</h4> <!-- Survey name without green color -->
+                            <p style="color: #497000;">{{ $result->question_content }}</p>
+                            <p style="color: #355400;">{!! $result->answer_value !!}</p>
+                            <p style="color: #2A4300;">Anonymous Visitor</p>
                         </div>
                     @endforeach
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- Start gallery Area -->
     <section class="gallery-area section-gap" id="gallery">

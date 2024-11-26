@@ -8,6 +8,22 @@
             max-width: 100%;
         }
 
+        /* Custom Toolbar Styling */
+        .fc-toolbar-chunk button.fc-button {
+            background-color: #88d200 !important;
+            border-color: #88d200 !important;
+        }
+
+        .fc-toolbar-chunk button.fc-button:hover {
+            background-color: #7ac400 !important;
+            border-color: #7ac400 !important;
+        }
+
+        .fc-toolbar-chunk button.fc-button-active {
+            background-color: #6eab00 !important;
+            border-color: #6eab00 !important;
+        }
+
         /* Mobile-first responsive adjustments */
         @media screen and (max-width: 768px) {
             .fc-toolbar.fc-header-toolbar {
