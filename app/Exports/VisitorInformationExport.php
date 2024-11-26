@@ -67,7 +67,6 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
 
                 $result = [
                     'id' => $entryId,
-                    'bus_number' => null,
                     'full_name' => null,
                     'address' => null,
                     'nationality' => null,
@@ -88,45 +87,42 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
                 foreach ($answers as $answer) {
                     switch ($answer->question_id) {
                         case 1:
-                            $result['bus_number'] = $answer->value;
-                            break;
-                        case 2:
                             $result['full_name'] = $answer->value;
                             break;
-                        case 3:
+                        case 2:
                             $result['address'] = $answer->value;
                             break;
-                        case 4:
+                        case 3:
                             $result['nationality'] = $answer->value;
                             break;
-                        case 5:
+                        case 4:
                             $result['male'] = $answer->value;
                             break;
-                        case 6:
+                        case 5:
                             $result['female'] = $answer->value;
                             break;
-                        case 7:
+                        case 6:
                             $result['students_grade_school'] = $answer->value;
                             break;
-                        case 8:
+                        case 7:
                             $result['students_high_school'] = $answer->value;
                             break;
-                        case 9:
+                        case 8:
                             $result['students_college'] = $answer->value;
                             break;
-                        case 10:
+                        case 9:
                             $result['pwd'] = $answer->value;
                             break;
-                        case 11:
+                        case 10:
                             $result['age_17_below'] = $answer->value;
                             break;
-                        case 12:
+                        case 11:
                             $result['age_18_30'] = $answer->value;
                             break;
-                        case 13:
+                        case 12:
                             $result['age_31_45'] = $answer->value;
                             break;
-                        case 14:
+                        case 13:
                             $result['age_60_above'] = $answer->value;
                             break;
                     }
@@ -143,7 +139,7 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
     public function headings(): array
     {
         return [
-            'ID', 'Bus Number', 'Full Name', 'Address', 'Nationality', 'Male', 'Female',
+            'ID', 'Full Name', 'Address', 'Nationality', 'Male', 'Female',
             'Students Grade School', 'Students High School', 'Students College', 'PWD',
             'Age 17 Below', 'Age 18-30', 'Age 31-45', 'Age 60 Above', 'Time In', 'Time Out'
         ];
@@ -202,10 +198,10 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
         }
 
         // Style the "Time In" and "Time Out" columns to use a different format
-        $sheet->getStyle('Q2:Q'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_DATE_DATETIME);
+        $sheet->getStyle('P2:P'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_DATE_DATETIME);
 
         // Set the "Age 60 Above" column to text format
-        $sheet->getStyle('O2:O'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_TEXT);
+        $sheet->getStyle('N2:N'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_TEXT);
 
         return [
             // Bold headings on the first row
