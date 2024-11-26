@@ -1,7 +1,11 @@
 @extends('layouts.guest-app')
 
 @section('content')
-
+    <style>
+        .fa-star {
+            color: green;
+        }
+    </style>
     <!-- start banner Area -->
     <section class="banner-area relative" id="home">
         <div class="overlay overlay-bg"></div>
@@ -21,7 +25,30 @@
         </div>
     </section>
     <!-- End banner Area -->
-
+    <section class="service-area pt-100" id="about">
+        <div class="container">
+            <div class="row">
+                @foreach($averages as $average)
+                    <div class="col-lg-3">
+                        <div class="single-service">
+                            <span class="{{ $average->icon }}"></span>
+                            <h4>{{ $average->title }}</h4>
+                            <p>
+                                Average Rating: {{ number_format($average->average_value, 2) }}
+                            </p>
+                            <div class="overlay">
+                                <div class="text">
+                                    <p>
+                                        The average rating for "{{ $average->title }}" is {{ number_format($average->average_value, 2) }}.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
     <!-- Start quote Area -->
     <section class="quote-area section-gap">
         <div class="container">
@@ -82,7 +109,30 @@
     </section>
     <!-- End upcoming-event Area -->
 
-
+    <section class="exibition-area section-gap" id="exhibitions">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="menu-content pb-60 col-lg-10">
+                    <div class="title text-center">
+                        <h1 class="mb-10">Survey Reports</h1>
+                        <p>Who are in extremely love with eco friendly system.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="active-exibition-carusel">
+                    @foreach($results as $result)
+                        <div class="single-exibition item">
+                            <h4>{{ $result->survey_name }}</h4>
+                            <p>{{ $result->question_content }}</p>
+                            <p>{!! $result->answer_value !!}</p>
+                            <p>Anonymous Visitor</p>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Start gallery Area -->
     <section class="gallery-area section-gap" id="gallery">

@@ -72,7 +72,7 @@ class FeedbackExport implements FromCollection, WithHeadings, WithStyles
     public function headings(): array
     {
         return [
-            'ID', 'Device Identifier', 'Question 14', 'Question 15', 'Question 16', 'Question 17', 'Question 18', 'Question 19', 'Question 20', 'Question 21', 'Question 22', 'Question 23', 'Question 24'
+            'ID', 'Device Identifier', 'Visit Experience', 'Feedback', 'Ease of Navigation', 'AR Features Functionality', 'AR Experience Engagement', 'Recommendation Likelihood', 'App Improvement Suggestions', 'Office Helpfulness', 'Service Satisfaction', 'Staff Capability', 'Response Clarity'
         ];
     }
 

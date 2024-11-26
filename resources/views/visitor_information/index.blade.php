@@ -251,42 +251,47 @@
             fetch(`/visitor/demographics/${entryId}`)
                 .then(response => response.json())
                 .then(data => {
+                    const totalVisitors = (data.age_17_below || 0) + (data.age_18_30 || 0) + (data.age_31_45 || 0) + (data.age_60_above || 0) + (data.students_grade_school || 0) + (data.students_high_school || 0) + (data.students_college || 0);
                     Swal.fire({
                         title: 'Demographic Data',
                         html: `
-                        <div class="table-responsive">
-                            <table class="table table-sm">
-                                <tr>
-                                    <th class="text-start">Age 17 Below:</th>
-                                    <td class="text-end">${data.age_17_below}</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-start">Age 18-30:</th>
-                                    <td class="text-end">${data.age_18_30}</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-start">Age 31-45:</th>
-                                    <td class="text-end">${data.age_31_45}</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-start">Age 60 Above:</th>
-                                    <td class="text-end">${data.age_60_above}</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-start">Students Grade School:</th>
-                                    <td class="text-end">${data.students_grade_school}</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-start">Students High School:</th>
-                                    <td class="text-end">${data.students_high_school}</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-start">Students College:</th>
-                                    <td class="text-end">${data.students_college}</td>
-                                </tr>
-                            </table>
-                        </div>
-                        `,
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <tr>
+                            <th class="text-start">Age 17 Below:</th>
+                            <td class="text-end">${data.age_17_below}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-start">Age 18-30:</th>
+                            <td class="text-end">${data.age_18_30}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-start">Age 31-45:</th>
+                            <td class="text-end">${data.age_31_45}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-start">Age 60 Above:</th>
+                            <td class="text-end">${data.age_60_above}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-start">Students Grade School:</th>
+                            <td class="text-end">${data.students_grade_school}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-start">Students High School:</th>
+                            <td class="text-end">${data.students_high_school}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-start">Students College:</th>
+                            <td class="text-end">${data.students_college}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-start">Total Visitors:</th>
+                            <td class="text-end">${totalVisitors}</td>
+                        </tr>
+                    </table>
+                </div>
+                `,
                         width: window.innerWidth < 768 ? '95%' : '500px',
                         icon: 'info',
                         confirmButtonClass: 'btn btn-primary'
