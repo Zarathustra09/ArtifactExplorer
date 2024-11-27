@@ -142,26 +142,25 @@
                 <div class="menu-content pb-70 col-lg-8">
                     <div class="title text-center">
                         <h1 class="mb-10 text-white">Our Exhibition Gallery</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua.</p>
+                        <p>Welcome to our Exhibition Gallery, where creativity, culture, and history come alive! Here, we proudly showcase an ever-evolving collection of curated works that tell compelling stories, celebrate human ingenuity, and connect the past with the present.</p>
                     </div>
                 </div>
             </div>
             <div id="grid-container" class="row">
-                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Battle-of-Zapote-Bridge.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Battle-of-Zapote-Bridge.jpg') }}"></a>
-                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Emilio-Aguinaldo-Centenary.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Emilio-Aguinaldo-Centenary.jpg') }}"></a>
-                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Centenary.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Centenary.jpg') }}"></a>
-                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-fighting-on-horseback.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-fighting-on-horseback.jpg') }}"></a>
-                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Miguel-malvar-Leader-of-the-Masses.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Miguel-malvar-Leader-of-the-Masses.jpg') }}"></a>
-                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Wearing-his-Uniform.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Wearing-his-Uniform.jpg') }}"></a>
-                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-with-his-wife-Paula.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-with-his-wife-Paula.jpg') }}"></a>
-                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Silver-finial.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Silver-finial.jpg') }}"></a>
-                <a class="single-gallery" href="{{ asset('gallery_img/gallery_3/1965-Malvar-Centennial-Commemorative-Medallions.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_3/1965-Malvar-Centennial-Commemorative-Medallions.jpg') }}"></a>
-                <a class="single-gallery" href="{{ asset('gallery_img/gallery_3/2015-Malvar-Sesquicentennial-Commemorative-Coins.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_3/2015-Malvar-Sesquicentennial-Commemorative-Coins.jpg') }}"></a>
-                <a class="single-gallery" href="{{ asset('gallery_img/gallery_3/Case-of-Coins-and-Medals.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_3/Case-of-Coins-and-Medals.jpg') }}"></a>
-                <a class="single-gallery" href="{{ asset('gallery_img/gallery_3/Pamana-ni-Miguel-Malvar.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_3/Pamana-ni-Miguel-Malvar.jpg') }}"></a>
-                <a class="single-gallery" href="{{ asset('gallery_img/gallery_3/The-Surrender.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_3/The-Surrender.jpg') }}"></a>
-                <a class="single-gallery" href="{{ asset('gallery_img/hallway/Battle-in-Tayabas.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/hallway/Battle-in-Tayabas.jpg') }}"></a>
-
+                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Battle-of-Zapote-Bridge.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Battle-of-Zapote-Bridge.jpg') }}" loading="lazy"></a>
+                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Emilio-Aguinaldo-Centenary.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Emilio-Aguinaldo-Centenary.jpg') }}" loading="lazy"></a>
+                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Centenary.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Centenary.jpg') }}" loading="lazy"></a>
+                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-fighting-on-horseback.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-fighting-on-horseback.jpg') }}" loading="lazy"></a>
+                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Miguel-malvar-Leader-of-the-Masses.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Miguel-malvar-Leader-of-the-Masses.jpg') }}" loading="lazy"></a>
+                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Wearing-his-Uniform.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-Wearing-his-Uniform.jpg') }}" loading="lazy"></a>
+                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-with-his-wife-Paula.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Miguel-Malvar-with-his-wife-Paula.jpg') }}" loading="lazy"></a>
+                <a class="single-gallery" href="{{ asset('gallery_img/gallery_1n2/Silver-finial.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_1n2/Silver-finial.jpg') }}" loading="lazy"></a>
+                <a class="single-gallery" href="{{ asset('gallery_img/gallery_3/1965-Malvar-Centennial-Commemorative-Medallions.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_3/1965-Malvar-Centennial-Commemorative-Medallions.jpg') }}" loading="lazy"></a>
+                <a class="single-gallery" href="{{ asset('gallery_img/gallery_3/2015-Malvar-Sesquicentennial-Commemorative-Coins.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_3/2015-Malvar-Sesquicentennial-Commemorative-Coins.jpg') }}" loading="lazy"></a>
+                <a class="single-gallery" href="{{ asset('gallery_img/gallery_3/Case-of-Coins-and-Medals.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_3/Case-of-Coins-and-Medals.jpg') }}" loading="lazy"></a>
+                <a class="single-gallery" href="{{ asset('gallery_img/gallery_3/Pamana-ni-Miguel-Malvar.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_3/Pamana-ni-Miguel-Malvar.jpg') }}" loading="lazy"></a>
+                <a class="single-gallery" href="{{ asset('gallery_img/gallery_3/The-Surrender.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/gallery_3/The-Surrender.jpg') }}" loading="lazy"></a>
+                <a class="single-gallery" href="{{ asset('gallery_img/hallway/Battle-in-Tayabas.jpg') }}"><img class="grid-item" src="{{ asset('gallery_img/hallway/Battle-in-Tayabas.jpg') }}" loading="lazy"></a>
             </div>
 
         </div>
