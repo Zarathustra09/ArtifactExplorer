@@ -208,9 +208,13 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
         $sheet->mergeCells('A5:P5');
         $sheet->setCellValue('A5', '');
 
+        // Add another empty row for additional spacing
         $sheet->mergeCells('A6:P6');
-        $sheet->setCellValue('A6', 'VISITOR LOG FORM');
-        $sheet->getStyle('A6')->applyFromArray([
+        $sheet->setCellValue('A6', '');
+
+        $sheet->mergeCells('A7:P7');
+        $sheet->setCellValue('A7', 'VISITOR LOG FORM');
+        $sheet->getStyle('A7')->applyFromArray([
             'font' => [
                 'bold' => true,
                 'size' => 14,
@@ -222,8 +226,96 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
             ],
         ]);
 
-        // Adjust the header row to start from row 7
-        $sheet->fromArray($this->headings(), null, 'A7');
+        // Add an empty row for spacing between the header and the visitor log
+        $sheet->mergeCells('A8:P8');
+        $sheet->setCellValue('A8', '');
+
+        // Unmerge cell A8 before merging E8:F8
+        $sheet->unmergeCells('A8:P8');
+
+        // Merge cells E8:F8 and add "Gender"
+        $sheet->mergeCells('E8:F8');
+        $sheet->setCellValue('E8', 'Gender');
+        $sheet->getStyle('E8')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'size' => 12,
+                'color' => ['argb' => 'FFFFFFFF'], // White text
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => [
+                    'argb' => 'FF4CAF50', // Green background color for headers
+                ],
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+
+        // Merge cells G8:I8 and add "No. of Students"
+        $sheet->mergeCells('G8:I8');
+        $sheet->setCellValue('G8', 'No. of Students');
+        $sheet->getStyle('G8')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'size' => 12,
+                'color' => ['argb' => 'FFFFFFFF'], // White text
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => [
+                    'argb' => 'FF4CAF50', // Green background color for headers
+                ],
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+
+        // Merge cells K8:N8 and add "No. of Visitor per Age Group"
+        $sheet->mergeCells('K8:N8');
+        $sheet->setCellValue('K8', 'No. of Visitor per Age Group');
+        $sheet->getStyle('K8')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'size' => 12,
+                'color' => ['argb' => 'FFFFFFFF'], // White text
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => [
+                    'argb' => 'FF4CAF50', // Green background color for headers
+                ],
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'], // Black border
+                ],
+            ],
+        ]);
+
+        // Adjust the header row to start from row 9
+        $sheet->fromArray($this->headings(), null, 'A9');
 
         // Get the highest column index
         $highestColumn = $sheet->getHighestColumn();
@@ -231,9 +323,9 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
 
         // Loop through each column in the first row
         for ($col = 1; $col <= $highestColumnIndex; $col++) {
-            $cell = $sheet->getCellByColumnAndRow($col, 7);
+            $cell = $sheet->getCellByColumnAndRow($col, 9);
             if ($cell->getValue() !== '') {
-                $sheet->getStyleByColumnAndRow($col, 7)->applyFromArray([
+                $sheet->getStyleByColumnAndRow($col, 9)->applyFromArray([
                     'font' => [
                         'bold' => true,
                         'color' => ['argb' => 'FFFFFFFF'], // White text
@@ -250,7 +342,7 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
 
         // Apply alternating row colors
         $rowCount = $sheet->getHighestRow();
-        for ($row = 8; $row <= $rowCount; $row++) {
+        for ($row = 10; $row <= $rowCount; $row++) {
             // Check if the row is even or odd and apply different styles
             if ($row % 2 == 0) {
                 // Apply a light gray background for even rows
@@ -258,7 +350,7 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                         'startColor' => [
-                            'argb' => 'FFE0E0E0', // Light gray background color
+                            'argb' => 'FFE0E0E0', // Light gray background color for even rows
                         ],
                     ],
                 ]);
@@ -268,7 +360,7 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                         'startColor' => [
-                            'argb' => 'FFFFFFFF', // White background color
+                            'argb' => 'FFFFFFFF', // White background color for odd rows
                         ],
                     ],
                 ]);
@@ -276,14 +368,14 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
         }
 
         // Style the "Time In" and "Time Out" columns to use a different format
-        $sheet->getStyle('P8:P'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_DATE_DATETIME);
+        $sheet->getStyle('P10:P'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_DATE_DATETIME);
 
         // Set the "Age 60 Above" column to text format
-        $sheet->getStyle('N8:N'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_TEXT);
+        $sheet->getStyle('N10:N'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_TEXT);
 
         return [
             // Bold headings on the first row
-            7 => ['font' => ['bold' => true]],
+            9 => ['font' => ['bold' => true]],
         ];
     }
 }
