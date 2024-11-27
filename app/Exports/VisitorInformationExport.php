@@ -86,43 +86,43 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
 
                 foreach ($answers as $answer) {
                     switch ($answer->question_id) {
-                        case 1:
+                        case 2:
                             $result['full_name'] = $answer->value;
                             break;
-                        case 2:
+                        case 3:
                             $result['address'] = $answer->value;
                             break;
-                        case 3:
+                        case 4:
                             $result['nationality'] = $answer->value;
                             break;
-                        case 4:
+                        case 5:
                             $result['male'] = $answer->value;
                             break;
-                        case 5:
+                        case 6:
                             $result['female'] = $answer->value;
                             break;
-                        case 6:
+                        case 7:
                             $result['students_grade_school'] = $answer->value;
                             break;
-                        case 7:
+                        case 8:
                             $result['students_high_school'] = $answer->value;
                             break;
-                        case 8:
+                        case 9:
                             $result['students_college'] = $answer->value;
                             break;
-                        case 9:
+                        case 10:
                             $result['pwd'] = $answer->value;
                             break;
-                        case 10:
+                        case 11:
                             $result['age_17_below'] = $answer->value;
                             break;
-                        case 11:
+                        case 12:
                             $result['age_18_30'] = $answer->value;
                             break;
-                        case 12:
+                        case 13:
                             $result['age_31_45'] = $answer->value;
                             break;
-                        case 13:
+                        case 14:
                             $result['age_60_above'] = $answer->value;
                             break;
                     }
@@ -147,15 +147,93 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
 
     public function styles(Worksheet $sheet)
     {
+        // Add company information at the top
+        $sheet->mergeCells('A1:P1');
+        $sheet->setCellValue('A1', 'National Historical Commission of the Philippines');
+        $sheet->getStyle('A1')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'size' => 16,
+                'color' => ['argb' => 'FF000000'], // Black text
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+        ]);
+
+        $sheet->mergeCells('A2:P2');
+        $sheet->setCellValue('A2', 'Historical Sites and Education Division');
+        $sheet->getStyle('A2')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'size' => 14,
+                'color' => ['argb' => 'FF000000'], // Black text
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+        ]);
+
+        $sheet->mergeCells('A3:P3');
+        $sheet->setCellValue('A3', 'Museo ni Miguel Malvar');
+        $sheet->getStyle('A3')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'size' => 12,
+                'color' => ['argb' => 'FF000000'], // Black text
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+        ]);
+
+        $sheet->mergeCells('A4:P4');
+        $sheet->setCellValue('A4', 'Sto. Tomas Batangas');
+        $sheet->getStyle('A4')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'size' => 12,
+                'color' => ['argb' => 'FF000000'], // Black text
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+        ]);
+
+        // Add an empty row for spacing
+        $sheet->mergeCells('A5:P5');
+        $sheet->setCellValue('A5', '');
+
+        $sheet->mergeCells('A6:P6');
+        $sheet->setCellValue('A6', 'VISITOR LOG FORM');
+        $sheet->getStyle('A6')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'size' => 14,
+                'color' => ['argb' => 'FF000000'], // Black text
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+        ]);
+
+        // Adjust the header row to start from row 7
+        $sheet->fromArray($this->headings(), null, 'A7');
+
         // Get the highest column index
         $highestColumn = $sheet->getHighestColumn();
         $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
 
         // Loop through each column in the first row
         for ($col = 1; $col <= $highestColumnIndex; $col++) {
-            $cell = $sheet->getCellByColumnAndRow($col, 1);
+            $cell = $sheet->getCellByColumnAndRow($col, 7);
             if ($cell->getValue() !== '') {
-                $sheet->getStyleByColumnAndRow($col, 1)->applyFromArray([
+                $sheet->getStyleByColumnAndRow($col, 7)->applyFromArray([
                     'font' => [
                         'bold' => true,
                         'color' => ['argb' => 'FFFFFFFF'], // White text
@@ -172,7 +250,7 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
 
         // Apply alternating row colors
         $rowCount = $sheet->getHighestRow();
-        for ($row = 2; $row <= $rowCount; $row++) {
+        for ($row = 8; $row <= $rowCount; $row++) {
             // Check if the row is even or odd and apply different styles
             if ($row % 2 == 0) {
                 // Apply a light gray background for even rows
@@ -198,14 +276,14 @@ class VisitorInformationExport implements FromCollection, WithHeadings, WithStyl
         }
 
         // Style the "Time In" and "Time Out" columns to use a different format
-        $sheet->getStyle('P2:P'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_DATE_DATETIME);
+        $sheet->getStyle('P8:P'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_DATE_DATETIME);
 
         // Set the "Age 60 Above" column to text format
-        $sheet->getStyle('N2:N'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_TEXT);
+        $sheet->getStyle('N8:N'.$rowCount)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_TEXT);
 
         return [
             // Bold headings on the first row
-            1 => ['font' => ['bold' => true]],
+            7 => ['font' => ['bold' => true]],
         ];
     }
 }
